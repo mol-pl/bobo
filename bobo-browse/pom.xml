@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>com.browseengine.bobo</groupId>
 		<artifactId>bobo-parent</artifactId>
-		<version>4.0.3-SNAPSHOT</version>
+		<version>5.0.0-SNAPSHOT</version>
 		<relativePath>../bobo-parent/pom.xml</relativePath>
 	</parent>
 
@@ -25,7 +25,7 @@
 	<name>bobo browse</name>
 
 	<description>Bobo is a Faceted Search implementation written purely in Java, an extension of Apache Lucene</description>
-	<url>http://javasoze.github.com/bobo</url>
+	<url>https://javasoze.github.io/bobo/</url>
 
 	<!-- Set the compiler to java6 -->
 	<build>

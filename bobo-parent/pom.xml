@@ -16,7 +16,7 @@
 
 	<groupId>com.browseengine.bobo</groupId>
 	<artifactId>bobo-parent</artifactId>
-	<version>4.0.3-SNAPSHOT</version>
+	<version>5.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>bobo parent</name>
@@ -148,7 +148,7 @@
 		<repository>
 			<id>sonatype-nexus-staging</id>
 			<name>sonatype nexus staging repository</name>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
