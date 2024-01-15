@@ -28,11 +28,11 @@ public class MultiValueWithWeightFacetDataCache<T> extends MultiValueFacetDataCa
 
   /**
    * loads multi-value facet data. This method uses a workarea to prepare loading.
-   * @param fieldName
-   * @param reader
-   * @param listFactory
-   * @param workArea
-   * @throws IOException
+   * @param fieldName .
+   * @param reader .
+   * @param listFactory .
+   * @param workArea .
+   * @throws IOException io.
    */
   @Override
   public void load(String fieldName, AtomicReader reader, TermListFactory<T> listFactory,

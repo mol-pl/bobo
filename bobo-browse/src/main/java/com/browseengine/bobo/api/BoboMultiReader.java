@@ -22,7 +22,6 @@
  * please go to https://sourceforge.net/projects/bobo-browse/, or
  * send mail to owner@browseengine.com.
  */
-
 package com.browseengine.bobo.api;
 
 import java.io.IOException;
@@ -37,80 +36,84 @@ import org.apache.lucene.index.FilterDirectoryReader;
 import com.browseengine.bobo.facets.FacetHandler;
 
 public class BoboMultiReader extends FilterDirectoryReader {
-  protected List<BoboSegmentReader> _subReaders = new ArrayList<BoboSegmentReader>();
 
-  /**
-   * Constructor
-   *
-   * @param reader
-   *          Index reader
-   * @throws IOException
-   */
-  public static BoboMultiReader getInstance(DirectoryReader reader) throws IOException {
-    return BoboMultiReader.getInstance(reader, null);
-  }
+	protected List<BoboSegmentReader> _subReaders = new ArrayList<BoboSegmentReader>();
 
-  public static BoboMultiReader getInstance(DirectoryReader reader,
-      Collection<FacetHandler<?>> facetHandlers) throws IOException {
-    BoboMultiReader boboReader = new BoboMultiReader(reader, facetHandlers);
-    boboReader.facetInit();
-    return boboReader;
-  }
+	/**
+	 * Factory.
+	 *
+	 * @param reader Index reader.
+	 * @return new instance each time.
+	 * @throws IOException io.
+	 */
+	public static BoboMultiReader getInstance(DirectoryReader reader) throws IOException {
+		return BoboMultiReader.getInstance(reader, null);
+	}
 
-  @Override
-  protected void doClose() throws IOException {
-    // do nothing
-  }
+	public static BoboMultiReader getInstance(DirectoryReader reader,
+			Collection<FacetHandler<?>> facetHandlers) throws IOException {
+		BoboMultiReader boboReader = new BoboMultiReader(reader, facetHandlers);
+		boboReader.facetInit();
+		return boboReader;
+	}
 
-  /**
-   * @param reader
-   * @param facetHandlers
-   * @throws IOException
-   */
-  @SuppressWarnings("unchecked")
-  protected BoboMultiReader(DirectoryReader reader, Collection<FacetHandler<?>> facetHandlers)
-      throws IOException {
-    super(reader, new BoboSubReaderWrapper(facetHandlers));
-    _subReaders = (List<BoboSegmentReader>) getSequentialSubReaders();
-  }
+	@Override
+	protected void doClose() throws IOException {
+		// do nothing
+	}
 
-  protected void facetInit() throws IOException {
-    for (BoboSegmentReader r : _subReaders) {
-      r.facetInit();
-    }
-  }
+	/**
+	 * @param reader        .
+	 * @param facetHandlers .
+	 * @throws IOException io.
+	 */
+	@SuppressWarnings("unchecked")
+	protected BoboMultiReader(DirectoryReader reader, Collection<FacetHandler<?>> facetHandlers)
+			throws IOException {
+		super(reader, new BoboSubReaderWrapper(facetHandlers));
+		_subReaders = (List<BoboSegmentReader>) getSequentialSubReaders();
+	}
 
-  public List<BoboSegmentReader> getSubReaders() {
-    return _subReaders;
-  }
+	protected void facetInit() throws IOException {
+		for (BoboSegmentReader r : _subReaders) {
+			r.facetInit();
+		}
+	}
 
-  public final int subReaderBase(int readerIndex) {
-    return readerBase(readerIndex);
-  }
+	public List<BoboSegmentReader> getSubReaders() {
+		return _subReaders;
+	}
 
-  public static class BoboSubReaderWrapper extends SubReaderWrapper {
+	public final int subReaderBase(int readerIndex) {
+		return readerBase(readerIndex);
+	}
 
-    private final BoboSegmentReader.WorkArea workArea = new BoboSegmentReader.WorkArea();
-    private Collection<FacetHandler<?>> _facetHandlers = null;
+	public static class BoboSubReaderWrapper extends SubReaderWrapper {
 
-    /** Constructor */
-    public BoboSubReaderWrapper(Collection<FacetHandler<?>> facetHandlers) {
-      _facetHandlers = facetHandlers;
-    }
+		private final BoboSegmentReader.WorkArea workArea = new BoboSegmentReader.WorkArea();
+		private Collection<FacetHandler<?>> _facetHandlers = null;
 
-    @Override
-    public AtomicReader wrap(AtomicReader reader) {
-      try {
-        return new BoboSegmentReader(reader, _facetHandlers, null, workArea);
-      } catch (IOException e) {
-        e.printStackTrace();
-        throw new RuntimeException(e);
-      }
-    }
-  }
+		/**
+		 * Constructor.
+		 * @param facetHandlers .
+		 */
+		public BoboSubReaderWrapper(Collection<FacetHandler<?>> facetHandlers) {
+			_facetHandlers = facetHandlers;
+		}
 
-  @Override
-  protected DirectoryReader doWrapDirectoryReader(DirectoryReader in) {
-    return in;
-  }
+		@Override
+		public AtomicReader wrap(AtomicReader reader) {
+			try {
+				return new BoboSegmentReader(reader, _facetHandlers, null, workArea);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	@Override
+	protected DirectoryReader doWrapDirectoryReader(DirectoryReader in) {
+		return in;
+	}
 }

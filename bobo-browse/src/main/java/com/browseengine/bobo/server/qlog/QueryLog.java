@@ -1,9 +1,10 @@
 package com.browseengine.bobo.server.qlog;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class QueryLog {
-  private static Logger logger = Logger.getLogger(QueryLog.class);
+  private static final Logger logger = LoggerFactory.getLogger(QueryLog.class);
 
   public static class LogLine {
     String protocol;

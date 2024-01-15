@@ -121,7 +121,7 @@ public class CombinedFloatFacetIterator extends FloatFacetIterator {
    * This version of the next() method applies the minHits from the facet spec
    * before returning the facet and its hitcount
    *
-   * @param minHits
+   * @param minHits .
    *          the minHits from the facet spec for CombinedFacetAccessible
    * @return The next facet that obeys the minHits
    */

@@ -51,7 +51,6 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -136,7 +135,6 @@ import com.browseengine.bobo.util.BigSegmentedArray;
 import com.browseengine.bobo.util.IntBoundedPriorityQueue.IntComparator;
 
 public class BoboTestCase extends TestCase {
-  static Logger log = Logger.getLogger(BoboTestCase.class);
   private final Directory _indexDir;
   private final List<FacetHandler<?>> _fconf;
   static final private Term tagSizePayloadTerm = new Term("tagSizePayload", "size");
@@ -159,10 +157,10 @@ public class BoboTestCase extends TestCase {
 
   public BoboTestCase(String testName) {
     super(testName);
-    String confdir = System.getProperty("conf.dir");
-    if (confdir == null) confdir = "./resource";
-    System.setProperty("log.home", ".");
-    org.apache.log4j.PropertyConfigurator.configure(confdir + "/log4j.properties");
+//    String confdir = System.getProperty("conf.dir");
+//    if (confdir == null) confdir = "./resource";
+//    System.setProperty("log.home", ".");
+//    org.apache.log4j.PropertyConfigurator.configure(confdir + "/log4j.properties");
     _fconf = buildFieldConf();
     _indexDir = createIndex();
   }

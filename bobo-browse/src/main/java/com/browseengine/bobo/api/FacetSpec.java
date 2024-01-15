@@ -6,177 +6,185 @@ import java.util.Map;
 
 /**
  * specifies how facets are to be returned for a browse
- *
  */
 public class FacetSpec implements Serializable {
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-  /**
-   * Sort options for facets
-   */
-  public static enum FacetSortSpec {
-    /**
-     * Order by the facet values in lexographical ascending order
-     */
-    OrderValueAsc,
+	/**
+	 * Sort options for facets
+	 */
+	public static enum FacetSortSpec {
+		/**
+		 * Order by the facet values in lexographical ascending order
+		 */
+		OrderValueAsc,
+		/**
+		 * Order by the facet hit counts in descending order
+		 */
+		OrderHitsDesc,
+		/**
+		 * custom order, must have a comparator
+		 */
+		OrderByCustom
+	}
 
-    /**
-     * Order by the facet hit counts in descending order
-     */
-    OrderHitsDesc,
+	private FacetSortSpec orderBy;
+	private int max;
+	private boolean expandSelection;
+	private int minCount;
+	private ComparatorFactory _comparatorFactory;
+	private Map<String, String> properties;
 
-    /**
-     * custom order, must have a comparator
-     */
-    OrderByCustom
-  }
+	/**
+	 * Constructor.
+	 */
+	public FacetSpec() {
+		orderBy = FacetSortSpec.OrderValueAsc;
+		minCount = 1;
+		expandSelection = false;
+		_comparatorFactory = null;
+		properties = new HashMap<String, String>();
+	}
 
-  private FacetSortSpec orderBy;
-  private int max;
-  private boolean expandSelection;
-  private int minCount;
-  private ComparatorFactory _comparatorFactory;
-  private Map<String, String> properties;
+	public FacetSpec setCustomComparatorFactory(ComparatorFactory comparatorFactory) {
+		_comparatorFactory = comparatorFactory;
+		return this;
+	}
 
-  /**
-   * Constructor.
-   *
-   */
-  public FacetSpec() {
-    orderBy = FacetSortSpec.OrderValueAsc;
-    minCount = 1;
-    expandSelection = false;
-    _comparatorFactory = null;
-    properties = new HashMap<String, String>();
-  }
+	public ComparatorFactory getCustomComparatorFactory() {
+		return _comparatorFactory;
+	}
 
-  public FacetSpec setCustomComparatorFactory(ComparatorFactory comparatorFactory) {
-    _comparatorFactory = comparatorFactory;
-    return this;
-  }
+	/**
+	 * Sets the minimum number of hits a choice would need to have to be returned.
+	 *
+	 * @param minCount minimum count
+	 * @return self
+	 * @see #getMinHitCount()
+	 */
+	public FacetSpec setMinHitCount(int minCount) {
+		this.minCount = minCount;
+		return this;
+	}
 
-  public ComparatorFactory getCustomComparatorFactory() {
-    return _comparatorFactory;
-  }
+	/**
+	 * Gets the minimum number of hits a choice would need to have to be returned.
+	 *
+	 * @return minimum count
+	 * @see #setMinHitCount(int)
+	 */
+	public int getMinHitCount() {
+		return minCount;
+	}
 
-  /**
-  * Sets the minimum number of hits a choice would need to have to be returned.
-  *
-   * @param minCount minimum count
-   * @see #getMinHitCount()
-  */
-  public FacetSpec setMinHitCount(int minCount) {
-    this.minCount = minCount;
-    return this;
-  }
+	/**
+	 * Get the current choice sort order
+	 *
+	 * @return choice sort order
+	 * @see #setOrderBy(FacetSortSpec)
+	 */
+	public FacetSortSpec getOrderBy() {
+		return orderBy;
+	}
 
-  /**
-   * Gets the minimum number of hits a choice would need to have to be returned.
-   * @return minimum count
-   * @see #setMinHitCount(int)
-   */
-  public int getMinHitCount() {
-    return minCount;
-  }
+	/**
+	 * Sets the choice sort order
+	 *
+	 * @param order sort order
+	 * @return self
+	 * @see #getOrderBy()
+	 */
+	public FacetSpec setOrderBy(FacetSortSpec order) {
+		orderBy = order;
+		return this;
+	}
 
-  /**
-   * Get the current choice sort order
-   * @return choice sort order
-   * @see #setOrderBy(FacetSortSpec)
-   */
-  public FacetSortSpec getOrderBy() {
-    return orderBy;
-  }
+	/**
+	 * Gets the maximum number of choices to return
+	 *
+	 * @return max number of choices to return
+	 * @see #setMaxCount(int)
+	 */
+	public int getMaxCount() {
+		return max;
+	}
 
-  /**
-   * Sets the choice sort order
-   *
-   * @param order sort order
-   * @see #getOrderBy()
-   */
-  public FacetSpec setOrderBy(FacetSortSpec order) {
-    orderBy = order;
-    return this;
-  }
+	/**
+	 * Sets the maximum number of choices to return.
+	 *
+	 * @param maxCount max number of choices to return, default = 0 which means all
+	 * @return self
+	 * @see #getMaxCount()
+	 */
+	public FacetSpec setMaxCount(int maxCount) {
+		max = maxCount;
+		return this;
+	}
 
-  /**
-   * Gets the maximum number of choices to return
-   * @return max number of choices to return
-   * @see #setMaxCount(int)
-   */
-  public int getMaxCount() {
-    return max;
-  }
+	@Override
+	public String toString() {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("orderBy: ").append(orderBy).append("\n");
+		buffer.append("max count: ").append(max).append("\n");
+		buffer.append("min hit count: ").append(minCount).append("\n");
+		buffer.append("expandSelection: ").append(expandSelection);
+		return buffer.toString();
+	}
 
-  /**
-   * Sets the maximum number of choices to return.
-   *
-   * @param maxCount max number of choices to return, default = 0 which means all
-   * @see #getMaxCount()
-   */
-  public FacetSpec setMaxCount(int maxCount) {
-    max = maxCount;
-    return this;
-  }
+	/**
+	 * Gets whether we are expanding sibling choices
+	 *
+	 * @return A boolean indicating whether to expand sibling choices.
+	 * @see #setExpandSelection(boolean)
+	 */
+	public boolean isExpandSelection() {
+		return expandSelection;
+	}
 
-  @Override
-  public String toString() {
-    StringBuffer buffer = new StringBuffer();
-    buffer.append("orderBy: ").append(orderBy).append("\n");
-    buffer.append("max count: ").append(max).append("\n");
-    buffer.append("min hit count: ").append(minCount).append("\n");
-    buffer.append("expandSelection: ").append(expandSelection);
-    return buffer.toString();
-  }
+	/**
+	 * Sets whether we are expanding sibling choices
+	 *
+	 * @param expandSelection indicating whether to expand sibling choices.
+	 * @return self
+	 * @see #isExpandSelection()
+	 */
+	public FacetSpec setExpandSelection(boolean expandSelection) {
+		this.expandSelection = expandSelection;
+		return this;
+	}
 
-  /**
-   * Gets whether we are expanding sibling choices
-   * @return A boolean indicating whether to expand sibling choices.
-   * @see #setExpandSelection(boolean)
-   */
-  public boolean isExpandSelection() {
-    return expandSelection;
-  }
+	/**
+	 * Gets custom properties for the facet search.
+	 * For example AttributeFacetHandler uses this to perform custom facet filtering.
+	 * @return props.
+	 */
+	public Map<String, String> getProperties() {
+		return properties;
+	}
 
-  /**
-   * Sets whether we are expanding sibling choices
-   *
-   * @param expandSelection indicating whether to expand sibling choices.
-   * @see #isExpandSelection()
-   */
-  public FacetSpec setExpandSelection(boolean expandSelection) {
-    this.expandSelection = expandSelection;
-    return this;
-  }
+	/**
+	 * Sets custom properties for the facet search. For example AttributeFacetHandler uses this to perform custom facet filtering
+	 *
+	 * @param properties .
+	 * @return self
+	 */
+	public FacetSpec setProperties(Map<String, String> properties) {
+		this.properties = properties;
+		return this;
+	}
 
-  /**
-   * Gets  custom properties for the facet search. For example AttributeFacetHandler uses this to perform custom facet filtering
-   */
-  public Map<String, String> getProperties() {
-    return properties;
-  }
+	@Override
+	public FacetSpec clone() {
+		Map<String, String> internalProperties = getProperties();
+		Map<String, String> clonedProperties = new HashMap<String, String>(internalProperties.size());
+		clonedProperties.putAll(internalProperties);
 
-  /**
-   * Sets  custom properties for the facet search. For example AttributeFacetHandler uses this to perform custom facet filtering
-   * @param properties
-   */
-  public FacetSpec setProperties(Map<String, String> properties) {
-    this.properties = properties;
-    return this;
-  }
-
-  @Override
-  public FacetSpec clone() {
-    Map<String, String> properties = getProperties();
-    Map<String, String> clonedProperties = new HashMap<String, String>(properties.size());
-    clonedProperties.putAll(properties);
-
-    return new FacetSpec().setCustomComparatorFactory(getCustomComparatorFactory())
-        .setExpandSelection(isExpandSelection()).setMaxCount(getMaxCount())
-        .setMinHitCount(getMinHitCount()).setOrderBy(getOrderBy()).setProperties(clonedProperties);
-  }
+		return new FacetSpec().setCustomComparatorFactory(getCustomComparatorFactory())
+				.setExpandSelection(isExpandSelection()).setMaxCount(getMaxCount())
+				.setMinHitCount(getMinHitCount()).setOrderBy(getOrderBy()).setProperties(clonedProperties);
+	}
 }

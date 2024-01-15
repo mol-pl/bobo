@@ -6,3 +6,5 @@ bobo-browse/target/
 *.iml
 *.idea
 .arcconfig
+*.lnk
+/bobo-browse/*.log

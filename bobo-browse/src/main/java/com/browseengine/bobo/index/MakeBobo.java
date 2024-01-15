@@ -49,7 +49,7 @@ public class MakeBobo {
   }
 
   /**
-   * @param args
+   * @param args .
    */
   public static void main(String[] args) throws IOException {
     // TODO Auto-generated method stub

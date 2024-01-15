@@ -117,7 +117,8 @@ public final class BigNestedIntArray {
 
     /**
      * initializes the loading context
-     * @param size
+     * @param size .
+     * @param oldList list to reclaim.
      */
     final public void initialize(int size, int[][] oldList) {
       reclaim(oldList);
@@ -153,8 +154,8 @@ public final class BigNestedIntArray {
 
     /**
      * reserves storage for the next int array data
-     * @param id
-     * @param size
+     * @param id .
+     * @param size .
      */
     final protected void reserve(int id, int size) {
       final int pageNo = (id >> PAGEID_SHIFT);
@@ -194,9 +195,9 @@ public final class BigNestedIntArray {
 
     /**
      * stores int array data. must call reserve(int,int) first to allocate storage
-     * @param data
-     * @param off
-     * @param len
+     * @param data .
+     * @param off .
+     * @param len .
      */
     final protected void store(int[] data, int off, int len) {
       if (len == 0) {
@@ -218,8 +219,8 @@ public final class BigNestedIntArray {
 
     /**
      * allocates storage for future calls of setData.
-     * @param id
-     * @param len
+     * @param id .
+     * @param len .
      */
     protected void allocate(int id, int len, boolean nonNegativeIntOnly) {
       reserve(id, len);
@@ -242,14 +243,13 @@ public final class BigNestedIntArray {
 
   /**
    * Constructs BigNEstedIntArray
-   * @throws Exception
    */
   public BigNestedIntArray() {
   }
 
   /**
    * set maximum number of items per doc.
-   * @param maxItems
+   * @param maxItems .
    */
   public void setMaxItems(int maxItems) {
     _maxItems = Math.min(maxItems, MAX_ITEMS);
@@ -265,8 +265,8 @@ public final class BigNestedIntArray {
 
   /**
    * loads data using the loader
-   * @param size
-   * @param loader
+   * @param size .
+   * @param loader .
    * @throws Exception
    */
   public final void load(int size, Loader loader) throws Exception {
@@ -284,9 +284,9 @@ public final class BigNestedIntArray {
 
   /**
    * gets an int data at [id][idx]
-   * @param id
-   * @param idx
-   * @param defaultValue
+   * @param id .
+   * @param idx .
+   * @param defaultValue .
    */
   public final int getData(int id, int idx, int defaultValue) {
     final int[] page = _list[id >> PAGEID_SHIFT];
@@ -305,8 +305,8 @@ public final class BigNestedIntArray {
 
   /**
    * gets an int data at [id]
-   * @param id
-   * @param buf
+   * @param id .
+   * @param buf .
    * @return length
    */
   public final int getData(int id, int[] buf) {
@@ -329,8 +329,8 @@ public final class BigNestedIntArray {
 
   /**
    * translates the int value using the val list
-   * @param id
-   * @param valarray
+   * @param id .
+   * @param valarray .
    */
   public final String[] getTranslatedData(int id, TermValueList<?> valarray) {
     final int[] page = _list[id >> PAGEID_SHIFT];
@@ -359,8 +359,8 @@ public final class BigNestedIntArray {
 
   /**
    * translates the int value using the val list
-   * @param id
-   * @param valarray
+   * @param id .
+   * @param valarray .
    */
   public final Object[] getRawData(int id, TermValueList<?> valarray) {
     final int[] page = _list[id >> PAGEID_SHIFT];
@@ -766,7 +766,7 @@ public final class BigNestedIntArray {
 
   /**
    * returns the number data items for id
-   * @param id
+   * @param id .
    */
   public final int getNumItems(int id) {
     final int[] page = _list[id >> PAGEID_SHIFT];
@@ -847,8 +847,8 @@ public final class BigNestedIntArray {
 
     /**
      * adds a pair of id and value to the buffer
-     * @param id
-     * @param val
+     * @param id .
+     * @param val .
      */
     public final boolean add(int id, int val) {
       int ptr = _info.get(id << 1);

@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.browseengine.bobo.api.BrowseFacet;
 import com.browseengine.bobo.api.FacetIterator;
@@ -22,7 +23,7 @@ import com.browseengine.bobo.util.LazyBigIntArray;
 
 public class GeoSimpleFacetCountCollector implements FacetCountCollector {
 
-  private static final Logger log = Logger.getLogger(GeoSimpleFacetCountCollector.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(GeoSimpleFacetCountCollector.class.getName());
   private final FacetSpec _spec;
   private final String _name;
   private int[] _latCount;

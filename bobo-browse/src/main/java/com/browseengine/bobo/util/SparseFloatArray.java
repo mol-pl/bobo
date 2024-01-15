@@ -52,7 +52,7 @@ public class SparseFloatArray {
    * in fact, you should lose all references to it, since this object 
    * might save you a lot of memory.
    * 
-   * @param floats
+   * @param floats .
    */
   public SparseFloatArray(float[] floats) {
     _capacity = floats.length;
@@ -66,10 +66,10 @@ public class SparseFloatArray {
    * all values in the float array are known to 
    * <pre>
    * == 0f
-   * <pre>
+   * </pre>
    * .
    * 
-   * @param capacity
+   * @param capacity .
    */
   public SparseFloatArray(int capacity) {
     _capacity = capacity;

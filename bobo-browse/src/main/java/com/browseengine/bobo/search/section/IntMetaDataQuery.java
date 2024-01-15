@@ -65,8 +65,8 @@ public class IntMetaDataQuery extends MetaDataQuery {
   /**
    * constructs IntMetaDataQueryQuery
    *
-   * @param term
-   * @param validator
+   * @param term .
+   * @param validator .
    */
   public IntMetaDataQuery(Term term, Validator validator) {
     super(term);

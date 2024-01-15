@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.index.AtomicReader;
 import org.apache.lucene.index.AtomicReaderContext;
 import org.apache.lucene.index.Term;
@@ -26,7 +27,7 @@ import com.browseengine.bobo.facets.filter.RandomAccessFilter;
 import com.browseengine.bobo.query.MatchAllDocIdSetIterator;
 
 public class FacetTermQuery extends Query {
-  private static final Logger logger = Logger.getLogger(FacetTermQuery.class);
+  private static final Logger logger = LoggerFactory.getLogger(FacetTermQuery.class);
 
   private final String _name;
   private final BrowseSelection _sel;

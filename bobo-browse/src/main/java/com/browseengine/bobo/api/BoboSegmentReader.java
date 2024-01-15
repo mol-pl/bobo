@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DocumentStoredFieldVisitor;
 import org.apache.lucene.document.Field;
@@ -46,9 +45,11 @@ import org.apache.lucene.index.StoredFieldVisitor;
 import com.browseengine.bobo.facets.FacetHandler;
 import com.browseengine.bobo.facets.RuntimeFacetHandler;
 import com.browseengine.bobo.facets.RuntimeFacetHandlerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BoboSegmentReader extends FilterAtomicReader {
-  private static Logger logger = Logger.getLogger(BoboSegmentReader.class);
+  private static final Logger logger = LoggerFactory.getLogger(BoboSegmentReader.class);
 
   protected Map<String, FacetHandler<?>> _facetHandlerMap;
 
@@ -197,12 +198,12 @@ public class BoboSegmentReader extends FilterAtomicReader {
   }
 
   /**
-   * @param reader
-   * @param facetHandlers
-   * @param facetHandlerFactories
-   * @param workArea
-   * the inner reader. false => we use the given reader as the inner reader.
-   * @throws IOException
+   * @param reader .
+   * @param facetHandlers .
+   * @param facetHandlerFactories .
+   * @param workArea .
+   * the inner reader. false ⇒ we use the given reader as the inner reader.
+   * @throws IOException io.
    */
   protected BoboSegmentReader(AtomicReader reader, Collection<FacetHandler<?>> facetHandlers,
       Collection<RuntimeFacetHandlerFactory<?, ?>> facetHandlerFactories, WorkArea workArea)
@@ -236,7 +237,7 @@ public class BoboSegmentReader extends FilterAtomicReader {
   /**
    * Gets a facet handler
    *
-   * @param fieldname
+   * @param fieldname .
    *          name
    * @return facet handler
    */

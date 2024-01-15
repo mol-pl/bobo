@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.browseengine.bobo.api.BrowseFacet;
 import com.browseengine.bobo.api.BrowseSelection;
@@ -25,7 +26,7 @@ import com.browseengine.bobo.util.LazyBigIntArray;
 import com.browseengine.bobo.util.ListMerger;
 
 public class PathFacetCountCollector implements FacetCountCollector {
-  private static final Logger log = Logger.getLogger(PathFacetCountCollector.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(PathFacetCountCollector.class.getName());
   private final BrowseSelection _sel;
   protected BigSegmentedArray _count;
   private final String _name;

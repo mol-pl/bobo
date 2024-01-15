@@ -4,7 +4,7 @@
 package com.browseengine.bobo.api;
 
 /**
- * @author "Xiaoyang Gu<xgu@linkedin.com>"
+ * @author "Xiaoyang Gu; xgu@linkedin.com"
  *
  */
 public abstract class LongFacetIterator extends FacetIterator {

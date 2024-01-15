@@ -28,7 +28,8 @@ package com.browseengine.bobo.service;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.store.Directory;
 
@@ -39,7 +40,7 @@ import com.browseengine.bobo.impl.DefaultBrowseServiceImpl;
 
 public class BrowseServiceFactory {
 
-  private static Logger logger = Logger.getLogger(BrowseServiceFactory.class);
+  private static final Logger logger = LoggerFactory.getLogger(BrowseServiceFactory.class);
 
   public static BrowseService createBrowseService(File idxDir) throws BrowseException {
     if (idxDir == null) throw new IllegalArgumentException("Null index dir specified");

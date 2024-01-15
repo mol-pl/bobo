@@ -29,76 +29,84 @@ import com.browseengine.bobo.util.BigSegmentedArray;
 import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.distance.DistanceUtils;
 
-/** Constructor for SpatialFacetHandler
- * @param name - name of the Spatial facet
- *
- */
 public class SpatialFacetHandler extends FacetHandler<FacetDataCache<?>> {
 
-  private final String longitude;
-  private final String latitude;
-  private final SpatialStrategy spatialStrategy;
+	private final String longitude;
+	private final String latitude;
+	private final SpatialStrategy spatialStrategy;
 
-  public SpatialFacetHandler(String name, String lonFieldName, String latFieldName,
-      String geoFieldName, int geoHashPrefixTreeMaxLevels) {
-    super(name);
-    longitude = lonFieldName;
-    latitude = latFieldName;
-    SpatialPrefixTree grid = new GeohashPrefixTree(SpatialContext.GEO, geoHashPrefixTreeMaxLevels);
-    spatialStrategy = new RecursivePrefixTreeStrategy(grid, geoFieldName);
-  }
+	/**
+	 * Constructor for SpatialFacetHandler.
+	 *
+	 * @param name name of the Spatial facet
+	 * @param lonFieldName longitude.
+	 * @param latFieldName latitude.
+	 * @param geoFieldName name RecursivePrefixTreeStrategy name.
+	 * @param geoHashPrefixTreeMaxLevels .
+	 */
+	public SpatialFacetHandler(String name, String lonFieldName, String latFieldName,
+			String geoFieldName, int geoHashPrefixTreeMaxLevels) {
+		super(name);
+		longitude = lonFieldName;
+		latitude = latFieldName;
+		SpatialPrefixTree grid = new GeohashPrefixTree(SpatialContext.GEO, geoHashPrefixTreeMaxLevels);
+		spatialStrategy = new RecursivePrefixTreeStrategy(grid, geoFieldName);
+	}
 
-  @Override
-  public FacetDataCache<?> load(BoboSegmentReader reader) throws IOException {
-    // No need to load any data
-    return null;
-  }
+	@Override
+	public FacetDataCache<?> load(BoboSegmentReader reader) throws IOException {
+		// No need to load any data
+		return null;
+	}
 
-  /**
-   * Builds a random access filter.
-   * @param value Should be of the form: lat, lon: rad
-   * @param selectionProperty
-   */
-  @Override
-  public RandomAccessFilter buildRandomAccessFilter(String value, Properties selectionProperty)
-      throws IOException {
-    GeoRange range = GeoFacetCountCollector.parse(value);
-    SpatialArgs spatialArgs = new SpatialArgs(SpatialOperation.Intersects,
-        SpatialContext.GEO.makeCircle(range.getLon(), range.getLat(),
-          DistanceUtils.dist2Degrees(range.getRad(), DistanceUtils.EARTH_MEAN_RADIUS_KM)));
-    Filter filter = spatialStrategy.makeFilter(spatialArgs);
-    if (filter == null) {
-      return null;
-    }
-    return new SpatialFacetFilter(filter);
-  }
+	/**
+	 * Builds a random access filter.
+	 *
+	 * @param value             Should be of the form: lat, lon: rad
+	 * @param selectionProperty .
+	 * @return the filter.
+	 * @throws java.io.IOException
+	 */
+	@Override
+	public RandomAccessFilter buildRandomAccessFilter(String value, Properties selectionProperty)
+			throws IOException {
+		GeoRange range = GeoFacetCountCollector.parse(value);
+		SpatialArgs spatialArgs = new SpatialArgs(SpatialOperation.Intersects,
+				SpatialContext.GEO.makeCircle(range.getLon(), range.getLat(),
+						DistanceUtils.dist2Degrees(range.getRad(), DistanceUtils.EARTH_MEAN_RADIUS_KM)));
+		Filter filter = spatialStrategy.makeFilter(spatialArgs);
+		if (filter == null) {
+			return null;
+		}
+		return new SpatialFacetFilter(filter);
+	}
 
-  @Override
-  public DocComparatorSource getDocComparatorSource() {
-    throw new UnsupportedOperationException("Doc comparator is not yet supported for spatial facet");
-  }
+	@Override
+	public DocComparatorSource getDocComparatorSource() {
+		throw new UnsupportedOperationException("Doc comparator is not yet supported for spatial facet");
+	}
 
-  @Override
-  public FacetCountCollectorSource getFacetCountCollectorSource(final BrowseSelection sel,
-      final FacetSpec fspec) {
-    throw new UnsupportedOperationException(
-        "Facet count collector is not yet supported for spatial facet");
-  }
+	@Override
+	public FacetCountCollectorSource getFacetCountCollectorSource(final BrowseSelection sel,
+			final FacetSpec fspec) {
+		throw new UnsupportedOperationException(
+				"Facet count collector is not yet supported for spatial facet");
+	}
 
-  @Override
-  public String[] getFieldValues(BoboSegmentReader reader, int id) {
-    FacetDataCache<?> latCache = (FacetDataCache<?>) reader.getFacetData(latitude);
-    FacetDataCache<?> lonCache = (FacetDataCache<?>) reader.getFacetData(longitude);
+	@Override
+	public String[] getFieldValues(BoboSegmentReader reader, int id) {
+		FacetDataCache<?> latCache = (FacetDataCache<?>) reader.getFacetData(latitude);
+		FacetDataCache<?> lonCache = (FacetDataCache<?>) reader.getFacetData(longitude);
 
-    BigSegmentedArray latOrderArray = latCache.orderArray;
-    TermValueList<?> latValList = latCache.valArray;
+		BigSegmentedArray latOrderArray = latCache.orderArray;
+		TermValueList<?> latValList = latCache.valArray;
 
-    BigSegmentedArray lonOrderArray = lonCache.orderArray;
-    TermValueList<?> lonValList = lonCache.valArray;
+		BigSegmentedArray lonOrderArray = lonCache.orderArray;
+		TermValueList<?> lonValList = lonCache.valArray;
 
-    String docLatString = latValList.get(latOrderArray.get(id));
-    String docLonString = lonValList.get(lonOrderArray.get(id));
-    String[] fieldValues = new String[] { docLatString, docLonString };
-    return fieldValues;
-  }
+		String docLatString = latValList.get(latOrderArray.get(id));
+		String docLonString = lonValList.get(lonOrderArray.get(id));
+		String[] fieldValues = new String[]{docLatString, docLonString};
+		return fieldValues;
+	}
 }

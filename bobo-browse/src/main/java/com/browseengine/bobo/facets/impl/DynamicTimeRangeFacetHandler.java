@@ -10,10 +10,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DynamicTimeRangeFacetHandler extends DynamicRangeFacetHandler {
-  private static final Logger log = Logger.getLogger(DynamicTimeRangeFacetHandler.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DynamicTimeRangeFacetHandler.class.getName());
   public static final String NUMBER_FORMAT = "00000000000000000000";
 
   protected ThreadLocal<DecimalFormat> _formatter = null;
@@ -29,10 +30,10 @@ public class DynamicTimeRangeFacetHandler extends DynamicRangeFacetHandler {
 
   /**
    * the format of range string is dddhhmmss. (ddd: days (000-999), hh : hours (00-23), mm: minutes (00-59), ss: seconds (00-59))
-   * @param name
-   * @param dataFacetName
-   * @param currentTime
-   * @param ranges
+   * @param name .
+   * @param dataFacetName .
+   * @param currentTime .
+   * @param ranges .
    */
   public DynamicTimeRangeFacetHandler(String name, String dataFacetName, long currentTime,
       List<String> ranges) throws ParseException {

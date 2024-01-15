@@ -6,7 +6,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.util.PriorityQueue;
 
 import com.browseengine.bobo.api.BrowseFacet;
@@ -31,7 +32,7 @@ import com.browseengine.bobo.facets.impl.CombinedShortFacetIterator;
  *
  */
 public class CombinedFacetAccessible implements FacetAccessible {
-  private static final Logger log = Logger.getLogger(CombinedFacetAccessible.class);
+  private static final Logger log = LoggerFactory.getLogger(CombinedFacetAccessible.class);
   protected final List<FacetAccessible> _list;
   protected final FacetSpec _fspec;
   protected boolean _closed;

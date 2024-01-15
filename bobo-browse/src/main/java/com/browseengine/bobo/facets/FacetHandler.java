@@ -26,267 +26,289 @@ import com.browseengine.bobo.sort.DocComparatorSource;
 /**
  * FacetHandler definition
  *
+ * @param <D> object.
  */
 public abstract class FacetHandler<D> {
-  public static class FacetDataNone implements Serializable {
-    private static final long serialVersionUID = 1L;
-    public static FacetDataNone instance = new FacetDataNone();
 
-    private FacetDataNone() {
-    }
-  }
+	public static class FacetDataNone implements Serializable {
 
-  protected final String _name;
-  private final Set<String> _dependsOn;
-  private final Map<String, FacetHandler<?>> _dependedFacetHandlers;
-  private TermCountSize _termCountSize;
+		private static final long serialVersionUID = 1L;
+		public static FacetDataNone instance = new FacetDataNone();
 
-  public static enum TermCountSize {
-    small, medium, large
-  }
+		private FacetDataNone() {
+		}
+	}
 
-  /**
-   * Constructor
-   * @param name name
-   * @param dependsOn Set of names of facet handlers this facet handler depend on for loading
-   */
-  public FacetHandler(String name, Set<String> dependsOn) {
-    _name = name;
-    _dependsOn = new HashSet<String>();
-    if (dependsOn != null) {
-      _dependsOn.addAll(dependsOn);
-    }
-    _dependedFacetHandlers = new HashMap<String, FacetHandler<?>>();
-    _termCountSize = TermCountSize.large;
-  }
+	protected final String _name;
+	private final Set<String> _dependsOn;
+	private final Map<String, FacetHandler<?>> _dependedFacetHandlers;
+	private TermCountSize _termCountSize;
 
-  public FacetHandler<D> setTermCountSize(String termCountSize) {
-    setTermCountSize(TermCountSize.valueOf(termCountSize.toLowerCase()));
-    return this;
-  }
+	public static enum TermCountSize {
+		small, medium, large
+	}
 
-  public FacetHandler<D> setTermCountSize(TermCountSize termCountSize) {
-    _termCountSize = termCountSize;
-    return this;
-  }
+	/**
+	 * Constructor
+	 *
+	 * @param name      name
+	 * @param dependsOn Set of names of facet handlers this facet handler depend on for loading
+	 */
+	public FacetHandler(String name, Set<String> dependsOn) {
+		_name = name;
+		_dependsOn = new HashSet<String>();
+		if (dependsOn != null) {
+			_dependsOn.addAll(dependsOn);
+		}
+		_dependedFacetHandlers = new HashMap<String, FacetHandler<?>>();
+		_termCountSize = TermCountSize.large;
+	}
 
-  public TermCountSize getTermCountSize() {
-    return _termCountSize;
-  }
+	public FacetHandler<D> setTermCountSize(String termCountSize) {
+		setTermCountSize(TermCountSize.valueOf(termCountSize.toLowerCase()));
+		return this;
+	}
 
-  /**
-   * Constructor
-   * @param name name
-   */
-  public FacetHandler(String name) {
-    this(name, null);
-  }
+	public FacetHandler<D> setTermCountSize(TermCountSize termCountSize) {
+		_termCountSize = termCountSize;
+		return this;
+	}
 
-  /**
-   * Gets the name
-   * @return name
-   */
-  public final String getName() {
-    return _name;
-  }
+	public TermCountSize getTermCountSize() {
+		return _termCountSize;
+	}
 
-  /**
-   * Gets names of the facet handler this depends on
-   * @return set of facet handler names
-   */
-  public final Set<String> getDependsOn() {
-    return _dependsOn;
-  }
+	/**
+	 * Constructor
+	 *
+	 * @param name name
+	 */
+	public FacetHandler(String name) {
+		this(name, null);
+	}
 
-  /**
-   * Adds a list of depended facet handlers
-   * @param facetHandler depended facet handler
-   */
-  public final void putDependedFacetHandler(FacetHandler<?> facetHandler) {
-    _dependedFacetHandlers.put(facetHandler._name, facetHandler);
-  }
+	/**
+	 * Gets the name
+	 *
+	 * @return name
+	 */
+	public final String getName() {
+		return _name;
+	}
 
-  /**
-   * Gets a depended facet handler
-   * @param name facet handler name
-   * @return facet handler instance
-   */
-  public final FacetHandler<?> getDependedFacetHandler(String name) {
-    return _dependedFacetHandlers.get(name);
-  }
+	/**
+	 * Gets names of the facet handler this depends on
+	 *
+	 * @return set of facet handler names
+	 */
+	public final Set<String> getDependsOn() {
+		return _dependsOn;
+	}
 
-  /**
-   * Load information from an index reader, initialized by {@link BoboSegmentReader}
-   * @param reader reader
-   * @throws IOException
-   */
-  abstract public D load(BoboSegmentReader reader) throws IOException;
+	/**
+	 * Adds a list of depended facet handlers
+	 *
+	 * @param facetHandler depended facet handler
+	 */
+	public final void putDependedFacetHandler(FacetHandler<?> facetHandler) {
+		_dependedFacetHandlers.put(facetHandler._name, facetHandler);
+	}
 
-  public FacetAccessible merge(FacetSpec fspec, List<FacetAccessible> facetList) {
-    return new CombinedFacetAccessible(fspec, facetList);
-  }
+	/**
+	 * Gets a depended facet handler
+	 *
+	 * @param name facet handler name
+	 * @return facet handler instance
+	 */
+	public final FacetHandler<?> getDependedFacetHandler(String name) {
+		return _dependedFacetHandlers.get(name);
+	}
 
-  @SuppressWarnings("unchecked")
-  public D getFacetData(BoboSegmentReader reader) {
-    return (D) reader.getFacetData(_name);
-  }
+	/**
+	 * Load information from an index reader, initialized by {@link BoboSegmentReader}
+	 *
+	 * @param reader reader
+	 * @return D.
+	 * @throws IOException io.
+	 */
+	abstract public D load(BoboSegmentReader reader) throws IOException;
 
-  public D load(BoboSegmentReader reader, BoboSegmentReader.WorkArea workArea) throws IOException {
-    return load(reader);
-  }
+	public FacetAccessible merge(FacetSpec fspec, List<FacetAccessible> facetList) {
+		return new CombinedFacetAccessible(fspec, facetList);
+	}
 
-  public void loadFacetData(BoboSegmentReader reader, BoboSegmentReader.WorkArea workArea)
-      throws IOException {
-    reader.putFacetData(_name, load(reader, workArea));
-  }
+	@SuppressWarnings("unchecked")
+	public D getFacetData(BoboSegmentReader reader) {
+		return (D) reader.getFacetData(_name);
+	}
 
-  public void loadFacetData(BoboSegmentReader reader) throws IOException {
-    reader.putFacetData(_name, load(reader));
-  }
+	public D load(BoboSegmentReader reader, BoboSegmentReader.WorkArea workArea) throws IOException {
+		return load(reader);
+	}
 
-  /**
-   * Gets a filter from a given selection
-   * @param sel selection
-   * @return a filter
-   * @throws IOException
-   * @throws IOException
-   */
-  public RandomAccessFilter buildFilter(BrowseSelection sel) throws IOException {
-    String[] selections = sel.getValues();
-    String[] notSelections = sel.getNotValues();
-    Properties prop = sel.getSelectionProperties();
+	public void loadFacetData(BoboSegmentReader reader, BoboSegmentReader.WorkArea workArea)
+			throws IOException {
+		reader.putFacetData(_name, load(reader, workArea));
+	}
 
-    RandomAccessFilter filter = null;
-    if (selections != null && selections.length > 0) {
-      if (sel.getSelectionOperation() == ValueOperation.ValueOperationAnd) {
-        filter = buildRandomAccessAndFilter(selections, prop);
-        if (filter == null) {
-          filter = EmptyFilter.getInstance();
-        }
-      } else {
-        filter = buildRandomAccessOrFilter(selections, prop, false);
-        if (filter == null) {
-          return EmptyFilter.getInstance();
-        }
-      }
-    }
+	public void loadFacetData(BoboSegmentReader reader) throws IOException {
+		reader.putFacetData(_name, load(reader));
+	}
 
-    if (notSelections != null && notSelections.length > 0) {
-      RandomAccessFilter notFilter = buildRandomAccessOrFilter(notSelections, prop, true);
-      if (filter == null) {
-        filter = notFilter;
-      } else {
-        RandomAccessFilter andFilter = new RandomAccessAndFilter(
-            Arrays.asList(new RandomAccessFilter[] { filter, notFilter }));
-        filter = andFilter;
-      }
-    }
+	/**
+	 * Gets a filter from a given selection
+	 *
+	 * @param sel selection
+	 * @return a filter
+	 * @throws IOException io.
+	 */
+	public RandomAccessFilter buildFilter(BrowseSelection sel) throws IOException {
+		String[] selections = sel.getValues();
+		String[] notSelections = sel.getNotValues();
+		Properties prop = sel.getSelectionProperties();
 
-    return filter;
-  }
+		RandomAccessFilter filter = null;
+		if (selections != null && selections.length > 0) {
+			if (sel.getSelectionOperation() == ValueOperation.ValueOperationAnd) {
+				filter = buildRandomAccessAndFilter(selections, prop);
+				if (filter == null) {
+					filter = EmptyFilter.getInstance();
+				}
+			} else {
+				filter = buildRandomAccessOrFilter(selections, prop, false);
+				if (filter == null) {
+					return EmptyFilter.getInstance();
+				}
+			}
+		}
 
-  abstract public RandomAccessFilter buildRandomAccessFilter(String value,
-      Properties selectionProperty) throws IOException;
+		if (notSelections != null && notSelections.length > 0) {
+			RandomAccessFilter notFilter = buildRandomAccessOrFilter(notSelections, prop, true);
+			if (filter == null) {
+				filter = notFilter;
+			} else {
+				RandomAccessFilter andFilter = new RandomAccessAndFilter(
+						Arrays.asList(new RandomAccessFilter[]{filter, notFilter}));
+				filter = andFilter;
+			}
+		}
 
-  public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties prop)
-      throws IOException {
-    ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
+		return filter;
+	}
 
-    for (String val : vals) {
-      RandomAccessFilter f = buildRandomAccessFilter(val, prop);
-      if (f != null) {
-        filterList.add(f);
-      } else {
-        return EmptyFilter.getInstance();
-      }
-    }
+	abstract public RandomAccessFilter buildRandomAccessFilter(String value,
+			Properties selectionProperty) throws IOException;
 
-    if (filterList.size() == 1) return filterList.get(0);
-    return new RandomAccessAndFilter(filterList);
-  }
+	public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties prop)
+			throws IOException {
+		ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
 
-  public RandomAccessFilter buildRandomAccessOrFilter(String[] vals, Properties prop, boolean isNot)
-      throws IOException {
-    ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
+		for (String val : vals) {
+			RandomAccessFilter f = buildRandomAccessFilter(val, prop);
+			if (f != null) {
+				filterList.add(f);
+			} else {
+				return EmptyFilter.getInstance();
+			}
+		}
 
-    for (String val : vals) {
-      RandomAccessFilter f = buildRandomAccessFilter(val, prop);
-      if (f != null && !(f instanceof EmptyFilter)) {
-        filterList.add(f);
-      }
-    }
+		if (filterList.size() == 1) {
+			return filterList.get(0);
+		}
+		return new RandomAccessAndFilter(filterList);
+	}
 
-    RandomAccessFilter finalFilter;
-    if (filterList.size() == 0) {
-      finalFilter = EmptyFilter.getInstance();
-    } else {
-      finalFilter = new RandomAccessOrFilter(filterList);
-    }
+	public RandomAccessFilter buildRandomAccessOrFilter(String[] vals, Properties prop, boolean isNot)
+			throws IOException {
+		ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
 
-    if (isNot) {
-      finalFilter = new RandomAccessNotFilter(finalFilter);
-    }
-    return finalFilter;
-  }
+		for (String val : vals) {
+			RandomAccessFilter f = buildRandomAccessFilter(val, prop);
+			if (f != null && !(f instanceof EmptyFilter)) {
+				filterList.add(f);
+			}
+		}
 
-  /**
-   * Gets a FacetCountCollector
-   * @param sel selection
-   * @param fspec facetSpec
-   * @return a FacetCountCollector
-   */
-  abstract public FacetCountCollectorSource getFacetCountCollectorSource(BrowseSelection sel,
-      FacetSpec fspec);
+		RandomAccessFilter finalFilter;
+		if (filterList.isEmpty()) {
+			finalFilter = EmptyFilter.getInstance();
+		} else {
+			finalFilter = new RandomAccessOrFilter(filterList);
+		}
 
-  /**
-   * Override this method if your facet handler have a better group mode like the SimpleFacetHandler.
-   */
-  public FacetCountCollectorSource getFacetCountCollectorSource(BrowseSelection sel,
-      FacetSpec ospec, boolean groupMode) {
-    return getFacetCountCollectorSource(sel, ospec);
-  }
+		if (isNot) {
+			finalFilter = new RandomAccessNotFilter(finalFilter);
+		}
+		return finalFilter;
+	}
 
-  /**
-   * Gets the field value
-   * @param id doc
-   * @param reader index reader
-   * @return array of field values
-   * @see #getFieldValue(BoboSegmentReader,int)
-   */
-  abstract public String[] getFieldValues(BoboSegmentReader reader, int id);
+	/**
+	 * Gets a FacetCountCollector
+	 *
+	 * @param sel   selection
+	 * @param fspec facetSpec
+	 * @return a FacetCountCollector
+	 */
+	abstract public FacetCountCollectorSource getFacetCountCollectorSource(BrowseSelection sel,
+			FacetSpec fspec);
 
-  public int getNumItems(BoboSegmentReader reader, int id) {
-    throw new UnsupportedOperationException("getNumItems is not supported for this facet handler: "
-        + getClass().getName());
-  }
+	/**
+	 * Override this method if your facet handler have a better group mode like the SimpleFacetHandler.
+	 *
+	 * @param sel   selection
+	 * @param ospec facetSpec
+	 * @param groupMode .
+	 * @return
+	 */
+	public FacetCountCollectorSource getFacetCountCollectorSource(BrowseSelection sel,
+			FacetSpec ospec, boolean groupMode) {
+		return getFacetCountCollectorSource(sel, ospec);
+	}
 
-  public Object[] getRawFieldValues(BoboSegmentReader reader, int id) {
-    return getFieldValues(reader, id);
-  }
+	/**
+	 * Gets the field value
+	 *
+	 * @param id     doc
+	 * @param reader index reader
+	 * @return array of field values
+	 * @see #getFieldValue(BoboSegmentReader,int)
+	 */
+	abstract public String[] getFieldValues(BoboSegmentReader reader, int id);
 
-  /**
-   * Gets a single field value
-   * @param id doc
-   * @param reader index reader
-   * @return first field value
-   * @see #getFieldValues(BoboSegmentReader,int)
-   */
-  public String getFieldValue(BoboSegmentReader reader, int id) {
-    String[] values = getFieldValues(reader, id);
-    if (values == null || values.length == 0) {
-      return null;
-    }
-    return values[0];
-  }
+	public int getNumItems(BoboSegmentReader reader, int id) {
+		throw new UnsupportedOperationException("getNumItems is not supported for this facet handler: "
+				+ getClass().getName());
+	}
 
-  /**
-   * builds a comparator to determine how sorting is done
-   * @return a sort comparator
-   */
-  abstract public DocComparatorSource getDocComparatorSource();
+	public Object[] getRawFieldValues(BoboSegmentReader reader, int id) {
+		return getFieldValues(reader, id);
+	}
 
-  @Override
-  public Object clone() throws CloneNotSupportedException {
-    return super.clone();
-  }
+	/**
+	 * Gets a single field value
+	 *
+	 * @param id     doc
+	 * @param reader index reader
+	 * @return first field value
+	 * @see #getFieldValues(BoboSegmentReader,int)
+	 */
+	public String getFieldValue(BoboSegmentReader reader, int id) {
+		String[] values = getFieldValues(reader, id);
+		if (values == null || values.length == 0) {
+			return null;
+		}
+		return values[0];
+	}
+
+	/**
+	 * builds a comparator to determine how sorting is done
+	 *
+	 * @return a sort comparator
+	 */
+	abstract public DocComparatorSource getDocComparatorSource();
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

@@ -8,113 +8,120 @@ import java.util.List;
  * This class represents a facet
  */
 public class BrowseFacet implements Serializable {
-  private static final long serialVersionUID = 1L;
 
-  private String _value;
-  private int _hitcount;
+	private static final long serialVersionUID = 1L;
 
-  public BrowseFacet() {
-  }
+	private String _value;
+	private int _hitcount;
 
-  public BrowseFacet(String value, int hitcount) {
-    _value = value;
-    _hitcount = hitcount;
-  }
+	public BrowseFacet() {
+	}
 
-  /**
-   * Gets the facet value
-   * @return value
-   * @see #setValue(String)
-   */
-  public String getValue() {
-    return _value;
-  }
+	public BrowseFacet(String value, int hitcount) {
+		_value = value;
+		_hitcount = hitcount;
+	}
 
-  /**
-   * Sets the facet value
-   *
-   * @param value Facet value
-   * @see #getValue()
-   */
-  public BrowseFacet setValue(String value) {
-    _value = value;
-    return this;
-  }
+	/**
+	 * Gets the facet value
+	 *
+	 * @return value
+	 * @see #setValue(String)
+	 */
+	public String getValue() {
+		return _value;
+	}
 
-  /**
-   * Gets the hit count
-   * @return hit count
-   * @deprecated use {@link #getFacetValueHitCount()}
-   */
-  @Deprecated
-  public int getHitCount() {
-    return _hitcount;
-  }
+	/**
+	 * Sets the facet value
+	 *
+	 * @param value Facet value
+	 * @return self.
+	 * @see #getValue()
+	 */
+	public BrowseFacet setValue(String value) {
+		_value = value;
+		return this;
+	}
 
-  /**
-   * Sets the hit count
-   *
-   * @param hitcount Hit count
-   * @deprecated use {@link #setFacetValueHitCount(int)}
-   */
-  @Deprecated
-  public BrowseFacet setHitCount(int hitcount) {
-    _hitcount = hitcount;
-    return this;
-  }
+	/**
+	 * Gets the hit count
+	 *
+	 * @return hit count
+	 * @deprecated use {@link #getFacetValueHitCount()}
+	 */
+	@Deprecated
+	public int getHitCount() {
+		return _hitcount;
+	}
 
-  /**
-   * Gets the hit count
-   * @return hit count
-   * @see #setHitCount(int)
-   */
-  public int getFacetValueHitCount() {
-    return _hitcount;
-  }
+	/**
+	 * Sets the hit count
+	 *
+	 * @param hitcount Hit count
+	 * @deprecated use {@link #setFacetValueHitCount(int)}
+	 * @return self.
+	 */
+	@Deprecated
+	public BrowseFacet setHitCount(int hitcount) {
+		_hitcount = hitcount;
+		return this;
+	}
 
-  /**
-   * Sets the hit count
-   *
-   * @param hitcount Hit count
-   * @see #getHitCount()
-   */
-  public BrowseFacet setFacetValueHitCount(int hitcount) {
-    _hitcount = hitcount;
-    return this;
-  }
+	/**
+	 * Gets the hit count
+	 *
+	 * @return hit count
+	 * @see #setHitCount(int)
+	 */
+	public int getFacetValueHitCount() {
+		return _hitcount;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder buf = new StringBuilder();
-    buf.append(_value).append("(").append(_hitcount).append(")");
-    return buf.toString();
-  }
+	/**
+	 * Sets the hit count
+	 *
+	 * @param hitcount Hit count
+	 * @see #getHitCount()
+	 * @return self.
+	 */
+	public BrowseFacet setFacetValueHitCount(int hitcount) {
+		_hitcount = hitcount;
+		return this;
+	}
 
-  @Override
-  public boolean equals(Object obj) {
-    boolean equals = false;
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append(_value).append("(").append(_hitcount).append(")");
+		return buf.toString();
+	}
 
-    if (obj instanceof BrowseFacet) {
-      BrowseFacet c2 = (BrowseFacet) obj;
-      if (_hitcount == c2._hitcount && _value.equals(c2._value)) {
-        equals = true;
-      }
-    }
-    return equals;
-  }
+	@Override
+	public boolean equals(Object obj) {
+		boolean equals = false;
 
-  public List<BrowseFacet> merge(List<BrowseFacet> v, Comparator<BrowseFacet> comparator) {
-    for (BrowseFacet facet : v) {
-      int val = comparator.compare(this, facet);
-      if (val == 0) {
-        facet._hitcount += this._hitcount;
-        return v;
-      }
-      if (val > 0) {
+		if (obj instanceof BrowseFacet) {
+			BrowseFacet c2 = (BrowseFacet) obj;
+			if (_hitcount == c2._hitcount && _value.equals(c2._value)) {
+				equals = true;
+			}
+		}
+		return equals;
+	}
 
-      }
-    }
-    v.add(this);
-    return v;
-  }
+	public List<BrowseFacet> merge(List<BrowseFacet> v, Comparator<BrowseFacet> comparator) {
+		for (BrowseFacet facet : v) {
+			int val = comparator.compare(this, facet);
+			if (val == 0) {
+				facet._hitcount += this._hitcount;
+				return v;
+			}
+			if (val > 0) {
+
+			}
+		}
+		v.add(this);
+		return v;
+	}
 }

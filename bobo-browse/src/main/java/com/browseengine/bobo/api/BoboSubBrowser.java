@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.apache.lucene.index.AtomicReaderContext;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.Collector;
@@ -30,12 +29,14 @@ import com.browseengine.bobo.facets.filter.RandomAccessFilter;
 import com.browseengine.bobo.search.BoboSearcher;
 import com.browseengine.bobo.search.FacetHitCollector;
 import com.browseengine.bobo.sort.SortCollector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class implements the browsing functionality.
  */
 public class BoboSubBrowser extends BoboSearcher implements Browsable {
-  private static Logger logger = Logger.getLogger(BoboSubBrowser.class);
+  private static final Logger logger = LoggerFactory.getLogger(BoboSubBrowser.class);
 
   private final BoboSegmentReader _reader;
   private final Map<String, RuntimeFacetHandlerFactory<?, ?>> _runtimeFacetHandlerFactoryMap;
@@ -77,7 +78,7 @@ public class BoboSubBrowser extends BoboSearcher implements Browsable {
    * Sets runtime facet handler. If has the same name as a preload handler, for the
    * duration of this browser, this one will be used.
    *
-   * @param facetHandler
+   * @param facetHandler .
    *          Runtime facet handler
    */
   @Override
@@ -104,7 +105,7 @@ public class BoboSubBrowser extends BoboSearcher implements Browsable {
   /**
    * Gets a defined facet handler
    *
-   * @param name
+   * @param name .
    *          facet name
    * @return a facet handler
    */
@@ -301,7 +302,7 @@ public class BoboSubBrowser extends BoboSearcher implements Browsable {
   /**
    * browses the index.
    *
-   * @param req
+   * @param req .
    *          browse request
    * @return browse result
    */
@@ -322,9 +323,9 @@ public class BoboSubBrowser extends BoboSearcher implements Browsable {
   /**
    * Returns the field data for a given doc.
    *
-   * @param docid
+   * @param docid .
    *          doc
-   * @param fieldname
+   * @param fieldname .
    *          name of the field
    * @return field data
    */

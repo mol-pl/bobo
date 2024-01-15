@@ -210,8 +210,8 @@ public class FacetDataCache<T> implements Serializable {
    * information to find index faster.
    *
    * @param <T>
-   * @param dataCache
-   * @param vals
+   * @param dataCache .
+   * @param vals .
    * @return the array of order indices of the values.
    */
   public static <T> int[] convert(FacetDataCache<T> dataCache, T[] vals) {

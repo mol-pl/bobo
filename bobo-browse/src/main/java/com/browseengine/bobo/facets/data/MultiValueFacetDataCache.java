@@ -7,7 +7,8 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.index.AtomicReader;
 import org.apache.lucene.index.DocsAndPositionsEnum;
 import org.apache.lucene.index.DocsEnum;
@@ -31,7 +32,7 @@ import com.browseengine.bobo.util.StringArrayComparator;
 
 public class MultiValueFacetDataCache<T> extends FacetDataCache<T> {
   private static final long serialVersionUID = 1L;
-  private static Logger logger = Logger.getLogger(MultiValueFacetDataCache.class);
+  private static final Logger logger = LoggerFactory.getLogger(MultiValueFacetDataCache.class);
 
   public final BigNestedIntArray _nestedArray;
   protected int _maxItems = BigNestedIntArray.MAX_ITEMS;
@@ -61,11 +62,11 @@ public class MultiValueFacetDataCache<T> extends FacetDataCache<T> {
 
   /**
    * loads multi-value facet data. This method uses a workarea to prepare loading.
-   * @param fieldName
-   * @param reader
-   * @param listFactory
-   * @param workArea
-   * @throws IOException
+   * @param fieldName .
+   * @param reader .
+   * @param listFactory .
+   * @param workArea .
+   * @throws IOException io.
    */
   public void load(String fieldName, AtomicReader reader, TermListFactory<T> listFactory,
       WorkArea workArea) throws IOException {
@@ -169,11 +170,11 @@ public class MultiValueFacetDataCache<T> extends FacetDataCache<T> {
 
   /**
    * loads multi-value facet data. This method uses the count payload to allocate storage before loading data.
-   * @param fieldName
-   * @param sizeTerm
-   * @param reader
-   * @param listFactory
-   * @throws IOException
+   * @param fieldName .
+   * @param sizeTerm .
+   * @param reader .
+   * @param listFactory .
+   * @throws IOException io.
    */
   public void load(String fieldName, AtomicReader reader, TermListFactory<T> listFactory,
       Term sizeTerm) throws IOException {

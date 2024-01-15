@@ -22,10 +22,10 @@ public final class GeoSimpleFacetFilter extends RandomAccessFilter {
   private final String _longRangeString;
 
   /**
-   * @param latHandler
-   * @param longHandler
-   * @param latRangeString
-   * @param longRangeString
+   * @param latHandler .
+   * @param longHandler .
+   * @param latRangeString .
+   * @param longRangeString .
    */
   public GeoSimpleFacetFilter(FacetHandler<FacetDataCache<?>> latHandler,
       FacetHandler<FacetDataCache<?>> longHandler, String latRangeString, String longRangeString) {

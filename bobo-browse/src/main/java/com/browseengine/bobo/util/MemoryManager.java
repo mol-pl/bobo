@@ -9,10 +9,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MemoryManager<T> implements MemoryManagerAdminMBean {
-  private static final Logger log = Logger.getLogger(MemoryManager.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(MemoryManager.class.getName());
   private static final int[] sizetable;
   private final AtomicLong _hits = new AtomicLong(0);
   private final AtomicLong _miss = new AtomicLong(0);
@@ -45,7 +46,7 @@ public class MemoryManager<T> implements MemoryManagerAdminMBean {
             try {
               MemoryManager.this.wait(10);
             } catch (InterruptedException e) {
-              log.error(e);
+              log.error(e.getMessage());
             }
           }
           ConcurrentLinkedQueue<T> t = _releaseQueue;
@@ -139,7 +140,7 @@ public class MemoryManager<T> implements MemoryManagerAdminMBean {
 
   /**
    * return the instance to the manager after use
-   * @param buf
+   * @param buf .
    */
   public void release(T buf) {
     // if (_releaseQueueSize.get()>8000)

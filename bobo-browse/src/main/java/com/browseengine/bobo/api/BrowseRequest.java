@@ -57,7 +57,7 @@ public class BrowseRequest implements Serializable {
 
   /**
    * Set the transaction ID;
-   * @param tid
+   * @param tid .
    */
   public final void setTid(long tid) {
     this.tid = tid;
@@ -123,7 +123,8 @@ public class BrowseRequest implements Serializable {
 
   /**
    * Sets the map between RuntimeFacetHandler names and their corresponding initialization data.
-   * @param facetHandlerDataMap
+   * @param facetHandlerDataMap .
+   * @return self
    */
   public BrowseRequest setFacetHandlerDataMap(
       Map<String, FacetHandlerInitializerParam> facetHandlerDataMap) {
@@ -137,7 +138,8 @@ public class BrowseRequest implements Serializable {
 
   /**
    * Set a default filter
-   * @param filter
+   * @param filter .
+   * @return self
    */
   public BrowseRequest setFilter(Filter filter) {
     _filter = filter;
@@ -145,7 +147,7 @@ public class BrowseRequest implements Serializable {
   }
 
   /**
-   * Gets the default filter
+   * @return Gets the default filter
    */
   public Filter getFilter() {
     return _filter;
@@ -235,6 +237,7 @@ public class BrowseRequest implements Serializable {
    *
    * @param name field name
    * @param facetSpec Facet spec
+   * @return self
    * @see #getFacetSpec(String)
    */
   public BrowseRequest setFacetSpec(String name, FacetSpec facetSpec) {
@@ -273,6 +276,7 @@ public class BrowseRequest implements Serializable {
    * Sets the number of hits to return. Part of the paging parameters.
    *
    * @param count number of hits to return.
+   * @return self
    * @see #getCount()
    */
   public BrowseRequest setCount(int count) {
@@ -293,6 +297,7 @@ public class BrowseRequest implements Serializable {
    * Sets of the offset. Part of the paging parameters.
    *
    * @param offset offset
+   * @return self
    * @see #getOffset()
    */
   public BrowseRequest setOffset(int offset) {
@@ -304,6 +309,7 @@ public class BrowseRequest implements Serializable {
    * Set the search query
    *
    * @param query lucene search query
+   * @return self
    * @see #getQuery()
    */
   public BrowseRequest setQuery(Query query) {
@@ -324,6 +330,7 @@ public class BrowseRequest implements Serializable {
    * Adds a browse selection
    *
    * @param sel selection
+   * @return self
    * @see #getSelections()
    */
   public BrowseRequest addSelection(BrowseSelection sel) {
@@ -347,7 +354,7 @@ public class BrowseRequest implements Serializable {
 
   /**
    * Gets selection by field name
-   * @param fieldname
+   * @param fieldname .
    * @return selection on the field
    */
   public BrowseSelection getSelection(String fieldname) {
@@ -376,6 +383,7 @@ public class BrowseRequest implements Serializable {
    * Add a sort spec
    *
    * @param sortSpec sort spec
+   * @return self
    * @see #getSort()
    * @see #setSort(SortField[])
    */
@@ -398,6 +406,7 @@ public class BrowseRequest implements Serializable {
    * Sets the sort criteria
    *
    * @param sorts sort criteria
+   * @return self
    * @see #addSortField(SortField)
    * @see #getSort()
    */

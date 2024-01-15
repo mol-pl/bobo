@@ -9,7 +9,8 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.management.StandardMBean;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.search.Collector;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
@@ -28,7 +29,7 @@ import com.browseengine.bobo.util.MemoryManager;
 import com.browseengine.bobo.util.MemoryManagerAdminMBean;
 
 public abstract class SortCollector extends Collector {
-  private static final Logger logger = Logger.getLogger(SortCollector.class);
+  private static final Logger logger = LoggerFactory.getLogger(SortCollector.class);
 
   protected static MemoryManager<int[]> intarraymgr = new MemoryManager<int[]>(
       new MemoryManager.Initializer<int[]>() {

@@ -8,7 +8,7 @@ import java.io.IOException;
 public class BoboBrowser extends MultiBoboBrowser {
   /**
    * @param reader BoboMultiReader
-   * @throws IOException
+   * @throws IOException io.
    */
   public BoboBrowser(BoboMultiReader reader) throws IOException {
     super(reader);

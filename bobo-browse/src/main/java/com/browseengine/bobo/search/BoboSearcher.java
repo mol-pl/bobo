@@ -70,7 +70,7 @@ public class BoboSearcher {
 
     /**
      * This method validates the doc against any multi-select enabled fields.
-     * @param docid
+     * @param docid .
      * @return true if all fields matched
      */
     public abstract boolean validate(final int docid) throws IOException;
@@ -108,7 +108,7 @@ public class BoboSearcher {
 
     /**
      * This method validates the doc against any multi-select enabled fields.
-     * @param docid
+     * @param docid .
      * @return true if all fields matched
      */
     @Override

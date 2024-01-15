@@ -32,7 +32,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntField;
@@ -59,7 +60,7 @@ import com.browseengine.bobo.index.BoboIndexer;
 import com.browseengine.bobo.index.digest.DataDigester;
 
 public class FacetNotValuesTest extends TestCase {
-  static Logger log = Logger.getLogger(FacetNotValuesTest.class);
+  static Logger log = LoggerFactory.getLogger(FacetNotValuesTest.class);
   private final List<FacetHandler<?>> _facetHandlers;
   private final int _documentSize;
   static private String[] _idRanges = new String[] { "[10 TO 10]" };
@@ -84,10 +85,10 @@ public class FacetNotValuesTest extends TestCase {
     super(testName);
     _facetHandlers = createFacetHandlers();
     _documentSize = 2;
-    String confdir = System.getProperty("conf.dir");
-    if (confdir == null) confdir = "./resource";
-    System.setProperty("log.home", ".");
-    org.apache.log4j.PropertyConfigurator.configure(confdir + "/log4j.properties");
+//    String confdir = System.getProperty("conf.dir");
+//    if (confdir == null) confdir = "./resource";
+//    System.setProperty("log.home", ".");
+//    org.apache.log4j.PropertyConfigurator.configure(confdir + "/log4j.properties");
   }
 
   public Document[] createDataTwo() {

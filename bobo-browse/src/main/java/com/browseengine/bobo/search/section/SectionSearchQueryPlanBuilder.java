@@ -38,9 +38,9 @@ public class SectionSearchQueryPlanBuilder {
   /**
    * Gets a query plan for the given query.
    * It is assumed that <code>query</code> is already rewritten before this call.
-   * @param query
+   * @param query .
    * @return SectionSearchQueryPlan
-   * @throws IOException
+   * @throws IOException io.
    */
   public SectionSearchQueryPlan getPlan(Query query) throws IOException {
     if (query != null) {
@@ -55,10 +55,10 @@ public class SectionSearchQueryPlanBuilder {
 
   /**
    * Translates a Lucence Query object to an SectionSearchQueryPlan
-   * @param query
-   * @param reader
+   * @param query .
+   * @param reader .
    * @return
-   * @throws IOException
+   * @throws IOException io.
    */
   private SectionSearchQueryPlan translate(Query query) throws IOException {
     if (query != null) {

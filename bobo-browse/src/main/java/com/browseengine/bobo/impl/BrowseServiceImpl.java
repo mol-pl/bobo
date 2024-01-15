@@ -28,7 +28,8 @@ package com.browseengine.bobo.impl;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -41,7 +42,7 @@ import com.browseengine.bobo.service.BrowseService;
 import com.browseengine.bobo.service.BrowseServiceFactory;
 
 public class BrowseServiceImpl implements BrowseService {
-  private static final Logger logger = Logger.getLogger(BrowseServiceImpl.class);
+  private static final Logger logger = LoggerFactory.getLogger(BrowseServiceImpl.class);
   private final File _idxDir;
   private BoboMultiReader _reader;
 

@@ -32,7 +32,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -59,7 +60,7 @@ import com.browseengine.bobo.index.digest.DataDigester;
  *
  */
 public class FacetNameTest extends TestCase {
-  static Logger log = Logger.getLogger(FacetNameTest.class);
+  static Logger log = LoggerFactory.getLogger(FacetNameTest.class);
   private final List<FacetHandler<?>> _facetHandlers;
   private final int _documentSize;
 
@@ -83,10 +84,10 @@ public class FacetNameTest extends TestCase {
     super(testName);
     _facetHandlers = createFacetHandlers();
     _documentSize = 10;
-    String confdir = System.getProperty("conf.dir");
-    if (confdir == null) confdir = "./resource";
-    System.setProperty("log.home", ".");
-    org.apache.log4j.PropertyConfigurator.configure(confdir + "/log4j.properties");
+//    String confdir = System.getProperty("conf.dir");
+//    if (confdir == null) confdir = "./resource";
+//    System.setProperty("log.home", ".");
+//    org.apache.log4j.PropertyConfigurator.configure(confdir + "/log4j.properties");
   }
 
   public Document[] createData() {

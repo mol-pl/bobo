@@ -7,7 +7,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.browseengine.bobo.api.FacetIterator;
 import com.browseengine.bobo.api.IntFacetIterator;
@@ -20,7 +21,7 @@ import com.browseengine.bobo.facets.impl.DefaultIntFacetIterator;
 import com.browseengine.bobo.util.BigIntArray;
 
 public class BoboFacetIteratorTest extends TestCase {
-  static Logger log = Logger.getLogger(BoboFacetIteratorTest.class);
+  static Logger log = LoggerFactory.getLogger(BoboFacetIteratorTest.class);
 
   public BoboFacetIteratorTest(String testName) {
     super(testName);

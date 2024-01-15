@@ -8,7 +8,8 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.management.StandardMBean;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.browseengine.bobo.api.BrowseFacet;
 import com.browseengine.bobo.api.BrowseSelection;
@@ -34,7 +35,7 @@ import com.browseengine.bobo.util.MemoryManager;
 import com.browseengine.bobo.util.MemoryManagerAdminMBean;
 
 public abstract class DefaultFacetCountCollector implements FacetCountCollector {
-  private static final Logger log = Logger.getLogger(DefaultFacetCountCollector.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DefaultFacetCountCollector.class.getName());
   protected final FacetSpec _ospec;
   public BigSegmentedArray _count;
 

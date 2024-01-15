@@ -2,13 +2,14 @@ package com.browseengine.bobo.docidset;
 
 import java.io.IOException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.lucene.search.DocIdSetIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class ImmutableDocSet extends DocSet {
   private int size = -1;
-  private final Logger log = Logger.getLogger(ImmutableDocSet.class.getName());
+  private static final Logger logger = LoggerFactory.getLogger(ImmutableDocSet.class);
 
   @Override
   public void addDoc(int docid) {
@@ -26,7 +27,7 @@ public abstract class ImmutableDocSet extends DocSet {
         while (dcit.nextDoc() != DocIdSetIterator.NO_MORE_DOCS)
           size++;
       } catch (IOException e) {
-        log.log(Level.SEVERE, "Error computing size..");
+        logger.error("Error computing size..");
         return -1;
       }
     }

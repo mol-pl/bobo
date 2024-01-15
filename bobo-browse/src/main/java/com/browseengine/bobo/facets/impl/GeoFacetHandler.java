@@ -25,208 +25,225 @@ import com.browseengine.bobo.util.BigFloatArray;
 import com.browseengine.bobo.util.BigSegmentedArray;
 import com.browseengine.bobo.util.GeoMatchUtil;
 
-/** Constructor for GeoFacetHandler
- * @param name - name of the Geo facet
- *
- */
 public class GeoFacetHandler extends FacetHandler<GeoFacetHandler.GeoFacetData> {
 
-  private final String _latFieldName;
-  private final String _lonFieldName;
-  // variable to specify if the geo distance calculations are in miles. Default is miles
-  private boolean _miles;
+	private final String _latFieldName;
+	private final String _lonFieldName;
+	// variable to specify if the geo distance calculations are in miles. Default is miles
+	private boolean _miles;
 
-  public GeoFacetHandler(String name, String latFieldName, String lonFieldName) {
-    super(name, new HashSet<String>(Arrays.asList(new String[] { latFieldName, lonFieldName })));
-    _latFieldName = latFieldName;
-    _lonFieldName = lonFieldName;
-    _miles = true;
-  }
+	/**
+	 * Constructor for GeoFacetHandler
+	 *
+	 * @param name         name of the geo facet
+	 * @param latFieldName name of the index field that stores the latitude value
+	 * @param lonFieldName name of the index field that stores the longitude value
+	 */
+	public GeoFacetHandler(String name, String latFieldName, String lonFieldName) {
+		super(name, new HashSet<String>(Arrays.asList(new String[]{latFieldName, lonFieldName})));
+		_latFieldName = latFieldName;
+		_lonFieldName = lonFieldName;
+		_miles = true;
+	}
 
-  /**
-   * Constructor for GeoFacetHandler
-   * @param name         name of the geo facet
-   * @param latFieldName name of the index field that stores the latitude value
-   * @param lonFieldName name of the index field that stores the longitude value
-   * @param miles        variable to specify if the geo distance calculations are in miles. False indicates distance calculation is in kilometers
-   */
-  public GeoFacetHandler(String name, String latFieldName, String lonFieldName, boolean miles) {
-    this(name, latFieldName, lonFieldName);
-    _miles = miles;
-  }
+	/**
+	 * Constructor for GeoFacetHandler
+	 *
+	 * @param name         name of the geo facet
+	 * @param latFieldName name of the index field that stores the latitude value
+	 * @param lonFieldName name of the index field that stores the longitude value
+	 * @param miles        variable to specify if the geo distance calculations are in miles. False indicates distance calculation is in kilometers
+	 */
+	public GeoFacetHandler(String name, String latFieldName, String lonFieldName, boolean miles) {
+		this(name, latFieldName, lonFieldName);
+		_miles = miles;
+	}
 
-  public static class GeoFacetData {
-    private BigFloatArray _xValArray;
-    private BigFloatArray _yValArray;
-    private BigFloatArray _zValArray;
+	public static class GeoFacetData {
 
-    public GeoFacetData() {
-      _xValArray = null;
-      _yValArray = null;
-      _zValArray = null;
-    }
+		private BigFloatArray _xValArray;
+		private BigFloatArray _yValArray;
+		private BigFloatArray _zValArray;
 
-    public GeoFacetData(BigFloatArray xvals, BigFloatArray yvals, BigFloatArray zvals) {
-      _xValArray = xvals;
-      _yValArray = yvals;
-      _zValArray = zvals;
-    }
+		public GeoFacetData() {
+			_xValArray = null;
+			_yValArray = null;
+			_zValArray = null;
+		}
 
-    public static BigFloatArray newInstance(int maxDoc) {
-      BigFloatArray array = new BigFloatArray(maxDoc);
-      array.ensureCapacity(maxDoc);
-      return array;
-    }
+		public GeoFacetData(BigFloatArray xvals, BigFloatArray yvals, BigFloatArray zvals) {
+			_xValArray = xvals;
+			_yValArray = yvals;
+			_zValArray = zvals;
+		}
 
-    /**
-     * @return the _xValArray
-     */
-    public BigFloatArray get_xValArray() {
-      return _xValArray;
-    }
+		public static BigFloatArray newInstance(int maxDoc) {
+			BigFloatArray array = new BigFloatArray(maxDoc);
+			array.ensureCapacity(maxDoc);
+			return array;
+		}
 
-    /**
-     * @param xValArray the _xValArray to set
-     */
-    public void set_xValArray(BigFloatArray xValArray) {
-      _xValArray = xValArray;
-    }
+		/**
+		 * @return the _xValArray
+		 */
+		public BigFloatArray get_xValArray() {
+			return _xValArray;
+		}
 
-    /**
-     * @return the _yValArray
-     */
-    public BigFloatArray get_yValArray() {
-      return _yValArray;
-    }
+		/**
+		 * @param xValArray the _xValArray to set
+		 */
+		public void set_xValArray(BigFloatArray xValArray) {
+			_xValArray = xValArray;
+		}
 
-    /**
-     * @param yValArray the _yValArray to set
-     */
-    public void set_yValArray(BigFloatArray yValArray) {
-      _yValArray = yValArray;
-    }
+		/**
+		 * @return the _yValArray
+		 */
+		public BigFloatArray get_yValArray() {
+			return _yValArray;
+		}
 
-    /**
-     * @return the _zValArray
-     */
-    public BigFloatArray get_zValArray() {
-      return _zValArray;
-    }
+		/**
+		 * @param yValArray the _yValArray to set
+		 */
+		public void set_yValArray(BigFloatArray yValArray) {
+			_yValArray = yValArray;
+		}
 
-    /**
-     * @param zValArray the _zValArray to set
-     */
-    public void set_zValArray(BigFloatArray zValArray) {
-      _zValArray = zValArray;
-    }
+		/**
+		 * @return the _zValArray
+		 */
+		public BigFloatArray get_zValArray() {
+			return _zValArray;
+		}
 
-    public void load(String latFieldName, String lonFieldName, BoboSegmentReader reader)
-        throws IOException {
-      if (reader == null) throw new IOException("reader object is null");
+		/**
+		 * @param zValArray the _zValArray to set
+		 */
+		public void set_zValArray(BigFloatArray zValArray) {
+			_zValArray = zValArray;
+		}
 
-      FacetDataCache<?> latCache = (FacetDataCache<?>) reader.getFacetData(latFieldName);
-      FacetDataCache<?> lonCache = (FacetDataCache<?>) reader.getFacetData(lonFieldName);
+		public void load(String latFieldName, String lonFieldName, BoboSegmentReader reader)
+				throws IOException {
+			if (reader == null) {
+				throw new IOException("reader object is null");
+			}
 
-      int maxDoc = reader.maxDoc();
+			FacetDataCache<?> latCache = (FacetDataCache<?>) reader.getFacetData(latFieldName);
+			FacetDataCache<?> lonCache = (FacetDataCache<?>) reader.getFacetData(lonFieldName);
 
-      BigFloatArray xVals = this._xValArray;
-      BigFloatArray yVals = this._yValArray;
-      BigFloatArray zVals = this._zValArray;
+			int maxDoc = reader.maxDoc();
 
-      if (xVals == null) xVals = newInstance(maxDoc);
-      else xVals.ensureCapacity(maxDoc);
-      if (yVals == null) yVals = newInstance(maxDoc);
-      else yVals.ensureCapacity(maxDoc);
-      if (zVals == null) zVals = newInstance(maxDoc);
-      else zVals.ensureCapacity(maxDoc);
+			BigFloatArray xVals = this._xValArray;
+			BigFloatArray yVals = this._yValArray;
+			BigFloatArray zVals = this._zValArray;
 
-      this._xValArray = xVals;
-      this._yValArray = yVals;
-      this._zValArray = zVals;
+			if (xVals == null) {
+				xVals = newInstance(maxDoc);
+			} else {
+				xVals.ensureCapacity(maxDoc);
+			}
+			if (yVals == null) {
+				yVals = newInstance(maxDoc);
+			} else {
+				yVals.ensureCapacity(maxDoc);
+			}
+			if (zVals == null) {
+				zVals = newInstance(maxDoc);
+			} else {
+				zVals.ensureCapacity(maxDoc);
+			}
 
-      BigSegmentedArray latOrderArray = latCache.orderArray;
-      TermValueList<?> latValList = latCache.valArray;
+			this._xValArray = xVals;
+			this._yValArray = yVals;
+			this._zValArray = zVals;
 
-      BigSegmentedArray lonOrderArray = lonCache.orderArray;
-      TermValueList<?> lonValList = lonCache.valArray;
+			BigSegmentedArray latOrderArray = latCache.orderArray;
+			TermValueList<?> latValList = latCache.valArray;
 
-      for (int i = 0; i < maxDoc; ++i) {
-        String docLatString = latValList.get(latOrderArray.get(i)).trim();
-        String docLonString = lonValList.get(lonOrderArray.get(i)).trim();
+			BigSegmentedArray lonOrderArray = lonCache.orderArray;
+			TermValueList<?> lonValList = lonCache.valArray;
 
-        float docLat = 0;
-        if (docLatString.length() > 0) {
-          docLat = Float.parseFloat(docLatString);
-        }
+			for (int i = 0; i < maxDoc; ++i) {
+				String docLatString = latValList.get(latOrderArray.get(i)).trim();
+				String docLonString = lonValList.get(lonOrderArray.get(i)).trim();
 
-        float docLon = 0;
-        if (docLonString.length() > 0) {
-          docLon = Float.parseFloat(docLonString);
-        }
+				float docLat = 0;
+				if (docLatString.length() > 0) {
+					docLat = Float.parseFloat(docLatString);
+				}
 
-        float[] coords = GeoMatchUtil.geoMatchCoordsFromDegrees(docLat, docLon);
-        _xValArray.add(i, coords[0]);
-        _yValArray.add(i, coords[1]);
-        _zValArray.add(i, coords[2]);
-      }
-    }
-  }
+				float docLon = 0;
+				if (docLonString.length() > 0) {
+					docLon = Float.parseFloat(docLonString);
+				}
 
-  /**
-   * Builds a random access filter.
-   * @param value Should be of the form: lat, lon: rad
-   * @param selectionProperty
-   */
-  @Override
-  public RandomAccessFilter buildRandomAccessFilter(String value, Properties selectionProperty)
-      throws IOException {
-    GeoRange range = GeoFacetCountCollector.parse(value);
-    return new GeoFacetFilter(this, range.getLat(), range.getLon(), range.getRad(), _miles);
-  }
+				float[] coords = GeoMatchUtil.geoMatchCoordsFromDegrees(docLat, docLon);
+				_xValArray.add(i, coords[0]);
+				_yValArray.add(i, coords[1]);
+				_zValArray.add(i, coords[2]);
+			}
+		}
+	}
 
-  @Override
-  public DocComparatorSource getDocComparatorSource() {
-    throw new UnsupportedOperationException("Doc comparator not yet supported for Geo Facets");
-  }
+	/**
+	 * Builds a random access filter.
+	 *
+	 * @param value             Should be of the form: lat, lon: rad
+	 * @param selectionProperty .
+	 */
+	@Override
+	public RandomAccessFilter buildRandomAccessFilter(String value, Properties selectionProperty)
+			throws IOException {
+		GeoRange range = GeoFacetCountCollector.parse(value);
+		return new GeoFacetFilter(this, range.getLat(), range.getLon(), range.getRad(), _miles);
+	}
 
-  @Override
-  public FacetCountCollectorSource getFacetCountCollectorSource(final BrowseSelection sel,
-      final FacetSpec fspec) {
-    return new FacetCountCollectorSource() {
-      final List<String> ranges = Arrays.asList(sel.getValues());
+	@Override
+	public DocComparatorSource getDocComparatorSource() {
+		throw new UnsupportedOperationException("Doc comparator not yet supported for Geo Facets");
+	}
 
-      @Override
-      public FacetCountCollector getFacetCountCollector(BoboSegmentReader reader, int docBase) {
-        GeoFacetData dataCache = getFacetData(reader);
-        return new GeoFacetCountCollector(_name, dataCache, docBase, fspec, ranges, _miles);
-      }
-    };
-  }
+	@Override
+	public FacetCountCollectorSource getFacetCountCollectorSource(final BrowseSelection sel,
+			final FacetSpec fspec) {
+		return new FacetCountCollectorSource() {
+			final List<String> ranges = Arrays.asList(sel.getValues());
 
-  @Override
-  public String[] getFieldValues(BoboSegmentReader reader, int id) {
-    GeoFacetData dataCache = getFacetData(reader);
-    BigFloatArray xvals = dataCache.get_xValArray();
-    BigFloatArray yvals = dataCache.get_yValArray();
-    BigFloatArray zvals = dataCache.get_zValArray();
+			@Override
+			public FacetCountCollector getFacetCountCollector(BoboSegmentReader reader, int docBase) {
+				GeoFacetData dataCache = getFacetData(reader);
+				return new GeoFacetCountCollector(_name, dataCache, docBase, fspec, ranges, _miles);
+			}
+		};
+	}
 
-    float xvalue = xvals.get(id);
-    float yvalue = yvals.get(id);
-    float zvalue = zvals.get(id);
-    float lat = GeoMatchUtil.getMatchLatDegreesFromXYZCoords(xvalue, yvalue, zvalue);
-    float lon = GeoMatchUtil.getMatchLonDegreesFromXYZCoords(xvalue, yvalue, zvalue);
+	@Override
+	public String[] getFieldValues(BoboSegmentReader reader, int id) {
+		GeoFacetData dataCache = getFacetData(reader);
+		BigFloatArray xvals = dataCache.get_xValArray();
+		BigFloatArray yvals = dataCache.get_yValArray();
+		BigFloatArray zvals = dataCache.get_zValArray();
 
-    String[] fieldValues = new String[2];
-    fieldValues[0] = String.valueOf(lat);
-    fieldValues[1] = String.valueOf(lon);
-    return fieldValues;
-  }
+		float xvalue = xvals.get(id);
+		float yvalue = yvals.get(id);
+		float zvalue = zvals.get(id);
+		float lat = GeoMatchUtil.getMatchLatDegreesFromXYZCoords(xvalue, yvalue, zvalue);
+		float lon = GeoMatchUtil.getMatchLonDegreesFromXYZCoords(xvalue, yvalue, zvalue);
 
-  @Override
-  public GeoFacetData load(BoboSegmentReader reader) throws IOException {
-    GeoFacetData dataCache = new GeoFacetData();
-    dataCache.load(_latFieldName, _lonFieldName, reader);
-    return dataCache;
-  }
+		String[] fieldValues = new String[2];
+		fieldValues[0] = String.valueOf(lat);
+		fieldValues[1] = String.valueOf(lon);
+		return fieldValues;
+	}
+
+	@Override
+	public GeoFacetData load(BoboSegmentReader reader) throws IOException {
+		GeoFacetData dataCache = new GeoFacetData();
+		dataCache.load(_latFieldName, _lonFieldName, reader);
+		return dataCache;
+	}
 
 }

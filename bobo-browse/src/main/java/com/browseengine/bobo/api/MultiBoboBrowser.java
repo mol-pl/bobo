@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.apache.lucene.index.AtomicReaderContext;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.MultiReader;
@@ -25,12 +24,14 @@ import org.apache.lucene.search.similarities.Similarity;
 
 import com.browseengine.bobo.facets.FacetHandler;
 import com.browseengine.bobo.sort.SortCollector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides implementation of Browser for multiple Browser instances
  */
 public class MultiBoboBrowser extends MultiReader implements Browsable {
-  private static Logger logger = Logger.getLogger(MultiBoboBrowser.class);
+  private static final Logger logger = LoggerFactory.getLogger(MultiBoboBrowser.class);
 
   private IndexSearcher _indexSearcher = null;
   protected Browsable[] _subBrowsers;
@@ -47,9 +48,9 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
 
   /**
    *
-   * @param browsers
+   * @param browsers .
    *          Browsers to search on
-   * @throws IOException
+   * @throws IOException io.
    */
   public MultiBoboBrowser(Browsable[] browsers) throws IOException {
     super(getSubReaders(browsers), false);
@@ -147,7 +148,7 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
 
   /**
    * Generate a merged BrowseResult from the given BrowseRequest
-   * @param req
+   * @param req .
    *          BrowseRequest for generating the facets
    * @return BrowseResult of the results of the BrowseRequest
    */
@@ -245,7 +246,7 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
   /**
    * Gets the sub-browser for a given docid
    *
-   * @param docid
+   * @param docid .
    * @return sub-browser instance
    */
   public Browsable subBrowser(int docid) {

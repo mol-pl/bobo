@@ -129,7 +129,7 @@ public class SectionSearchQuery extends Query {
   /**
    * constructs SectionSearchQuery
    *
-   * @param query
+   * @param query .
    */
   public SectionSearchQuery(Query query) {
     _query = query;
