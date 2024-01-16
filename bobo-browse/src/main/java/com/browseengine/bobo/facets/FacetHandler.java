@@ -258,7 +258,7 @@ public abstract class FacetHandler<D> {
 	 * @param sel   selection
 	 * @param ospec facetSpec
 	 * @param groupMode .
-	 * @return
+	 * @return .
 	 */
 	public FacetCountCollectorSource getFacetCountCollectorSource(BrowseSelection sel,
 			FacetSpec ospec, boolean groupMode) {

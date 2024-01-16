@@ -57,7 +57,7 @@ public class SectionSearchQueryPlanBuilder {
    * Translates a Lucence Query object to an SectionSearchQueryPlan
    * @param query .
    * @param reader .
-   * @return
+   * @return .
    * @throws IOException io.
    */
   private SectionSearchQueryPlan translate(Query query) throws IOException {

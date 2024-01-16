@@ -71,9 +71,10 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 		count = 0;
 	}
 
-	/*
-   * (non-Javadoc)
-   * @see com.browseengine.bobo.api.FacetIterator#getFacet()
+	/**
+	 * (non-Javadoc)
+	 * @return formatted facet.
+	 * @see com.browseengine.bobo.api.FacetIterator#facet
 	 */
 	public String getFacet() {
 		if (facet == TermDoubleList.VALUE_MISSING) {
@@ -95,7 +96,7 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 	/**
      * (non-Javadoc)
 	 * @return count.
-     * @see com.browseengine.bobo.api.FacetIterator#getFacetCount()
+     * @see com.browseengine.bobo.api.FacetIterator#count
 	 */
 	public int getFacetCount() {
 		return count;
@@ -134,10 +135,9 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 
 	/**
 	 * This version of the next() method applies the minHits from the facet spec
-	 * before returning the facet and its hitcount
+	 * before returning the facet and its hitcount.
 	 *
-	 * @param minHits .
-	 *                the minHits from the facet spec for CombinedFacetAccessible
+	 * @param minHits the minHits from the facet spec for CombinedFacetAccessible
 	 * @return The next facet that obeys the minHits
 	 */
 	@Override
@@ -214,6 +214,7 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 
 		/**
 		 * Subclass constructors must call this.
+		 * @param maxSize .
 		 */
 		protected final void initialize(int maxSize) {
 			size = 0;
@@ -261,6 +262,7 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 
 		/**
 		 * Returns the least element of the PriorityQueue in constant time.
+		 * @return first element.
 		 */
 		public final DoubleIteratorNode top() {
 			// We don't need to check size here: if maxSize is 0,
@@ -272,6 +274,7 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 		/**
 		 * Removes and returns the least element of the PriorityQueue in log(size)
 		 * time.
+		 * @return last element.
 		 */
 		public final DoubleIteratorNode pop() {
 			if (size > 0) {
@@ -297,6 +300,7 @@ public class CombinedDoubleFacetIterator extends DoubleFacetIterator {
 
 		/**
 		 * Returns the number of elements currently stored in the PriorityQueue.
+		 * @return number of elements.
 		 */
 		public final int size() {
 			return size;

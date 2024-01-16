@@ -209,7 +209,7 @@ public class FacetDataCache<T> implements Serializable {
    * values are supplied in raw form so that we can take advantage of the type
    * information to find index faster.
    *
-   * @param <T>
+   * @param <T> Type.
    * @param dataCache .
    * @param vals .
    * @return the array of order indices of the values.
