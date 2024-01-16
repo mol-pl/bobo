@@ -72,6 +72,7 @@ public class BrowseSelection implements Serializable {
 	 * @see #setStrict(boolean)
 	 * @deprecated use {@link #getSelectionProperties()}
 	 */
+	@Deprecated
 	public boolean isStrict() {
 		return Boolean.parseBoolean(_selectionProperties.getProperty(PathFacetHandler.SEL_PROP_NAME_STRICT));
 	}
@@ -84,6 +85,7 @@ public class BrowseSelection implements Serializable {
 	 * @see #isStrict()
 	 * @deprecated use {@link #setSelectionOperation(ValueOperation)}
 	 */
+	@Deprecated
 	public BrowseSelection setStrict(boolean strict) {
 		_selectionProperties.setProperty(PathFacetHandler.SEL_PROP_NAME_STRICT, String.valueOf(strict));
 		return this;
@@ -96,6 +98,7 @@ public class BrowseSelection implements Serializable {
 	 * @see #setDepth(int)
 	 * @deprecated use {@link #getSelectionProperties()}
 	 */
+	@Deprecated
 	public int getDepth() {
 		try {
 			return Integer.parseInt(_selectionProperties
@@ -113,6 +116,7 @@ public class BrowseSelection implements Serializable {
 	 * @see #getDepth()
 	 * @deprecated use {@link #getSelectionProperties()}
 	 */
+	@Deprecated
 	public BrowseSelection setDepth(int depth) {
 		_selectionProperties.setProperty(PathFacetHandler.SEL_PROP_NAME_DEPTH, String.valueOf(depth));
 		return this;

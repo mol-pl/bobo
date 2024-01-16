@@ -223,7 +223,7 @@ public class BoboTestCase extends TestCase {
   }
 
   public static Document[] buildData() {
-    ArrayList<Document> dataList = new ArrayList<Document>();
+    ArrayList<Document> dataList = new ArrayList<>();
 
     Document d1 = new Document();
     d1.add(buildMetaField("id", "1"));
@@ -496,7 +496,7 @@ public class BoboTestCase extends TestCase {
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public static List<FacetHandler<?>> buildFieldConf() {
-    List<FacetHandler<?>> facetHandlers = new ArrayList<FacetHandler<?>>();
+    List<FacetHandler<?>> facetHandlers = new ArrayList<>();
     facetHandlers.add(new SimpleFacetHandler("id"));
     SimpleFacetHandler colorHandler = new SimpleFacetHandler("color");
     colorHandler.setTermCountSize(TermCountSize.small);
@@ -538,7 +538,7 @@ public class BoboTestCase extends TestCase {
           public void cleanup(BoboSegmentReader reader) {
             // do nothing here.
           }
-        }, new HashSet<String>(Arrays.asList(new String[] { "number" }))));
+        }, new HashSet<>(Arrays.asList(new String[] { "number" }))));
     facetHandlers.add(new SimpleFacetHandler("testStored"));
 
     facetHandlers.add(new SimpleFacetHandler("name"));
@@ -572,10 +572,10 @@ public class BoboTestCase extends TestCase {
         Long.class, DynamicTimeRangeFacetHandler.NUMBER_FORMAT), null));
 
     String[] predefinedSalaryRanges = new String[4];
-    predefinedSalaryRanges[0] = new String("[04000 TO 05999]");
-    predefinedSalaryRanges[1] = new String("[06000 TO 07999]");
-    predefinedSalaryRanges[2] = new String("[08000 TO 09999]");
-    predefinedSalaryRanges[3] = new String("[10000 TO *]");
+    predefinedSalaryRanges[0] = "[04000 TO 05999]";
+    predefinedSalaryRanges[1] = "[06000 TO 07999]";
+    predefinedSalaryRanges[2] = "[08000 TO 09999]";
+    predefinedSalaryRanges[3] = "[10000 TO *]";
     RangeFacetHandler dependedRangeFacet = new RangeFacetHandler("salary",
         Arrays.asList(predefinedSalaryRanges));
     facetHandlers.add(dependedRangeFacet);
@@ -586,7 +586,7 @@ public class BoboTestCase extends TestCase {
     predefinedBuckets[2] = new String[] { "john", "cathy" };
     predefinedBuckets[3] = new String[] { "doug" };
 
-    Map<String, String[]> predefinedGroups = new HashMap<String, String[]>();
+    Map<String, String[]> predefinedGroups = new HashMap<>();
     predefinedGroups.put("g1", predefinedBuckets[0]);
     predefinedGroups.put("g2", predefinedBuckets[1]);
     predefinedGroups.put("g3", predefinedBuckets[2]);
@@ -599,7 +599,7 @@ public class BoboTestCase extends TestCase {
     predefinedBuckets2[1] = new String[] { "1", "4" };
     predefinedBuckets2[2] = new String[] { "7", "8" };
 
-    Map<String, String[]> predefinedNumberSets = new HashMap<String, String[]>();
+    Map<String, String[]> predefinedNumberSets = new HashMap<>();
     predefinedNumberSets.put("s1", predefinedBuckets2[0]);
     predefinedNumberSets.put("s2", predefinedBuckets2[1]);
     predefinedNumberSets.put("s3", predefinedBuckets2[2]);
@@ -608,12 +608,12 @@ public class BoboTestCase extends TestCase {
 
     // histogram
 
-    HistogramFacetHandler<Integer> histoHandler = new HistogramFacetHandler<Integer>("numberhisto",
-        "number", new Integer(0), new Integer(5000), new Integer(100));
+    HistogramFacetHandler<Integer> histoHandler = new HistogramFacetHandler<>("numberhisto",
+        "number", 0, 5000, 100);
 
     facetHandlers.add(histoHandler);
 
-    LinkedHashSet<String> dependsNames = new LinkedHashSet<String>();
+    LinkedHashSet<String> dependsNames = new LinkedHashSet<>();
     dependsNames.add("color");
     dependsNames.add("shape");
     dependsNames.add("number");
@@ -768,7 +768,7 @@ public class BoboTestCase extends TestCase {
       List<SerializableField> storedFields = hit.getStoredFields();
       assertNotNull(storedFields);
 
-      List<String> fieldValues = new ArrayList<String>();
+      List<String> fieldValues = new ArrayList<>();
       for (SerializableField field : storedFields) {
         if (field.name().equals("testStored") && field.stringValue() != null) {
           fieldValues.add(field.stringValue());
@@ -914,29 +914,29 @@ public class BoboTestCase extends TestCase {
 
       assertEquals("bobo", tv.get(0).term);
       assertEquals(2, tv.get(0).freq.intValue());
-      List<Integer> positions = new ArrayList<Integer>(Arrays.asList(0, 1));
+      List<Integer> positions = new ArrayList<>(Arrays.asList(0, 1));
       assertEquals(positions, tv.get(0).positions);
-      List<Integer> startOffsets = new ArrayList<Integer>(Arrays.asList(-1, -1));
+      List<Integer> startOffsets = new ArrayList<>(Arrays.asList(-1, -1));
       assertEquals(startOffsets, tv.get(0).startOffsets);
-      List<Integer> endOffsets = new ArrayList<Integer>(Arrays.asList(-1, -1));
+      List<Integer> endOffsets = new ArrayList<>(Arrays.asList(-1, -1));
       assertEquals(endOffsets, tv.get(0).endOffsets);
 
       assertEquals("lucene", tv.get(1).term);
       assertEquals(3, tv.get(1).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(2, 3, 4));
+      positions = new ArrayList<>(Arrays.asList(2, 3, 4));
       assertEquals(positions, tv.get(1).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(-1, -1, -1));
+      startOffsets = new ArrayList<>(Arrays.asList(-1, -1, -1));
       assertEquals(startOffsets, tv.get(1).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(-1, -1, -1));
+      endOffsets = new ArrayList<>(Arrays.asList(-1, -1, -1));
       assertEquals(endOffsets, tv.get(1).endOffsets);
 
       assertEquals("test", tv.get(2).term);
       assertEquals(1, tv.get(2).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(5));
+      positions = new ArrayList<>(Arrays.asList(5));
       assertEquals(positions, tv.get(2).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(-1));
+      startOffsets = new ArrayList<>(Arrays.asList(-1));
       assertEquals(startOffsets, tv.get(2).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(-1));
+      endOffsets = new ArrayList<>(Arrays.asList(-1));
       assertEquals(endOffsets, tv.get(2).endOffsets);
 
       tv = tvMap.get("tvOffsets");
@@ -944,58 +944,58 @@ public class BoboTestCase extends TestCase {
 
       assertEquals("bobo", tv.get(0).term);
       assertEquals(2, tv.get(0).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(-1, -1));
+      positions = new ArrayList<>(Arrays.asList(-1, -1));
       assertEquals(positions, tv.get(0).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(0, 5));
+      startOffsets = new ArrayList<>(Arrays.asList(0, 5));
       assertEquals(startOffsets, tv.get(0).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(4, 9));
+      endOffsets = new ArrayList<>(Arrays.asList(4, 9));
       assertEquals(endOffsets, tv.get(0).endOffsets);
 
       assertEquals("lucene", tv.get(1).term);
       assertEquals(3, tv.get(1).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(-1, -1, -1));
+      positions = new ArrayList<>(Arrays.asList(-1, -1, -1));
       assertEquals(positions, tv.get(1).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(10, 17, 24));
+      startOffsets = new ArrayList<>(Arrays.asList(10, 17, 24));
       assertEquals(startOffsets, tv.get(1).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(16, 23, 30));
+      endOffsets = new ArrayList<>(Arrays.asList(16, 23, 30));
       assertEquals(endOffsets, tv.get(1).endOffsets);
 
       assertEquals("test", tv.get(2).term);
       assertEquals(1, tv.get(2).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(-1));
+      positions = new ArrayList<>(Arrays.asList(-1));
       assertEquals(positions, tv.get(2).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(31));
+      startOffsets = new ArrayList<>(Arrays.asList(31));
       assertEquals(startOffsets, tv.get(2).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(35));
+      endOffsets = new ArrayList<>(Arrays.asList(35));
       assertEquals(endOffsets, tv.get(2).endOffsets);
 
       tv = tvMap.get("tvPositionsAndOffsets");
       assertNotNull(tv);
       assertEquals("bobo", tv.get(0).term);
       assertEquals(2, tv.get(0).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(0, 1));
+      positions = new ArrayList<>(Arrays.asList(0, 1));
       assertEquals(positions, tv.get(0).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(0, 5));
+      startOffsets = new ArrayList<>(Arrays.asList(0, 5));
       assertEquals(startOffsets, tv.get(0).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(4, 9));
+      endOffsets = new ArrayList<>(Arrays.asList(4, 9));
       assertEquals(endOffsets, tv.get(0).endOffsets);
 
       assertEquals("lucene", tv.get(1).term);
       assertEquals(3, tv.get(1).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(2, 3, 4));
+      positions = new ArrayList<>(Arrays.asList(2, 3, 4));
       assertEquals(positions, tv.get(1).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(10, 17, 24));
+      startOffsets = new ArrayList<>(Arrays.asList(10, 17, 24));
       assertEquals(startOffsets, tv.get(1).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(16, 23, 30));
+      endOffsets = new ArrayList<>(Arrays.asList(16, 23, 30));
       assertEquals(endOffsets, tv.get(1).endOffsets);
 
       assertEquals("test", tv.get(2).term);
       assertEquals(1, tv.get(2).freq.intValue());
-      positions = new ArrayList<Integer>(Arrays.asList(5));
+      positions = new ArrayList<>(Arrays.asList(5));
       assertEquals(positions, tv.get(2).positions);
-      startOffsets = new ArrayList<Integer>(Arrays.asList(31));
+      startOffsets = new ArrayList<>(Arrays.asList(31));
       assertEquals(startOffsets, tv.get(2).startOffsets);
-      endOffsets = new ArrayList<Integer>(Arrays.asList(35));
+      endOffsets = new ArrayList<>(Arrays.asList(35));
       assertEquals(endOffsets, tv.get(2).endOffsets);
     } catch (BrowseException e) {
       e.printStackTrace();
@@ -1601,7 +1601,7 @@ public class BoboTestCase extends TestCase {
 
     DirectoryReader srcReader = DirectoryReader.open(_indexDir);
     try {
-      List<FacetHandler<?>> facetHandlers = new ArrayList<FacetHandler<?>>();
+      List<FacetHandler<?>> facetHandlers = new ArrayList<>();
       facetHandlers.add(new SimpleFacetHandler("id"));
 
       BoboMultiReader reader = BoboMultiReader.getInstance(srcReader, facetHandlers);
@@ -1816,7 +1816,7 @@ public class BoboTestCase extends TestCase {
 
         @Override
         public Comparable<?> value(ScoreDoc doc) {
-          return new Integer(Math.abs(doc.doc - 4));
+          return Math.abs(doc.doc - 4);
         }
 
       }
@@ -2735,7 +2735,7 @@ public class BoboTestCase extends TestCase {
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public void testTime() throws Exception {
-    List<FacetHandler<?>> facetHandlers = new ArrayList<FacetHandler<?>>();
+    List<FacetHandler<?>> facetHandlers = new ArrayList<>();
     /* Underlying time facet for DynamicTimeRangeFacetHandler */
     facetHandlers.add(new RangeFacetHandler("timeinmillis", new PredefinedTermListFactory(
         Long.class, DynamicTimeRangeFacetHandler.NUMBER_FORMAT), null));
@@ -2757,7 +2757,7 @@ public class BoboTestCase extends TestCase {
     DirectoryReader idxReader = DirectoryReader.open(idxDir);
     BoboMultiReader boboReader = BoboMultiReader.getInstance(idxReader, facetHandlers);
     BoboBrowser browser = new BoboBrowser(boboReader);
-    List<String> ranges = new ArrayList<String>();
+    List<String> ranges = new ArrayList<>();
     ranges.add("000000001");
     ranges.add("000010000");// one hour
     ranges.add("000020000");// two hours
