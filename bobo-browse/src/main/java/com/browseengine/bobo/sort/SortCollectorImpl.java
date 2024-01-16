@@ -42,7 +42,7 @@ import com.browseengine.bobo.facets.data.PrimitiveLongArrayWrapper;
 import com.browseengine.bobo.util.ListMerger;
 
 public class SortCollectorImpl extends SortCollector {
-  private static final Comparator<MyScoreDoc> MERGE_COMPATATOR = new Comparator<MyScoreDoc>() {
+  private static final Comparator<MyScoreDoc> MERGE_COMPATATOR = new Comparator<>() {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public int compare(MyScoreDoc o1, MyScoreDoc o2) {
@@ -131,7 +131,7 @@ public class SortCollectorImpl extends SortCollector {
     assert (offset >= 0 && count >= 0);
     _boboBrowser = boboBrowser;
     _compSource = compSource;
-    _pqList = new LinkedList<DocIDPriorityQueue>();
+    _pqList = new LinkedList<>();
     _numHits = offset + count;
     _offset = offset;
     _count = count;
@@ -143,7 +143,7 @@ public class SortCollectorImpl extends SortCollector {
     _collectDocIdCache = collectDocIdCache || groupBy != null;
 
     if (groupBy != null && groupBy.length != 0) {
-      List<FacetHandler<?>> groupByList = new ArrayList<FacetHandler<?>>(groupBy.length);
+      List<FacetHandler<?>> groupByList = new ArrayList<>(groupBy.length);
       for (String field : groupBy) {
         FacetHandler<?> handler = boboBrowser.getFacetHandler(field);
         if (handler != null) groupByList.add(handler);
@@ -154,20 +154,20 @@ public class SortCollectorImpl extends SortCollector {
       }
       if (this.groupBy != null && _count > 0) {
         if (groupByMulti.length == 1) {
-          _currentValueDocMaps = new Int2ObjectOpenHashMap<ScoreDoc>(_count);
+          _currentValueDocMaps = new Int2ObjectOpenHashMap<>(_count);
           _facetAccessibleLists = null;
         } else {
           _currentValueDocMaps = null;
           _facetCountCollectorMulti = new FacetCountCollector[groupByList.size() - 1];
           _facetAccessibleLists = new List[_facetCountCollectorMulti.length];
           for (int i = 0; i < _facetCountCollectorMulti.length; ++i) {
-            _facetAccessibleLists[i] = new LinkedList<FacetAccessible>();
+            _facetAccessibleLists[i] = new LinkedList<>();
           }
         }
         if (_collectDocIdCache) {
-          contextList = new LinkedList<CollectorContext>();
-          docidarraylist = new LinkedList<int[]>();
-          if (doScoring) scorearraylist = new LinkedList<float[]>();
+          contextList = new LinkedList<>();
+          docidarraylist = new LinkedList<>();
+          if (doScoring) scorearraylist = new LinkedList<>();
         }
       } else {
         _currentValueDocMaps = null;
@@ -352,7 +352,7 @@ public class SortCollectorImpl extends SortCollector {
 
   @Override
   public BrowseHit[] topDocs() throws IOException {
-    ArrayList<Iterator<MyScoreDoc>> iterList = new ArrayList<Iterator<MyScoreDoc>>(_pqList.size());
+    ArrayList<Iterator<MyScoreDoc>> iterList = new ArrayList<>(_pqList.size());
     for (DocIDPriorityQueue pq : _pqList) {
       int count = pq.size();
       MyScoreDoc[] resList = new MyScoreDoc[count];
@@ -379,9 +379,9 @@ public class SortCollectorImpl extends SortCollector {
             _groupAccessibles[i] = new CombinedFacetAccessible(new FacetSpec(),
                 _facetAccessibleLists[i]);
         }
-        resList = new ArrayList<MyScoreDoc>(_count);
+        resList = new ArrayList<>(_count);
         Iterator<MyScoreDoc> mergedIter = ListMerger.mergeLists(iterList, MERGE_COMPATATOR);
-        Set<Object> groupSet = new HashSet<Object>(_offset + _count);
+        Set<Object> groupSet = new HashSet<>(_offset + _count);
         int offsetLeft = _offset;
         while (mergedIter.hasNext()) {
           MyScoreDoc scoreDoc = mergedIter.next();
@@ -431,7 +431,7 @@ public class SortCollectorImpl extends SortCollector {
         hit.setStoredFields(reader.document(fdoc.doc));
       }
       if (termVectorsToFetch != null && termVectorsToFetch.size() > 0) {
-        Map<String, List<BoboTerm>> tvMap = new HashMap<String, List<BoboTerm>>();
+        Map<String, List<BoboTerm>> tvMap = new HashMap<>();
         hit.setTermVectorMap(tvMap);
         Fields fds = reader.getTermVectors(fdoc.doc);
         for (String field : termVectorsToFetch) {
@@ -442,7 +442,7 @@ public class SortCollectorImpl extends SortCollector {
           TermsEnum termsEnum = terms.iterator(null);
           BytesRef text;
           DocsAndPositionsEnum docsAndPositions = null;
-          List<BoboTerm> boboTermList = new ArrayList<BoboTerm>();
+          List<BoboTerm> boboTermList = new ArrayList<>();
           while ((text = termsEnum.next()) != null) {
             BoboTerm boboTerm = new BoboTerm();
             boboTerm.term = text.utf8ToString();
@@ -450,9 +450,9 @@ public class SortCollectorImpl extends SortCollector {
             docsAndPositions = termsEnum.docsAndPositions(null, docsAndPositions);
             if (docsAndPositions != null) {
               docsAndPositions.nextDoc();
-              boboTerm.positions = new ArrayList<Integer>();
-              boboTerm.startOffsets = new ArrayList<Integer>();
-              boboTerm.endOffsets = new ArrayList<Integer>();
+              boboTerm.positions = new ArrayList<>();
+              boboTerm.startOffsets = new ArrayList<>();
+              boboTerm.endOffsets = new ArrayList<>();
               for (int t = 0; t < boboTerm.freq; ++t) {
                 boboTerm.positions.add(docsAndPositions.nextPosition());
                 boboTerm.startOffsets.add(docsAndPositions.startOffset());
@@ -464,8 +464,8 @@ public class SortCollectorImpl extends SortCollector {
           tvMap.put(field, boboTermList);
         }
       }
-      Map<String, String[]> map = new HashMap<String, String[]>();
-      Map<String, Object[]> rawMap = new HashMap<String, Object[]>();
+      Map<String, String[]> map = new HashMap<>();
+      Map<String, Object[]> rawMap = new HashMap<>();
       for (FacetHandler<?> facetHandler : facetHandlers) {
         map.put(facetHandler.getName(), facetHandler.getFieldValues(reader, fdoc.doc));
         rawMap.put(facetHandler.getName(), facetHandler.getRawFieldValues(reader, fdoc.doc));

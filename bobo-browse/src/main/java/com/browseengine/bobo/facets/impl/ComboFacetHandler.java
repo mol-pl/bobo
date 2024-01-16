@@ -77,13 +77,13 @@ public class ComboFacetHandler extends FacetHandler<FacetDataNone> {
   }
 
   private static Map<String, List<String>> convertMap(String[] vals, String sep) {
-    Map<String, List<String>> retmap = new HashMap<String, List<String>>();
+    Map<String, List<String>> retmap = new HashMap<>();
     for (String val : vals) {
       ComboSelection sel = ComboSelection.parse(val, sep);
       if (sel != null) {
         List<String> valList = retmap.get(sel.name);
         if (valList == null) {
-          valList = new LinkedList<String>();
+          valList = new LinkedList<>();
           retmap.put(sel.name, valList);
         }
         valList.add(sel.val);
@@ -98,7 +98,7 @@ public class ComboFacetHandler extends FacetHandler<FacetDataNone> {
     Map<String, List<String>> valMap = convertMap(vals, _separator);
     Set<Entry<String, List<String>>> entries = valMap.entrySet();
 
-    List<RandomAccessFilter> filterList = new LinkedList<RandomAccessFilter>();
+    List<RandomAccessFilter> filterList = new LinkedList<>();
     for (Entry<String, List<String>> entry : entries) {
       String name = entry.getKey();
       FacetHandler<?> facetHandler = getDependedFacetHandler(name);
@@ -129,7 +129,7 @@ public class ComboFacetHandler extends FacetHandler<FacetDataNone> {
 
     Set<Entry<String, List<String>>> entries = valMap.entrySet();
 
-    List<RandomAccessFilter> filterList = new LinkedList<RandomAccessFilter>();
+    List<RandomAccessFilter> filterList = new LinkedList<>();
     for (Entry<String, List<String>> entry : entries) {
       String name = entry.getKey();
       FacetHandler<?> facetHandler = getDependedFacetHandler(name);
@@ -174,7 +174,7 @@ public class ComboFacetHandler extends FacetHandler<FacetDataNone> {
   @Override
   public String[] getFieldValues(BoboSegmentReader reader, int id) {
     Set<String> dependsOn = this.getDependsOn();
-    List<String> valueList = new LinkedList<String>();
+    List<String> valueList = new LinkedList<>();
     for (String depends : dependsOn) {
       FacetHandler<?> facetHandler = getDependedFacetHandler(depends);
       String[] fieldValues = facetHandler.getFieldValues(reader, id);

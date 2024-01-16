@@ -90,7 +90,7 @@ public class BoboFacetIteratorTest extends TestCase {
     count2.add(0, 1);
     count2.add(1, 5);
     DefaultFacetIterator itr2 = new DefaultFacetIterator(tsl2, count2, 2, true);
-    List<FacetIterator> list = new ArrayList<FacetIterator>();
+    List<FacetIterator> list = new ArrayList<>();
     list.add(itr1);
     list.add(itr2);
     CombinedFacetIterator ctr = new CombinedFacetIterator(list);
@@ -106,7 +106,7 @@ public class BoboFacetIteratorTest extends TestCase {
   public void testDefaultIntFacetIterator() {
     String format = "00";
     DecimalFormat df = new DecimalFormat(format);
-    List<IntFacetIterator> list = new ArrayList<IntFacetIterator>();
+    List<IntFacetIterator> list = new ArrayList<>();
     for (int seg = 0; seg < 5; seg++) {
       TermIntList tsl1 = new TermIntList(format);
       int limit = 25;

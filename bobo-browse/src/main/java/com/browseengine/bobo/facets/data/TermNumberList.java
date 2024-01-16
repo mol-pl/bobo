@@ -25,7 +25,7 @@ public abstract class TermNumberList<T extends Number> extends TermValueList<T> 
 
   protected void setFormatString(String formatString) {
     _formatString = formatString;
-    _formatter = new ThreadLocal<DecimalFormat>() {
+    _formatter = new ThreadLocal<>() {
       protected DecimalFormat initialValue() {
         if (_formatString != null) {
           return new DecimalFormat(_formatString);

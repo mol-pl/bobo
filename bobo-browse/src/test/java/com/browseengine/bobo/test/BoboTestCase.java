@@ -1072,7 +1072,7 @@ public class BoboTestCase extends TestCase {
     br.setFacetSpec("color", output);
     br.setFacetSpec("shape", output);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("blue", 2), new BrowseFacet("green", 2),
@@ -1088,7 +1088,7 @@ public class BoboTestCase extends TestCase {
     sel.addValue("square");
     br.addSelection(sel);
 
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put("color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("blue", 1), new BrowseFacet("red", 2) }));
     answer.put(
@@ -1114,7 +1114,7 @@ public class BoboTestCase extends TestCase {
     pathSpec.setOrderBy(FacetSortSpec.OrderValueAsc);
     br.setFacetSpec("path", pathSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "path",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("a-b", 1), new BrowseFacet("a-c", 4),
@@ -1122,7 +1122,7 @@ public class BoboTestCase extends TestCase {
     doTest(br, 7, answer, null);
 
     pathSpec.setOrderBy(FacetSortSpec.OrderHitsDesc);
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put(
       "path",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("a-c", 4), new BrowseFacet("a-e", 2),
@@ -1130,7 +1130,7 @@ public class BoboTestCase extends TestCase {
     doTest(br, 7, answer, null);
 
     pathSpec.setMaxCount(2);
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put("path",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("a-c", 4), new BrowseFacet("a-e", 2) }));
     doTest(br, 7, answer, null);
@@ -1209,7 +1209,7 @@ public class BoboTestCase extends TestCase {
     geoSpec.setOrderBy(FacetSortSpec.OrderValueAsc);
     br.setFacetSpec("distance", geoSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "distance",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("30,70:5", 2),
@@ -1222,7 +1222,7 @@ public class BoboTestCase extends TestCase {
 
     BrowseSelection sel2 = new BrowseSelection("distance");
     sel2.addValue("60,120:1");
-    HashMap<String, Float> map = new HashMap<String, Float>();
+    HashMap<String, Float> map = new HashMap<>();
     map.put("0,120:1", 3.0f);
     FacetTermQuery geoQ = new FacetTermQuery(sel2, map);
 
@@ -1236,7 +1236,7 @@ public class BoboTestCase extends TestCase {
 
     BrowseSelection sel3 = new BrowseSelection("color");
     sel3.addValue("red");
-    HashMap<String, Float> map3 = new HashMap<String, Float>();
+    HashMap<String, Float> map3 = new HashMap<>();
     map3.put("red", 3.0f);
     FacetTermQuery colorQ = new FacetTermQuery(sel3, map3);
 
@@ -1273,7 +1273,7 @@ public class BoboTestCase extends TestCase {
     geoSpec.setOrderBy(FacetSortSpec.OrderValueAsc);
     br.setFacetSpec("correctDistance", geoSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "correctDistance",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("30,75:100", 1),
@@ -1287,7 +1287,7 @@ public class BoboTestCase extends TestCase {
 
     BrowseSelection sel2 = new BrowseSelection("correctDistance");
     sel2.addValue("60,120:1");
-    HashMap<String, Float> map = new HashMap<String, Float>();
+    HashMap<String, Float> map = new HashMap<>();
     map.put("60,120:1", 3.0f);
     FacetTermQuery geoQ = new FacetTermQuery(sel2, map);
 
@@ -1301,7 +1301,7 @@ public class BoboTestCase extends TestCase {
 
     BrowseSelection sel3 = new BrowseSelection("color");
     sel3.addValue("red");
-    HashMap<String, Float> map3 = new HashMap<String, Float>();
+    HashMap<String, Float> map3 = new HashMap<>();
     map3.put("red", 3.0f);
     FacetTermQuery colorQ = new FacetTermQuery(sel3, map3);
 
@@ -1332,8 +1332,8 @@ public class BoboTestCase extends TestCase {
     pathSpec.setOrderBy(FacetSortSpec.OrderHitsDesc);
     br.setFacetSpec("multipath", pathSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
-    answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
+    answer = new HashMap<>();
     answer.put(
       "multipath",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("a-b", 7), new BrowseFacet("a-c", 4),
@@ -1360,8 +1360,8 @@ public class BoboTestCase extends TestCase {
     pathSpec.setOrderBy(FacetSortSpec.OrderHitsDesc);
     br.setFacetSpec("path", pathSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
-    answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
+    answer = new HashMap<>();
     answer
         .put(
           "path",
@@ -1400,7 +1400,7 @@ public class BoboTestCase extends TestCase {
 
       @Override
       public Comparator<BrowseFacet> newComparator() {
-        return new Comparator<BrowseFacet>() {
+        return new Comparator<>() {
           @Override
           public int compare(BrowseFacet f1, BrowseFacet f2) {
             int val = f2.getFacetValueHitCount() - f1.getFacetValueHitCount();
@@ -1414,7 +1414,7 @@ public class BoboTestCase extends TestCase {
 
     });
 
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer
         .put(
           "path",
@@ -1445,7 +1445,7 @@ public class BoboTestCase extends TestCase {
 
     br.setFacetSpec("tag", tagOutput);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("location",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("toy/lego/block", 3) }));
     answer
@@ -1483,7 +1483,7 @@ public class BoboTestCase extends TestCase {
     br.setFacetSpec("char", charOutput);
     br.addSortField(new SortField("date", SortField.Type.CUSTOM, true));
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "char",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("a", 1), new BrowseFacet("i", 1),
@@ -1507,7 +1507,7 @@ public class BoboTestCase extends TestCase {
 
     br.addSortField(new SortField("date", SortField.Type.CUSTOM, true));
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("blue", 2), new BrowseFacet("green", 1),
@@ -1530,7 +1530,7 @@ public class BoboTestCase extends TestCase {
 
     br.addSortField(new SortField("date", SortField.Type.CUSTOM, true));
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("green", 1), new BrowseFacet("red", 1) }));
     doTest(br, 2, answer, new String[] { "6", "7" });
@@ -1551,7 +1551,7 @@ public class BoboTestCase extends TestCase {
 
     br.addSortField(new SortField("date", SortField.Type.CUSTOM, true));
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("green", 1), new BrowseFacet("red", 1) }));
     doTest(br, 2, answer, new String[] { "3", "1" });
@@ -1636,7 +1636,7 @@ public class BoboTestCase extends TestCase {
     shapeSpec.setOrderBy(FacetSortSpec.OrderValueAsc);
     br.setFacetSpec("shape", shapeSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("red", 3), new BrowseFacet("blue", 2),
@@ -1689,7 +1689,7 @@ public class BoboTestCase extends TestCase {
     ospec.setExpandSelection(false);
     br.setFacetSpec("color", ospec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("color", Arrays.asList(new BrowseFacet[] { new BrowseFacet("red", 3) }));
 
     doTest(br, 3, null, new String[0]);
@@ -1845,7 +1845,7 @@ public class BoboTestCase extends TestCase {
 
     br.setSort(new SortField[] { new SortField("number", SortField.Type.CUSTOM, false) });
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("red", 3), new BrowseFacet("blue", 2) }));
 
@@ -1866,7 +1866,7 @@ public class BoboTestCase extends TestCase {
     spec.setOrderBy(FacetSortSpec.OrderHitsDesc);
     br.setFacetSpec("color", spec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("red", 2), new BrowseFacet("blue", 1),
@@ -1956,7 +1956,7 @@ public class BoboTestCase extends TestCase {
       FacetSpec ospec = new FacetSpec();
       ospec.setExpandSelection(true);
       br.setFacetSpec("color", ospec);
-      HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+      HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
       answer.put(
         "color",
         Arrays.asList(new BrowseFacet[] { new BrowseFacet("blue", 2), new BrowseFacet("green", 1),
@@ -1991,7 +1991,7 @@ public class BoboTestCase extends TestCase {
 
     br.setSort(new SortField[] { new SortField("compactnum", SortField.Type.CUSTOM, true) });
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
 
     answer.put(
       "compactnum",
@@ -2031,7 +2031,7 @@ public class BoboTestCase extends TestCase {
 
     ospec = new FacetSpec();
     br.setFacetSpec("compactnum", ospec);
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
 
     answer.put(
       "compactnum",
@@ -2054,7 +2054,7 @@ public class BoboTestCase extends TestCase {
     FacetSpec ospec = new FacetSpec();
     br.setFacetSpec("multiwithweight", ospec);
     br.setSort(new SortField[] { new SortField("multiwithweight", SortField.Type.CUSTOM, true) });
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
 
     answer.put("multiwithweight",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("cool", 3), new BrowseFacet("good", 2) }));
@@ -2088,7 +2088,7 @@ public class BoboTestCase extends TestCase {
     FacetSpec ospec = new FacetSpec();
     br.setFacetSpec("multinum", ospec);
     br.setSort(new SortField[] { new SortField("multinum", SortField.Type.CUSTOM, true) });
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
 
     answer.put(
       "multinum",
@@ -2128,7 +2128,7 @@ public class BoboTestCase extends TestCase {
 
     ospec = new FacetSpec();
     br.setFacetSpec("multinum", ospec);
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
 
     answer.put(
       "multinum",
@@ -2147,7 +2147,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel = new BrowseSelection("color");
     sel.addValue("red");
     br.addSelection(sel);
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
 
     doTest(br, 3, answer, new String[] { "1", "2", "7" });
 
@@ -2168,7 +2168,7 @@ public class BoboTestCase extends TestCase {
       sel = new BrowseSelection("color");
       sel.addValue("red");
       br.addSelection(sel);
-      answer = new HashMap<String, List<BrowseFacet>>();
+      answer = new HashMap<>();
 
       doTest(new BoboBrowser(reader), br, 1, answer, new String[] { "7" });
     } catch (IOException ioe) {
@@ -2189,7 +2189,7 @@ public class BoboTestCase extends TestCase {
     sel = new BrowseSelection("color");
     sel.addValue("red");
     br.addSelection(sel);
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
 
     doTest(br, 1, answer, new String[] { "7" });
   }
@@ -2206,7 +2206,7 @@ public class BoboTestCase extends TestCase {
     FacetSpec simpleOutput = new FacetSpec();
     br.setFacetSpec("shape", simpleOutput);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "shape",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("circle", 2),
@@ -2269,7 +2269,7 @@ public class BoboTestCase extends TestCase {
     simpleOutput.setExpandSelection(true);
     br.setFacetSpec("date", simpleOutput);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "date",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("[2000/01/01 TO 2003/05/05]", 4),
@@ -2293,7 +2293,7 @@ public class BoboTestCase extends TestCase {
 
     br.addSelection(sel1);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "date",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("[2000/01/01 TO 2003/02/14]", 4),
@@ -2318,7 +2318,7 @@ public class BoboTestCase extends TestCase {
     simpleOutput.setExpandSelection(true);
     br.setFacetSpec("numendorsers", simpleOutput);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "numendorsers",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("[000000 TO 000005]", 2),
@@ -2366,7 +2366,7 @@ public class BoboTestCase extends TestCase {
 
     br.setFacetSpec("tag", tagOutput);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("green", 1), new BrowseFacet("red", 2) }));
     answer.put(
@@ -2432,7 +2432,7 @@ public class BoboTestCase extends TestCase {
         boboBrowser });
     BrowseResult mergedResult = multiBoboBrowser.browse(browseRequest);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("color",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("red", 4), new BrowseFacet("green", 2) }));
     answer.put(
@@ -2457,7 +2457,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel = new BrowseSelection("color");
     sel.addValue("red");
     sel.addValue("blue");
-    HashMap<String, Float> map = new HashMap<String, Float>();
+    HashMap<String, Float> map = new HashMap<>();
     map.put("red", 5.0f);
     map.put("blue", 4.0f);
     FacetTermQuery colorQ = new FacetTermQuery(sel, map);
@@ -2465,7 +2465,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel2 = new BrowseSelection("shape");
     sel2.addValue("circle");
     sel2.addValue("square");
-    HashMap<String, Float> map2 = new HashMap<String, Float>();
+    HashMap<String, Float> map2 = new HashMap<>();
     map2.put("circle", 3.0f);
     map2.put("square", 2.0f);
     FacetTermQuery shapeQ = new FacetTermQuery(sel2, map2);
@@ -2493,7 +2493,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel = new BrowseSelection("color");
     sel.addValue("red");
     sel.addValue("blue");
-    HashMap<String, Float> map = new HashMap<String, Float>();
+    HashMap<String, Float> map = new HashMap<>();
     map.put("red", 3.0f);
     map.put("blue", 2.0f);
     FacetTermQuery colorQ = new FacetTermQuery(sel, map);
@@ -2501,7 +2501,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel2 = new BrowseSelection("tag");
     sel2.addValue("rabbit");
     sel2.addValue("dog");
-    HashMap<String, Float> map2 = new HashMap<String, Float>();
+    HashMap<String, Float> map2 = new HashMap<>();
     map2.put("rabbit", 100.0f);
     map2.put("dog", 50.0f);
     FacetTermQuery tagQ = new FacetTermQuery(sel2, map2);
@@ -2526,7 +2526,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel = new BrowseSelection("color");
     sel.addValue("red");
     sel.addValue("blue");
-    HashMap<String, Float> map = new HashMap<String, Float>();
+    HashMap<String, Float> map = new HashMap<>();
     map.put("red", 3.0f);
     map.put("blue", 2.0f);
     FacetTermQuery colorQ = new FacetTermQuery(sel, map);
@@ -2534,7 +2534,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel2 = new BrowseSelection("tag");
     sel2.addValue("rabbit");
     sel2.addValue("dog");
-    HashMap<String, Float> map2 = new HashMap<String, Float>();
+    HashMap<String, Float> map2 = new HashMap<>();
     map2.put("rabbit", 100.0f);
     map2.put("dog", 50.0f);
     FacetTermQuery tagQ = new FacetTermQuery(sel2, map2);
@@ -2557,7 +2557,7 @@ public class BoboTestCase extends TestCase {
     BrowseSelection sel = new BrowseSelection("numendorsers");
     sel.addValue("[* TO 000010]");
 
-    HashMap<String, Float> map = new HashMap<String, Float>();
+    HashMap<String, Float> map = new HashMap<>();
     map.put("000002", 100.0f);
     map.put("000010", 50.0f);
     FacetTermQuery numberQ = new FacetTermQuery(sel, map);
@@ -2571,15 +2571,15 @@ public class BoboTestCase extends TestCase {
   }
 
   public void testFacetBoost() throws Exception {
-    Map<String, Map<String, Float>> boostMaps = new HashMap<String, Map<String, Float>>();
+    Map<String, Map<String, Float>> boostMaps = new HashMap<>();
     HashMap<String, Float> map;
 
-    map = new HashMap<String, Float>();
+    map = new HashMap<>();
     map.put("red", 3.0f);
     map.put("blue", 2.0f);
     boostMaps.put("color", map);
 
-    map = new HashMap<String, Float>();
+    map = new HashMap<>();
     map.put("rabbit", 5.0f);
     map.put("dog", 7.0f);
     boostMaps.put("tag", map);
@@ -2608,7 +2608,7 @@ public class BoboTestCase extends TestCase {
 
     BrowseRequest req = new BrowseRequest();
     req.setFacetSpec("filtered_date", new FacetSpec());
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "filtered_date",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("[2001/01/01 TO 2001/12/30]", 1),
@@ -2656,7 +2656,7 @@ public class BoboTestCase extends TestCase {
 
       @Override
       public Comparator<BrowseFacet> newComparator() {
-        return new Comparator<BrowseFacet>() {
+        return new Comparator<>() {
           @Override
           public int compare(BrowseFacet o1, BrowseFacet o2) {
             int v1 = Integer.parseInt(o1.getValue());
@@ -2674,7 +2674,7 @@ public class BoboTestCase extends TestCase {
     numberSpec.setMaxCount(3);
     req.setFacetSpec("number", numberSpec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "number",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("2130", 1), new BrowseFacet("1013", 1),
@@ -2696,7 +2696,7 @@ public class BoboTestCase extends TestCase {
     FacetSpec fspec = new FacetSpec();
     req.setFacetSpec("groupby", fspec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put(
       "groupby",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("red,rectangle,0011", 1),
@@ -2869,7 +2869,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[3] = new BrowseFacet("0000000010", 1);
     answerBucketFacets[4] = new BrowseFacet("0000000021", 1);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("numberhisto", Arrays.asList(answerBucketFacets));
 
     doTest(br, 7, answer, null);
@@ -2884,7 +2884,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[0] = new BrowseFacet("0000000002", 1);
     answerBucketFacets[1] = new BrowseFacet("0000000021", 1);
 
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put("numberhisto", Arrays.asList(answerBucketFacets));
 
     doTest(br, 2, answer, null);
@@ -2904,7 +2904,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[1] = new BrowseFacet("s2", 4);
     answerBucketFacets[2] = new BrowseFacet("s3", 3);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("sets", Arrays.asList(answerBucketFacets));
     doTest(br, 7, answer, null);
 
@@ -2925,7 +2925,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[1] = new BrowseFacet("s2", 3);
     answerBucketFacets[2] = new BrowseFacet("s3", 1);
 
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put("sets", Arrays.asList(answerBucketFacets));
     doTest(br, 4, answer, null);
   }
@@ -2948,7 +2948,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[1] = new BrowseFacet("g1", 1);
     answerBucketFacets[2] = new BrowseFacet("g3", 1);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("groups", Arrays.asList(answerBucketFacets));
     doTest(br, 3, answer, null);
 
@@ -2970,7 +2970,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[0] = new BrowseFacet("g1", 1);
     answerBucketFacets[1] = new BrowseFacet("g2", 1);
 
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put("groups", Arrays.asList(answerBucketFacets));
     doTest(br, 1, answer, null);
 
@@ -2993,7 +2993,7 @@ public class BoboTestCase extends TestCase {
     answerBucketFacets[1] = new BrowseFacet("g2", 3);
     answerBucketFacets[2] = new BrowseFacet("g3", 1);
 
-    answer = new HashMap<String, List<BrowseFacet>>();
+    answer = new HashMap<>();
     answer.put("groups", Arrays.asList(answerBucketFacets));
     doTest(br, 5, answer, null);
   }
@@ -3012,7 +3012,7 @@ public class BoboTestCase extends TestCase {
     spec.setOrderBy(FacetSortSpec.OrderValueAsc);
     br.setFacetSpec("virtual", spec);
 
-    HashMap<String, List<BrowseFacet>> answer = new HashMap<String, List<BrowseFacet>>();
+    HashMap<String, List<BrowseFacet>> answer = new HashMap<>();
     answer.put("virtual",
       Arrays.asList(new BrowseFacet[] { new BrowseFacet("0010", 1), new BrowseFacet("0011", 1) }));
     doTest(br, 2, answer, new String[] { "1", "2" });

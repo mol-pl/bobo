@@ -82,7 +82,7 @@ public class FacetBasedBoostScorerBuilder implements ScorerBuilder {
       super(innerScorer.getWeight());
       _innerScorer = innerScorer;
 
-      ArrayList<BoboDocScorer> list = new ArrayList<BoboDocScorer>();
+      ArrayList<BoboDocScorer> list = new ArrayList<>();
 
       for (Map.Entry<String, Map<String, Float>> boostEntry : _boostMaps.entrySet()) {
         String facetName = boostEntry.getKey();

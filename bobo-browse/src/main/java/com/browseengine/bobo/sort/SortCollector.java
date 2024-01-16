@@ -31,7 +31,7 @@ import com.browseengine.bobo.util.MemoryManagerAdminMBean;
 public abstract class SortCollector extends Collector {
   private static final Logger logger = LoggerFactory.getLogger(SortCollector.class);
 
-  protected static MemoryManager<int[]> intarraymgr = new MemoryManager<int[]>(
+  protected static MemoryManager<int[]> intarraymgr = new MemoryManager<>(
       new MemoryManager.Initializer<int[]>() {
         @Override
         public void init(int[] buf) {
@@ -51,7 +51,7 @@ public abstract class SortCollector extends Collector {
 
       });
 
-  protected static MemoryManager<float[]> floatarraymgr = new MemoryManager<float[]>(
+  protected static MemoryManager<float[]> floatarraymgr = new MemoryManager<>(
       new MemoryManager.Initializer<float[]>() {
         @Override
         public void init(float[] buf) {

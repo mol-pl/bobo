@@ -57,7 +57,7 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
   @Override
   public RandomAccessFilter buildRandomAccessFilter(String value, Properties selectionProperty)
       throws IOException {
-    List<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>();
+    List<RandomAccessFilter> filterList = new ArrayList<>();
     String[] vals = value.split(_sep);
     for (int i = 0; i < vals.length; ++i) {
       SimpleFacetHandler handler = _facetHandlers.get(i);
@@ -75,7 +75,7 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
 
       @Override
       public FacetCountCollector getFacetCountCollector(BoboSegmentReader reader, int docBase) {
-        ArrayList<DefaultFacetCountCollector> collectorList = new ArrayList<DefaultFacetCountCollector>(
+        ArrayList<DefaultFacetCountCollector> collectorList = new ArrayList<>(
             _facetHandlers.size());
         for (SimpleFacetHandler facetHandler : _facetHandlers) {
           collectorList.add((DefaultFacetCountCollector) (facetHandler
@@ -91,7 +91,7 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
 
   @Override
   public String[] getFieldValues(BoboSegmentReader reader, int id) {
-    ArrayList<String> valList = new ArrayList<String>();
+    ArrayList<String> valList = new ArrayList<>();
     for (FacetHandler<?> handler : _facetHandlers) {
       StringBuffer buf = new StringBuffer();
       boolean firsttime = true;
@@ -122,7 +122,7 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
 
       @Override
       public DocComparator getComparator(AtomicReader reader, int docbase) throws IOException {
-        ArrayList<DocComparator> comparatorList = new ArrayList<DocComparator>(_fieldsSet.size());
+        ArrayList<DocComparator> comparatorList = new ArrayList<>(_fieldsSet.size());
         for (FacetHandler<?> handler : _facetHandlers) {
           comparatorList.add(handler.getDocComparatorSource().getComparator(reader, docbase));
         }
@@ -136,8 +136,8 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
 
   @Override
   public FacetDataNone load(BoboSegmentReader reader) throws IOException {
-    _facetHandlers = new ArrayList<SimpleFacetHandler>(_fieldsSet.size());
-    _facetHandlerMap = new HashMap<String, SimpleFacetHandler>(_fieldsSet.size());
+    _facetHandlers = new ArrayList<>(_fieldsSet.size());
+    _facetHandlerMap = new HashMap<>(_fieldsSet.size());
     for (String name : _fieldsSet) {
       FacetHandler<?> handler = reader.getFacetHandler(name);
       if (handler == null || !(handler instanceof SimpleFacetHandler)) {
@@ -333,7 +333,7 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
         FacetSortSpec sortspec = _fspec.getOrderBy();
         List<BrowseFacet> facetColl;
         if (sortspec == FacetSortSpec.OrderValueAsc) {
-          facetColl = new ArrayList<BrowseFacet>(max);
+          facetColl = new ArrayList<>(max);
           for (int i = 1; i < _countlength; ++i) // exclude zero
           {
             int hits = _count.get(i);
@@ -368,7 +368,7 @@ public class SimpleGroupbyFacetHandler extends FacetHandler<FacetDataNone> {
             }
 
           }, _count);
-          facetColl = new LinkedList<BrowseFacet>();
+          facetColl = new LinkedList<>();
           final int forbidden = -1;
           IntBoundedPriorityQueue pq = new IntBoundedPriorityQueue(comparator, max, forbidden);
 

@@ -41,7 +41,7 @@ public class AdaptiveFacetFilter extends RandomAccessFilter {
       RandomAccessFilter facetFilter, String[] val, boolean takeComplement) {
     _facetFilter = facetFilter;
     _facetDataCacheBuilder = facetDataCacheBuilder;
-    _valSet = new HashSet<String>(Arrays.asList(val));
+    _valSet = new HashSet<>(Arrays.asList(val));
     _takeComplement = takeComplement;
   }
 
@@ -65,7 +65,7 @@ public class AdaptiveFacetFilter extends RandomAccessFilter {
     TermValueList<?> valArray = dataCache.valArray;
     int freqCount = 0;
 
-    ArrayList<String> validVals = new ArrayList<String>(_valSet.size());
+    ArrayList<String> validVals = new ArrayList<>(_valSet.size());
     for (String val : _valSet) {
       int idx = valArray.indexOf(val);
       if (idx >= 0) {
@@ -138,7 +138,7 @@ public class AdaptiveFacetFilter extends RandomAccessFilter {
         return new TermDocIdSet(_reader, _name, _vals.get(0)).iterator();
       } else {
         if (_vals.size() < OR_THRESHOLD) {
-          ArrayList<DocIdSet> docSetList = new ArrayList<DocIdSet>(_vals.size());
+          ArrayList<DocIdSet> docSetList = new ArrayList<>(_vals.size());
           for (String val : _vals) {
             docSetList.add(new TermDocIdSet(_reader, _name, val));
           }

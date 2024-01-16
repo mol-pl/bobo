@@ -173,10 +173,10 @@ public class BrowseRequest implements Serializable {
    */
   public BrowseRequest() {
     super();
-    _selections = new HashMap<String, BrowseSelection>();
-    _sortSpecs = new ArrayList<SortField>();
-    _facetSpecMap = new HashMap<String, FacetSpec>();
-    _facetHandlerDataMap = new HashMap<String, FacetHandlerInitializerParam>();
+    _selections = new HashMap<>();
+    _sortSpecs = new ArrayList<>();
+    _facetSpecMap = new HashMap<>();
+    _facetHandlerDataMap = new HashMap<>();
     _filter = null;
     _fetchStoredFields = false;
     _groupBy = null;

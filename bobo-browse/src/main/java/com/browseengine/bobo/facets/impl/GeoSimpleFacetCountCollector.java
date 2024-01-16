@@ -189,7 +189,7 @@ public class GeoSimpleFacetCountCollector implements FacetCountCollector {
             }
           }
         }
-        List<BrowseFacet> list = new ArrayList<BrowseFacet>(rangeCounts.length);
+        List<BrowseFacet> list = new ArrayList<>(rangeCounts.length);
         for (int i = 0; i < rangeCounts.length; ++i) {
           if (rangeCounts[i] >= minCount) {
             BrowseFacet choice = new BrowseFacet();

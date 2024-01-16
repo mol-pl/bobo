@@ -24,7 +24,7 @@ public class FilteredRangeFacetHandler extends FacetHandler<FacetDataNone> {
 
   public FilteredRangeFacetHandler(String name, String underlyingHandler,
       List<String> predefinedRanges) {
-    super(name, new HashSet<String>(Arrays.asList(underlyingHandler)));
+    super(name, new HashSet<>(Arrays.asList(underlyingHandler)));
     _predefinedRanges = predefinedRanges;
     _inner = underlyingHandler;
     _innerHandler = null;

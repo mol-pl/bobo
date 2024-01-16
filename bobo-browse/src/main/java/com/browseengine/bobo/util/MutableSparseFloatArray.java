@@ -35,7 +35,7 @@ public class MutableSparseFloatArray extends SparseFloatArray {
 
   public MutableSparseFloatArray(float[] floats) {
     super(floats);
-    _map = new Hashtable<Integer, Float>();
+    _map = new Hashtable<>();
     _isDirty = false;
   }
 
@@ -132,6 +132,6 @@ public class MutableSparseFloatArray extends SparseFloatArray {
    */
   public synchronized void condense() {
     super.condense(expand());
-    _map = new Hashtable<Integer, Float>();
+    _map = new Hashtable<>();
   }
 }

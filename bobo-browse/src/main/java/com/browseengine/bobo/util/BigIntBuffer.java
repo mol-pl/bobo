@@ -15,7 +15,7 @@ public class BigIntBuffer {
   private int _mark;
 
   public BigIntBuffer() {
-    _buffer = new ArrayList<int[]>();
+    _buffer = new ArrayList<>();
     _allocSize = 0;
     _mark = 0;
   }

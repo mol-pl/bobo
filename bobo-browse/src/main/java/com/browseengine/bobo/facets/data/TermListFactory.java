@@ -7,7 +7,7 @@ public interface TermListFactory<T> {
 
   Class<?> getType();
 
-  public static TermListFactory<String> StringListFactory = new TermListFactory<String>() {
+  public static TermListFactory<String> StringListFactory = new TermListFactory<>() {
     public TermValueList<String> createTermList(int capacity) {
       return new TermStringList(capacity);
     }

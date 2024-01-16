@@ -40,7 +40,7 @@ public class TestPathMultiVal extends TestCase {
 
   public TestPathMultiVal(String name) {
     super(name);
-    facetHandlers = new LinkedList<FacetHandler<?>>();
+    facetHandlers = new LinkedList<>();
   }
 
   private void addMetaDataField(Document doc, String name, String[] vals) {
@@ -75,7 +75,7 @@ public class TestPathMultiVal extends TestCase {
 
     BrowseSelection sel = new BrowseSelection(PathHandlerName);
     sel.addValue("/a");
-    HashMap<String, String> propMap = new HashMap<String, String>();
+    HashMap<String, String> propMap = new HashMap<>();
     propMap.put(PathFacetHandler.SEL_PROP_NAME_DEPTH, "0");
     propMap.put(PathFacetHandler.SEL_PROP_NAME_STRICT, "false");
     sel.setSelectionProperties(propMap);

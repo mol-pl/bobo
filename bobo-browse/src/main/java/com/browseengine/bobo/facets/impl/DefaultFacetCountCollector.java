@@ -44,10 +44,10 @@ public abstract class DefaultFacetCountCollector implements FacetCountCollector 
   private final String _name;
   protected final BrowseSelection _sel;
   protected final BigSegmentedArray _array;
-  protected final LinkedList<BigSegmentedArray> intarraylist = new LinkedList<BigSegmentedArray>();
+  protected final LinkedList<BigSegmentedArray> intarraylist = new LinkedList<>();
   private boolean _closed = false;
 
-  protected static MemoryManager<BigSegmentedArray> intarraymgr = new MemoryManager<BigSegmentedArray>(
+  protected static MemoryManager<BigSegmentedArray> intarraymgr = new MemoryManager<>(
       new MemoryManager.Initializer<BigSegmentedArray>() {
         @Override
         public void init(BigSegmentedArray buf) {
@@ -159,7 +159,7 @@ public abstract class DefaultFacetCountCollector implements FacetCountCollector 
       List<BrowseFacet> facetColl;
       FacetSortSpec sortspec = ospec.getOrderBy();
       if (sortspec == FacetSortSpec.OrderValueAsc) {
-        facetColl = new ArrayList<BrowseFacet>(max);
+        facetColl = new ArrayList<>(max);
         for (int i = 1; i < countlength; ++i) // exclude zero
         {
           int hits = count.get(i);
@@ -195,7 +195,7 @@ public abstract class DefaultFacetCountCollector implements FacetCountCollector 
           }
 
         }, count);
-        facetColl = new LinkedList<BrowseFacet>();
+        facetColl = new LinkedList<>();
         final int forbidden = -1;
         IntBoundedPriorityQueue pq = new IntBoundedPriorityQueue(comparator, max, forbidden);
 

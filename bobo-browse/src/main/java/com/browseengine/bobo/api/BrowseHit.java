@@ -175,7 +175,7 @@ public class BrowseHit implements Serializable {
 		 */
 		public void addDetail(SerializableExplanation detail) {
 			if (details == null) {
-				details = new ArrayList<SerializableExplanation>();
+				details = new ArrayList<>();
 			}
 			details.add(detail);
 		}
@@ -283,7 +283,7 @@ public class BrowseHit implements Serializable {
 	private BrowseHit[] _groupHits;
 	private SerializableExplanation _explanation;
 
-	private Map<String, List<BoboTerm>> _termVectorMap = new HashMap<String, List<BoboTerm>>();
+	private Map<String, List<BoboTerm>> _termVectorMap = new HashMap<>();
 
 	public Map<String, List<BoboTerm>> getTermVectorMap() {
 		return _termVectorMap;
@@ -454,7 +454,7 @@ public class BrowseHit implements Serializable {
 			_storedFields = null;
 			return this;
 		}
-		_storedFields = new ArrayList<SerializableField>();
+		_storedFields = new ArrayList<>();
 		Iterator<IndexableField> it = doc.iterator();
 		while (it.hasNext()) {
 			_storedFields.add(new SerializableField(it.next()));

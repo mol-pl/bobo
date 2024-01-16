@@ -19,8 +19,8 @@ public final class FacetHitCollector {
   public FacetHandler<?> facetHandler;
   public RandomAccessFilter _filter;
   public final CurrentPointers _currentPointers = new CurrentPointers();
-  public LinkedList<FacetCountCollector> _countCollectorList = new LinkedList<FacetCountCollector>();
-  public LinkedList<FacetCountCollector> _collectAllCollectorList = new LinkedList<FacetCountCollector>();
+  public LinkedList<FacetCountCollector> _countCollectorList = new LinkedList<>();
+  public LinkedList<FacetCountCollector> _collectAllCollectorList = new LinkedList<>();
 
   public void setNextReader(BoboSegmentReader reader, int docBase) throws IOException {
     if (_collectAllSource != null) {

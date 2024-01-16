@@ -28,7 +28,7 @@ public class FacetValueComparatorFactory implements ComparatorFactory {
 
   @Override
   public Comparator<BrowseFacet> newComparator() {
-    return new Comparator<BrowseFacet>() {
+    return new Comparator<>() {
       @Override
       public int compare(BrowseFacet o1, BrowseFacet o2) {
         return o1.getValue().compareTo(o2.getValue());

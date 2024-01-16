@@ -32,9 +32,9 @@ public class TermStringList extends TermValueList<String> {
   protected List<?> buildPrimitiveList(int capacity) {
     _type = String.class;
     if (capacity < 0) {
-      return new ArrayList<String>();
+      return new ArrayList<>();
     } else {
-      return new ArrayList<String>(capacity);
+      return new ArrayList<>(capacity);
     }
   }
 

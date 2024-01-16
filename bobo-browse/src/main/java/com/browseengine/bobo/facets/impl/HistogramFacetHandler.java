@@ -38,7 +38,7 @@ public class HistogramFacetHandler<T extends Number> extends RuntimeFacetHandler
   private FacetHandler<?> _dataFacetHandler;
 
   public HistogramFacetHandler(String name, String dataHandlerName, T start, T end, T unit) {
-    super(name, new HashSet<String>(Arrays.asList(new String[] { dataHandlerName })));
+    super(name, new HashSet<>(Arrays.asList(new String[] { dataHandlerName })));
     _dataHandlerName = dataHandlerName;
     _start = start;
     _end = end;
@@ -102,7 +102,7 @@ public class HistogramFacetHandler<T extends Number> extends RuntimeFacetHandler
         FacetDataCache<?> dataCache = (FacetDataCache<?>) reader.getFacetData(_dataHandlerName);
         FacetCountCollector baseCollector = baseCollectorSrc
             .getFacetCountCollector(reader, docBase);
-        return new HistogramCollector<T>(getName(), baseCollector, dataCache, ospec, _start, _end,
+        return new HistogramCollector<>(getName(), baseCollector, dataCache, ospec, _start, _end,
             _unit);
       }
     };
@@ -247,7 +247,7 @@ public class HistogramFacetHandler<T extends Number> extends RuntimeFacetHandler
         List<BrowseFacet> facetColl;
         FacetSortSpec sortspec = _ospec.getOrderBy();
         if (sortspec == FacetSortSpec.OrderValueAsc) {
-          facetColl = new ArrayList<BrowseFacet>(max);
+          facetColl = new ArrayList<>(max);
           for (int i = 0; i < _count.size(); ++i) {
             int hits = _count.get(i);
             if (hits >= minCount) {

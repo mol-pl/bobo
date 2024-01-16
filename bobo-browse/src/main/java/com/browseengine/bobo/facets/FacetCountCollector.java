@@ -37,6 +37,6 @@ public interface FacetCountCollector extends FacetAccessible {
   /**
    * Empty facet list. 
    */
-  public static List<BrowseFacet> EMPTY_FACET_LIST = new LinkedList<BrowseFacet>();
+  public static List<BrowseFacet> EMPTY_FACET_LIST = new LinkedList<>();
 
 }

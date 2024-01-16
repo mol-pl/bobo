@@ -75,7 +75,7 @@ public class FacetMergePerf {
     fspec.setMinHitCount(1);
     fspec.setOrderBy(FacetSortSpec.OrderHitsDesc);
 
-    final List<FacetAccessible> list1 = new ArrayList<FacetAccessible>(numSegs);
+    final List<FacetAccessible> list1 = new ArrayList<>(numSegs);
     for (int i = 0; i < numSegs; ++i) {
       list1.add(buildSubAccessible(fname1, i, fspec));
     }

@@ -97,29 +97,29 @@ public class FacetHandlerTest extends TestCase {
   public void testFacetHandlerLoad() throws Exception {
     DirectoryReader reader = DirectoryReader.open(_ramDir);
 
-    List<FacetHandler<?>> list = new LinkedList<FacetHandler<?>>();
+    List<FacetHandler<?>> list = new LinkedList<>();
     NoopFacetHandler h1 = new NoopFacetHandler("A");
     list.add(h1);
 
-    HashSet<String> s2 = new HashSet<String>();
+    HashSet<String> s2 = new HashSet<>();
     s2.add("A");
     s2.add("C");
     s2.add("D");
     NoopFacetHandler h2 = new NoopFacetHandler("B", s2);
     list.add(h2);
 
-    HashSet<String> s3 = new HashSet<String>();
+    HashSet<String> s3 = new HashSet<>();
     s3.add("A");
     s2.add("D");
     NoopFacetHandler h3 = new NoopFacetHandler("C", s3);
     list.add(h3);
 
-    HashSet<String> s4 = new HashSet<String>();
+    HashSet<String> s4 = new HashSet<>();
     s4.add("A");
     NoopFacetHandler h4 = new NoopFacetHandler("D", s4);
     list.add(h4);
 
-    HashSet<String> s5 = new HashSet<String>();
+    HashSet<String> s5 = new HashSet<>();
     s5.add("E");
     NoopFacetHandler h5 = new NoopFacetHandler("E", s5);
     list.add(h5);
@@ -127,14 +127,14 @@ public class FacetHandlerTest extends TestCase {
     BoboMultiReader boboReader = BoboMultiReader.getInstance(reader, list);
 
     BoboBrowser browser = new BoboBrowser(boboReader);
-    HashSet<String> s6 = new HashSet<String>();
+    HashSet<String> s6 = new HashSet<>();
     s6.add("A");
     s6.add("B");
     s6.add("C");
     s6.add("D");
     browser.setFacetHandler(new NoopFacetHandler("runtime", s6));
 
-    Set<String> expected = new HashSet<String>();
+    Set<String> expected = new HashSet<>();
     expected.add("A");
     expected.add("B");
     expected.add("C");
@@ -165,31 +165,31 @@ public class FacetHandlerTest extends TestCase {
   public void testNegativeLoadTest() throws Exception {
     DirectoryReader reader = DirectoryReader.open(_ramDir);
 
-    List<FacetHandler<?>> list = new LinkedList<FacetHandler<?>>();
-    HashSet<String> s1 = new HashSet<String>();
+    List<FacetHandler<?>> list = new LinkedList<>();
+    HashSet<String> s1 = new HashSet<>();
     s1.add("E");
     NoopFacetHandler h1 = new NoopFacetHandler("A", s1);
     list.add(h1);
 
-    HashSet<String> s2 = new HashSet<String>();
+    HashSet<String> s2 = new HashSet<>();
     s2.add("A");
     s2.add("C");
     s2.add("D");
     NoopFacetHandler h2 = new NoopFacetHandler("B", s2);
     list.add(h2);
 
-    HashSet<String> s3 = new HashSet<String>();
+    HashSet<String> s3 = new HashSet<>();
     s3.add("A");
     s2.add("D");
     NoopFacetHandler h3 = new NoopFacetHandler("C", s3);
     list.add(h3);
 
-    HashSet<String> s4 = new HashSet<String>();
+    HashSet<String> s4 = new HashSet<>();
     s4.add("A");
     NoopFacetHandler h4 = new NoopFacetHandler("D", s4);
     list.add(h4);
 
-    HashSet<String> s5 = new HashSet<String>();
+    HashSet<String> s5 = new HashSet<>();
     s5.add("E");
     NoopFacetHandler h5 = new NoopFacetHandler("E", s5);
     list.add(h5);
@@ -198,7 +198,7 @@ public class FacetHandlerTest extends TestCase {
 
     BoboBrowser browser = new BoboBrowser(boboReader);
 
-    Set<String> expected = new HashSet<String>();
+    Set<String> expected = new HashSet<>();
     expected.add("A");
     expected.add("B");
     expected.add("C");

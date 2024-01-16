@@ -28,7 +28,7 @@ public class BoboSearcher {
 
   public BoboSearcher(AtomicReaderContext ctx) {
     _atomicReaderContext = ctx;
-    _facetCollectors = new LinkedList<FacetHitCollector>();
+    _facetCollectors = new LinkedList<>();
     _boboSegmentReader = (BoboSegmentReader) ctx.reader();
   }
 
@@ -45,7 +45,7 @@ public class BoboSearcher {
     public int _nextTarget;
 
     private void sortPostCollectors(final BoboSegmentReader reader) {
-      Comparator<FacetHitCollector> comparator = new Comparator<FacetHitCollector>() {
+      Comparator<FacetHitCollector> comparator = new Comparator<>() {
         @Override
         public int compare(FacetHitCollector fhc1, FacetHitCollector fhc2) {
           double selectivity1 = fhc1._filter.getFacetSelectivity(reader);
@@ -76,7 +76,7 @@ public class BoboSearcher {
     public abstract boolean validate(final int docid) throws IOException;
 
     public void setNextReader(BoboSegmentReader reader, int docBase) throws IOException {
-      ArrayList<FacetCountCollector> collectorList = new ArrayList<FacetCountCollector>();
+      ArrayList<FacetCountCollector> collectorList = new ArrayList<>();
       sortPostCollectors(reader);
       for (int i = 0; i < _collectors.length; ++i) {
         _collectors[i].setNextReader(reader, docBase);
@@ -89,7 +89,7 @@ public class BoboSearcher {
     }
 
     public FacetCountCollector[] getCountCollectors() {
-      List<FacetCountCollector> collectors = new ArrayList<FacetCountCollector>();
+      List<FacetCountCollector> collectors = new ArrayList<>();
       collectors.addAll(Arrays.asList(_countCollectors));
       for (FacetHitCollector facetHitCollector : _collectors) {
         collectors.addAll(facetHitCollector._collectAllCollectorList);

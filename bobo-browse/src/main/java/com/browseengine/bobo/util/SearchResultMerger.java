@@ -37,7 +37,7 @@ public class SearchResultMerger<T> {
 
     @SuppressWarnings("unchecked")
     public MergedIterator(final List<Iterator<T>> sources, final Comparator<T> comparator) {
-      _queue = new PriorityQueue<Object>(sources.size()) {
+      _queue = new PriorityQueue<>(sources.size()) {
         @Override
         protected boolean lessThan(Object o1, Object o2) {
           T v1 = ((IteratorCtx) o1)._curVal;
@@ -78,7 +78,7 @@ public class SearchResultMerger<T> {
   }
 
   public static <T> Iterator<T> mergeIterator(List<Iterator<T>> results, Comparator<T> comparator) {
-    return new MergedIterator<T>(results, comparator);
+    return new MergedIterator<>(results, comparator);
   }
 
   public static <T> ArrayList<T> mergeResult(int offset, int count, List<Iterator<T>> results,
@@ -89,7 +89,7 @@ public class SearchResultMerger<T> {
       mergedIter.next();
     }
 
-    ArrayList<T> mergedList = new ArrayList<T>();
+    ArrayList<T> mergedList = new ArrayList<>();
 
     for (int c = 0; c < count && mergedIter.hasNext(); c++) {
       mergedList.add(mergedIter.next());

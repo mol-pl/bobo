@@ -124,7 +124,7 @@ public class TermFixedLengthLongArrayList extends TermValueList<long[]> {
   public Iterator<String> iterator() {
     final Iterator<?> iter = _innerList.iterator();
 
-    return new Iterator<String>() {
+    return new Iterator<>() {
       @Override
       public boolean hasNext() {
         return iter.hasNext();

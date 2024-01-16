@@ -50,12 +50,12 @@ public class BrowseSelection implements Serializable {
 
 	private ValueOperation selectionOperation;
 
-	private String fieldName;
+	private final String fieldName;
 
 	protected ArrayList<String> values;
 	protected ArrayList<String> notValues;
 
-	private Properties _selectionProperties;
+	private final Properties _selectionProperties;
 
 	public void setSelectionProperty(String key, String val) {
 		_selectionProperties.setProperty(key, val);
@@ -209,8 +209,8 @@ public class BrowseSelection implements Serializable {
 	public BrowseSelection(String fieldName) {
 		super();
 		this.fieldName = fieldName;
-		values = new ArrayList<String>();
-		notValues = new ArrayList<String>();
+		values = new ArrayList<>();
+		notValues = new ArrayList<>();
 		selectionOperation = ValueOperation.ValueOperationOr;
 		_selectionProperties = new Properties();
 	}

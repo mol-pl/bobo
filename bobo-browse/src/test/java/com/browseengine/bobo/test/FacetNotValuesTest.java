@@ -92,7 +92,7 @@ public class FacetNotValuesTest extends TestCase {
   }
 
   public Document[] createDataTwo() {
-    ArrayList<Document> dataList = new ArrayList<Document>();
+    ArrayList<Document> dataList = new ArrayList<>();
     String color = "red";
     String ID = Integer.toString(10);
     Document d = new Document();
@@ -113,7 +113,7 @@ public class FacetNotValuesTest extends TestCase {
   }
 
   public Document[] createData() {
-    ArrayList<Document> dataList = new ArrayList<Document>();
+    ArrayList<Document> dataList = new ArrayList<>();
     for (int i = 0; i < _documentSize; i++) {
       String color = (i % 2 == 0) ? "red" : "green";
       String ID = Integer.toString(i);
@@ -162,7 +162,7 @@ public class FacetNotValuesTest extends TestCase {
   }
 
   public static List<FacetHandler<?>> createFacetHandlers() {
-    List<FacetHandler<?>> facetHandlers = new ArrayList<FacetHandler<?>>();
+    List<FacetHandler<?>> facetHandlers = new ArrayList<>();
     facetHandlers.add(new SimpleFacetHandler("id"));
     facetHandlers.add(new SimpleFacetHandler("color"));
     FacetHandler<?> rangeFacetHandler = new RangeFacetHandler("idRange", "id", null);

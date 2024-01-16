@@ -26,7 +26,7 @@ public class TermDateList extends TermLongList {
 
   protected void setFormatString(final String formatString) {
     _formatString = formatString;
-    _dateFormatter = new ThreadLocal<SimpleDateFormat>() {
+    _dateFormatter = new ThreadLocal<>() {
       protected SimpleDateFormat initialValue() {
         if (formatString != null) {
           return new SimpleDateFormat(formatString);

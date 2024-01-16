@@ -38,8 +38,8 @@ public class RandomAccessAndFilter extends RandomAccessFilter {
     if (_filters.size() == 1) {
       return _filters.get(0).getRandomAccessDocIdSet(reader);
     } else {
-      List<DocIdSet> list = new ArrayList<DocIdSet>(_filters.size());
-      List<RandomAccessDocIdSet> randomAccessList = new ArrayList<RandomAccessDocIdSet>(
+      List<DocIdSet> list = new ArrayList<>(_filters.size());
+      List<RandomAccessDocIdSet> randomAccessList = new ArrayList<>(
           _filters.size());
       for (RandomAccessFilter f : _filters) {
         RandomAccessDocIdSet s = f.getRandomAccessDocIdSet(reader);

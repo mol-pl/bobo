@@ -8,7 +8,7 @@ import org.apache.lucene.search.Query;
 
 public class QueriesSupport {
   public static Query combineAnd(Query... queries) {
-    HashSet<Query> uniques = new HashSet<Query>();
+    HashSet<Query> uniques = new HashSet<>();
     for (int i = 0; i < queries.length; i++) {
       Query query = queries[i];
       BooleanClause[] clauses = null;

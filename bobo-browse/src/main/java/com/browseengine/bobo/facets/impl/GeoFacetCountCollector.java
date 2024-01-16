@@ -228,7 +228,7 @@ public class GeoFacetCountCollector implements FacetCountCollector {
     if (_spec != null) {
       int minHitCount = _spec.getMinHitCount();
       if (_ranges != null) {
-        List<BrowseFacet> facets = new ArrayList<BrowseFacet>();
+        List<BrowseFacet> facets = new ArrayList<>();
         int countIndex = -1;
         for (String value : _predefinedRanges) {
           countIndex++;

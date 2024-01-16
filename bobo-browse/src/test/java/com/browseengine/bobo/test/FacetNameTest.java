@@ -91,7 +91,7 @@ public class FacetNameTest extends TestCase {
   }
 
   public Document[] createData() {
-    ArrayList<Document> dataList = new ArrayList<Document>();
+    ArrayList<Document> dataList = new ArrayList<>();
     for (int i = 0; i < _documentSize; ++i) {
       String color = null;
       if (i == 0) color = "red";
@@ -136,7 +136,7 @@ public class FacetNameTest extends TestCase {
   }
 
   public static List<FacetHandler<?>> createFacetHandlers() {
-    List<FacetHandler<?>> facetHandlers = new ArrayList<FacetHandler<?>>();
+    List<FacetHandler<?>> facetHandlers = new ArrayList<>();
     facetHandlers.add(new SimpleFacetHandler("id"));
     facetHandlers.add(new SimpleFacetHandler("make"));
     facetHandlers.add(new SimpleFacetHandler("mycolor", "color"));

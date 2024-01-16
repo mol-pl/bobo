@@ -25,12 +25,12 @@ public class DefaultFacetHandlerInitializerParam extends FacetHandlerInitializer
   private final Map<String, double[]> _doubleMap;
 
   public DefaultFacetHandlerInitializerParam() {
-    _boolMap = new HashMap<String, boolean[]>();
-    _intMap = new HashMap<String, int[]>();
-    _longMap = new HashMap<String, long[]>();
-    _stringMap = new HashMap<String, List<String>>();
-    _byteMap = new HashMap<String, byte[]>();
-    _doubleMap = new HashMap<String, double[]>();
+    _boolMap = new HashMap<>();
+    _intMap = new HashMap<>();
+    _longMap = new HashMap<>();
+    _stringMap = new HashMap<>();
+    _byteMap = new HashMap<>();
+    _doubleMap = new HashMap<>();
   }
 
   public Set<String> getBooleanParamNames() {

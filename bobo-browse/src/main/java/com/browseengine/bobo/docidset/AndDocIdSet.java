@@ -11,7 +11,7 @@ import org.apache.lucene.search.DocIdSetIterator;
 
 public class AndDocIdSet extends ImmutableDocSet implements Serializable {
   private static final long serialVersionUID = 1L;
-  private final ArrayList<Integer> _interSectionResult = new ArrayList<Integer>();
+  private final ArrayList<Integer> _interSectionResult = new ArrayList<>();
 
   public class DescDocIdSetComparator implements Comparator<StatefulDSIterator>, Serializable {
     private static final long serialVersionUID = 1L;

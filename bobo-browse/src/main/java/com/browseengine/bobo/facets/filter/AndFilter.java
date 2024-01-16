@@ -24,7 +24,7 @@ public class AndFilter extends Filter {
     if (_filters.size() == 1) {
       return _filters.get(0).getDocIdSet(context, acceptDocs);
     } else {
-      List<DocIdSet> list = new ArrayList<DocIdSet>(_filters.size());
+      List<DocIdSet> list = new ArrayList<>(_filters.size());
       for (Filter f : _filters) {
         list.add(f.getDocIdSet(context, acceptDocs));
       }

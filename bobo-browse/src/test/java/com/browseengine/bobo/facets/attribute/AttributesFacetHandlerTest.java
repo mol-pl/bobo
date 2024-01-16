@@ -52,7 +52,7 @@ public class AttributesFacetHandlerTest extends TestCase {
 
   public AttributesFacetHandlerTest(String name) {
     super(name);
-    facetHandlers = new LinkedList<FacetHandler<?>>();
+    facetHandlers = new LinkedList<>();
   }
 
   private void addMetaDataField(Document doc, String name, String[] vals) {
@@ -66,7 +66,7 @@ public class AttributesFacetHandlerTest extends TestCase {
   protected void setUp() throws Exception {
     directory = new RAMDirectory();
     analyzer = new WhitespaceAnalyzer(Version.LUCENE_43);
-    selectionProperties = new HashMap<String, String>();
+    selectionProperties = new HashMap<>();
     IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_43, analyzer);
     conf.setOpenMode(OpenMode.CREATE);
     IndexWriter writer = new IndexWriter(directory, conf);
@@ -80,7 +80,7 @@ public class AttributesFacetHandlerTest extends TestCase {
     writer.commit();
 
     attributesFacetHandler = new AttributesFacetHandler(AttributeHandlerName, AttributeHandlerName,
-        null, null, new HashMap<String, String>());
+        null, null, new HashMap<>());
     facetHandlers.add(attributesFacetHandler);
     DirectoryReader reader = DirectoryReader.open(directory);
     boboReader = BoboMultiReader.getInstance(reader, facetHandlers);
@@ -288,7 +288,7 @@ public class AttributesFacetHandlerTest extends TestCase {
     writer.addDocument(doc("prop1=val1", "prop2=val1", "prop4=val2", "prop4=val3"));
     writer.commit();
 
-    HashMap<String, String> facetProps = new HashMap<String, String>();
+    HashMap<String, String> facetProps = new HashMap<>();
     facetProps.put(AttributesFacetHandler.MAX_FACETS_PER_KEY_PROP_NAME, "1");
     attributesFacetHandler = new AttributesFacetHandler(AttributeHandlerName, AttributeHandlerName,
         null, null, facetProps);

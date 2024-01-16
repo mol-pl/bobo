@@ -37,7 +37,7 @@ import com.browseengine.bobo.facets.FacetHandler;
 
 public class BoboMultiReader extends FilterDirectoryReader {
 
-	protected List<BoboSegmentReader> _subReaders = new ArrayList<BoboSegmentReader>();
+	protected List<BoboSegmentReader> _subReaders = new ArrayList<>();
 
 	/**
 	 * Factory.

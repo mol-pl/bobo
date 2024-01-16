@@ -84,7 +84,7 @@ public class CompactMultiValueFacetHandler extends FacetHandler<FacetDataCache<?
   @Override
   public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties prop)
       throws IOException {
-    ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
+    ArrayList<RandomAccessFilter> filterList = new ArrayList<>(vals.length);
 
     for (String val : vals) {
       RandomAccessFilter f = buildRandomAccessFilter(val, prop);
@@ -139,7 +139,7 @@ public class CompactMultiValueFacetHandler extends FacetHandler<FacetDataCache<?
       return new String[] { "" };
     } else {
       int count = 1;
-      ArrayList<String> valList = new ArrayList<String>(MAX_VAL_COUNT);
+      ArrayList<String> valList = new ArrayList<>(MAX_VAL_COUNT);
 
       while (encoded != 0) {
         if ((encoded & 0x00000001) != 0x0) {
@@ -161,7 +161,7 @@ public class CompactMultiValueFacetHandler extends FacetHandler<FacetDataCache<?
       return new Object[0];
     } else {
       int count = 1;
-      ArrayList<Object> valList = new ArrayList<Object>(MAX_VAL_COUNT);
+      ArrayList<Object> valList = new ArrayList<>(MAX_VAL_COUNT);
 
       while (encoded != 0) {
         if ((encoded & 0x00000001) != 0x0) {
@@ -305,7 +305,7 @@ public class CompactMultiValueFacetHandler extends FacetHandler<FacetDataCache<?
 
       int count = 1;
       FloatList scoreList = new FloatArrayList(_dataCache.valArray.size());
-      ArrayList<Explanation> explList = new ArrayList<Explanation>(scoreList.size());
+      ArrayList<Explanation> explList = new ArrayList<>(scoreList.size());
       while (encoded != 0) {
         if ((encoded & 0x00000001) != 0x0) {
           int idx = count - 1;

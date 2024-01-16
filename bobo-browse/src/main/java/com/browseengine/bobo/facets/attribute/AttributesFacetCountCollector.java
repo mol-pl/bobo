@@ -62,7 +62,7 @@ public final class AttributesFacetCountCollector extends DefaultFacetCountCollec
 
   private void filterByKeys(List<BrowseFacet> facets, char separator, int numFacetsPerKey,
       String[] values) {
-    Map<String, AtomicInteger> keyOccurences = new HashMap<String, AtomicInteger>();
+    Map<String, AtomicInteger> keyOccurences = new HashMap<>();
     Iterator<BrowseFacet> iterator = facets.iterator();
     String separatorString = String.valueOf(separator);
     while (iterator.hasNext()) {

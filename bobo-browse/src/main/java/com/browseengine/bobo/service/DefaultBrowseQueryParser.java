@@ -18,7 +18,7 @@ public class DefaultBrowseQueryParser implements BrowseQueryParser {
     DocIdSet selSet = null;
 
     if (selectionNodes != null && selectionNodes.length > 0) {
-      ArrayList<DocIdSet> selSetList = new ArrayList<DocIdSet>(selectionNodes.length);
+      ArrayList<DocIdSet> selSetList = new ArrayList<>(selectionNodes.length);
       for (SelectionNode selectionNode : selectionNodes) {
         DocIdSet ds = selectionNode.getDocSet();
 
@@ -39,7 +39,7 @@ public class DefaultBrowseQueryParser implements BrowseQueryParser {
     DocIdSet notSelSet = null;
 
     if (notSelectionNodes != null && notSelectionNodes.length > 0) {
-      ArrayList<DocIdSet> notSelSetList = new ArrayList<DocIdSet>(notSelectionNodes.length);
+      ArrayList<DocIdSet> notSelSetList = new ArrayList<>(notSelectionNodes.length);
       for (SelectionNode selectionNode : notSelectionNodes) {
         DocIdSet ds = selectionNode.getDocSet();
 

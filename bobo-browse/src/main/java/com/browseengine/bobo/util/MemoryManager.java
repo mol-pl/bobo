@@ -27,9 +27,9 @@ public class MemoryManager<T> implements MemoryManagerAdminMBean {
       sizetable[i] = (int) (sizetable[i - 1] * ratio);
     }
   }
-  private final ConcurrentHashMap<Integer, ConcurrentLinkedQueue<WeakReference<T>>> _sizeMap = new ConcurrentHashMap<Integer, ConcurrentLinkedQueue<WeakReference<T>>>();
-  private volatile ConcurrentLinkedQueue<T> _releaseQueue = new ConcurrentLinkedQueue<T>();
-  private volatile ConcurrentLinkedQueue<T> _releaseQueueb = new ConcurrentLinkedQueue<T>();
+  private final ConcurrentHashMap<Integer, ConcurrentLinkedQueue<WeakReference<T>>> _sizeMap = new ConcurrentHashMap<>();
+  private volatile ConcurrentLinkedQueue<T> _releaseQueue = new ConcurrentLinkedQueue<>();
+  private volatile ConcurrentLinkedQueue<T> _releaseQueueb = new ConcurrentLinkedQueue<>();
   private final AtomicInteger _releaseQueueSize = new AtomicInteger(0);
   private final Initializer<T> _initializer;
   private final Thread _cleanThread;
@@ -107,7 +107,7 @@ public class MemoryManager<T> implements MemoryManagerAdminMBean {
     // ConcurrentLinkedQueue<WeakReference<T>> queue = _sizeMap.get(size);
     // if (queue==null)
     // {
-    // queue = new ConcurrentLinkedQueue<WeakReference<T>>();
+    // queue = new ConcurrentLinkedQueue<>();
     // _sizeMap.putIfAbsent(size, queue);
     // queue = _sizeMap.get(size);
     // }

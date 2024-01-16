@@ -158,7 +158,7 @@ public class RangeFacetCountCollector implements FacetCountCollector {
           rangeCount[k] = count;
         }
 
-        List<BrowseFacet> facetColl = new ArrayList<BrowseFacet>(_predefinedRanges.size());
+        List<BrowseFacet> facetColl = new ArrayList<>(_predefinedRanges.size());
         for (int k = 0; k < _predefinedRangeIndexes.length; ++k) {
           if (rangeCount[k] >= minCount) {
             BrowseFacet choice = new BrowseFacet(_predefinedRanges.get(k), rangeCount[k]);
@@ -197,7 +197,7 @@ public class RangeFacetCountCollector implements FacetCountCollector {
         List<BrowseFacet> facetColl;
         FacetSortSpec sortspec = _ospec.getOrderBy();
         if (sortspec == FacetSortSpec.OrderValueAsc) {
-          facetColl = new ArrayList<BrowseFacet>(maxNumOfFacets);
+          facetColl = new ArrayList<>(maxNumOfFacets);
           for (int k = 0; k < _predefinedRangeIndexes.length; ++k) {
             if (rangeCount.get(k) >= minCount) {
               BrowseFacet choice = new BrowseFacet(_predefinedRanges.get(k), rangeCount.get(k));
@@ -239,7 +239,7 @@ public class RangeFacetCountCollector implements FacetCountCollector {
           }
 
           int val;
-          facetColl = new LinkedList<BrowseFacet>();
+          facetColl = new LinkedList<>();
           while ((val = pq.pollInt()) != forbidden) {
             BrowseFacet facet = new BrowseFacet(_predefinedRanges.get(val), rangeCount.get(val));
             ((LinkedList<BrowseFacet>) facetColl).addFirst(facet);

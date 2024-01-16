@@ -44,7 +44,7 @@ public class ListMerger {
     private final PriorityQueue _queue;
 
     private MergedIterator(final int length, final Comparator<T> comparator) {
-      _queue = new PriorityQueue<Object>(length) {
+      _queue = new PriorityQueue<>(length) {
         @SuppressWarnings("unchecked")
         @Override
         protected boolean lessThan(Object o1, Object o2) {
@@ -103,31 +103,31 @@ public class ListMerger {
 
   public static <T> Iterator<T> mergeLists(final Iterator<T>[] iterators,
       final Comparator<T> comparator) {
-    return new MergedIterator<T>(iterators, comparator);
+    return new MergedIterator<>(iterators, comparator);
   }
 
   public static <T> Iterator<T> mergeLists(final List<Iterator<T>> iterators,
       final Comparator<T> comparator) {
-    return new MergedIterator<T>(iterators, comparator);
+    return new MergedIterator<>(iterators, comparator);
   }
 
   public static <T> ArrayList<T> mergeLists(int offset, int count, Iterator<T>[] iterators,
       Comparator<T> comparator) {
-    return mergeLists(offset, count, new MergedIterator<T>(iterators, comparator));
+    return mergeLists(offset, count, new MergedIterator<>(iterators, comparator));
   }
 
   public static <T> ArrayList<T> mergeLists(int offset, int count, List<Iterator<T>> iterators,
       Comparator<T> comparator) {
-    return mergeLists(offset, count, new MergedIterator<T>(iterators, comparator));
+    return mergeLists(offset, count, new MergedIterator<>(iterators, comparator));
   }
 
   private static <T> ArrayList<T> mergeLists(int offset, int count, Iterator<T> mergedIter) {
-    if (count == 0) return new ArrayList<T>();
+    if (count == 0) return new ArrayList<>();
     for (int c = 0; c < offset && mergedIter.hasNext(); c++) {
       mergedIter.next();
     }
 
-    ArrayList<T> mergedList = new ArrayList<T>();
+    ArrayList<T> mergedList = new ArrayList<>();
 
     for (int c = 0; c < count && mergedIter.hasNext(); c++) {
       mergedList.add(mergedIter.next());
@@ -136,7 +136,7 @@ public class ListMerger {
     return mergedList;
   }
 
-  public static final Comparator<BrowseFacet> FACET_VAL_COMPARATOR = new Comparator<BrowseFacet>() {
+  public static final Comparator<BrowseFacet> FACET_VAL_COMPARATOR = new Comparator<>() {
 
     @Override
     public int compare(BrowseFacet o1, BrowseFacet o2) {
@@ -151,12 +151,12 @@ public class ListMerger {
 
   public static Map<String, FacetAccessible> mergeSimpleFacetContainers(
       Collection<Map<String, FacetAccessible>> subMaps, BrowseRequest req) {
-    Map<String, Map<String, BrowseFacet>> counts = new HashMap<String, Map<String, BrowseFacet>>();
+    Map<String, Map<String, BrowseFacet>> counts = new HashMap<>();
     for (Map<String, FacetAccessible> subMap : subMaps) {
       for (Map.Entry<String, FacetAccessible> entry : subMap.entrySet()) {
         Map<String, BrowseFacet> count = counts.get(entry.getKey());
         if (count == null) {
-          count = new HashMap<String, BrowseFacet>();
+          count = new HashMap<>();
           counts.put(entry.getKey(), count);
         }
         for (BrowseFacet facet : entry.getValue().getFacets()) {
@@ -172,7 +172,7 @@ public class ListMerger {
       }
     }
 
-    Map<String, FacetAccessible> mergedFacetMap = new HashMap<String, FacetAccessible>();
+    Map<String, FacetAccessible> mergedFacetMap = new HashMap<>();
     for (String facet : counts.keySet()) {
       FacetSpec fs = req.getFacetSpec(facet);
 

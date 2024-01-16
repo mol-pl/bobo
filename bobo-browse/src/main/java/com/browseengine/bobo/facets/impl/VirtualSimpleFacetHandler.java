@@ -63,7 +63,7 @@ public class VirtualSimpleFacetHandler extends SimpleFacetHandler {
           if (_termListFactory == null) _termListFactory = new TermFixedLengthLongArrayListFactory(
               ((long[]) val).length);
 
-          dataMap = new TreeMap<Object, LinkedList<Integer>>(new Comparator<Object>() {
+          dataMap = new TreeMap<>(new Comparator<Object>() {
             @Override
             public int compare(Object big, Object small) {
               if (((long[]) big).length != ((long[]) small).length) {
@@ -84,9 +84,9 @@ public class VirtualSimpleFacetHandler extends SimpleFacetHandler {
             }
           });
         } else if (val instanceof Comparable) {
-          dataMap = new TreeMap<Object, LinkedList<Integer>>();
+          dataMap = new TreeMap<>();
         } else {
-          dataMap = new TreeMap<Object, LinkedList<Integer>>(new Comparator<Object>() {
+          dataMap = new TreeMap<>(new Comparator<Object>() {
             @Override
             public int compare(Object big, Object small) {
               return String.valueOf(big).compareTo(String.valueOf(small));
@@ -97,7 +97,7 @@ public class VirtualSimpleFacetHandler extends SimpleFacetHandler {
 
       docList = dataMap.get(val);
       if (docList == null) {
-        docList = new LinkedList<Integer>();
+        docList = new LinkedList<>();
         dataMap.put(val, docList);
       }
       docList.add(doc);

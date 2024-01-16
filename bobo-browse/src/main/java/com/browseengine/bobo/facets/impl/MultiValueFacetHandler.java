@@ -173,7 +173,7 @@ public class MultiValueFacetHandler extends FacetHandler<MultiValueFacetDataCach
   public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties prop)
       throws IOException {
 
-    ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
+    ArrayList<RandomAccessFilter> filterList = new ArrayList<>(vals.length);
 
     for (String val : vals) {
       RandomAccessFilter f = buildRandomAccessFilter(val, prop);
@@ -238,7 +238,7 @@ public class MultiValueFacetHandler extends FacetHandler<MultiValueFacetDataCach
       String[] vals = _array.getTranslatedData(doc, _dataCache.valArray);
 
       FloatList scoreList = new FloatArrayList(_dataCache.valArray.size());
-      ArrayList<Explanation> explList = new ArrayList<Explanation>(scoreList.size());
+      ArrayList<Explanation> explList = new ArrayList<>(scoreList.size());
       for (String val : vals) {
         int idx = _dataCache.valArray.indexOf(val);
         if (idx >= 0) {

@@ -30,7 +30,7 @@ public class BucketFacetHandler extends FacetHandler<FacetDataNone> {
 
   public BucketFacetHandler(String name, Map<String, String[]> predefinedBuckets,
       String dependsOnFacetName) {
-    super(name, new HashSet<String>(Arrays.asList(new String[] { dependsOnFacetName })));
+    super(name, new HashSet<>(Arrays.asList(new String[] { dependsOnFacetName })));
     _name = name;
     _predefinedBuckets = predefinedBuckets;
     _dependsOnFacetName = dependsOnFacetName;
@@ -72,7 +72,7 @@ public class BucketFacetHandler extends FacetHandler<FacetDataNone> {
   @Override
   public RandomAccessFilter buildRandomAccessAndFilter(String[] bucketStrings, Properties prop)
       throws IOException {
-    List<RandomAccessFilter> filterList = new LinkedList<RandomAccessFilter>();
+    List<RandomAccessFilter> filterList = new LinkedList<>();
     FacetHandler<FacetDataCache<?>> dependOnFacetHandler = (FacetHandler<FacetDataCache<?>>) getDependedFacetHandler(_dependsOnFacetName);
     for (String bucketString : bucketStrings) {
       String[] vals = _predefinedBuckets.get(bucketString);
@@ -95,7 +95,7 @@ public class BucketFacetHandler extends FacetHandler<FacetDataNone> {
     } else {
       FacetHandler<FacetDataCache<?>> dependOnFacetHandler = (FacetHandler<FacetDataCache<?>>) getDependedFacetHandler(_dependsOnFacetName);
 
-      Set<String> selections = new HashSet<String>();
+      Set<String> selections = new HashSet<>();
       for (String bucket : bucketStrings) {
         String[] vals = _predefinedBuckets.get(bucket);
         if (vals != null) {

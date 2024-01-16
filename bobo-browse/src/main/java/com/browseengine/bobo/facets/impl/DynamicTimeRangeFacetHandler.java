@@ -38,7 +38,7 @@ public class DynamicTimeRangeFacetHandler extends DynamicRangeFacetHandler {
   public DynamicTimeRangeFacetHandler(String name, String dataFacetName, long currentTime,
       List<String> ranges) throws ParseException {
     super(name, dataFacetName);
-    _formatter = new ThreadLocal<DecimalFormat>() {
+    _formatter = new ThreadLocal<>() {
       protected DecimalFormat initialValue() {
         return new DecimalFormat(NUMBER_FORMAT);
       }
@@ -47,12 +47,12 @@ public class DynamicTimeRangeFacetHandler extends DynamicRangeFacetHandler {
     if (log.isDebugEnabled()) {
       log.debug(name + " " + dataFacetName + " " + currentTime);
     }
-    ArrayList<String> sortedRanges = new ArrayList<String>(ranges);
+    ArrayList<String> sortedRanges = new ArrayList<>(ranges);
     Collections.sort(sortedRanges);
 
-    _valueToRangeStringMap = new HashMap<String, String>();
-    _rangeStringToValueMap = new HashMap<String, String>();
-    _rangeStringList = new ArrayList<String>(ranges.size());
+    _valueToRangeStringMap = new HashMap<>();
+    _rangeStringToValueMap = new HashMap<>();
+    _rangeStringList = new ArrayList<>(ranges.size());
 
     String prev = "000000000";
     for (String range : sortedRanges) {

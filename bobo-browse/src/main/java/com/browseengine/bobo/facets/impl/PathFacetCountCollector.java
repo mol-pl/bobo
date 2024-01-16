@@ -174,13 +174,13 @@ public class PathFacetCountCollector implements FacetCountCollector {
 
   private List<BrowseFacet> getFacetsForPath(String selectedPath, int depth, boolean strict,
       int minCount, int maxCount) {
-    LinkedList<BrowseFacet> list = new LinkedList<BrowseFacet>();
+    LinkedList<BrowseFacet> list = new LinkedList<>();
 
     BoundedPriorityQueue<BrowseFacet> pq = null;
     if (_comparatorFactory != null) {
       final Comparator<BrowseFacet> comparator = _comparatorFactory.newComparator();
 
-      pq = new BoundedPriorityQueue<BrowseFacet>(new Comparator<BrowseFacet>() {
+      pq = new BoundedPriorityQueue<>(new Comparator<BrowseFacet>() {
 
         @Override
         public int compare(BrowseFacet o1, BrowseFacet o2) {
@@ -331,8 +331,8 @@ public class PathFacetCountCollector implements FacetCountCollector {
 
     if (paths.length == 1) return getFacetsForPath(paths[0], depth, strict, _minHitCount, _maxCount);
 
-    LinkedList<BrowseFacet> finalList = new LinkedList<BrowseFacet>();
-    ArrayList<Iterator<BrowseFacet>> iterList = new ArrayList<Iterator<BrowseFacet>>(paths.length);
+    LinkedList<BrowseFacet> finalList = new LinkedList<>();
+    ArrayList<Iterator<BrowseFacet>> iterList = new ArrayList<>(paths.length);
     for (String path : paths) {
       List<BrowseFacet> subList = getFacetsForPath(path, depth, strict, _minHitCount, _maxCount);
       if (subList.size() > 0) {
@@ -374,8 +374,8 @@ public class PathFacetCountCollector implements FacetCountCollector {
       return new PathFacetIterator(finalList);
     }
 
-    finalList = new LinkedList<BrowseFacet>();
-    ArrayList<Iterator<BrowseFacet>> iterList = new ArrayList<Iterator<BrowseFacet>>(paths.length);
+    finalList = new LinkedList<>();
+    ArrayList<Iterator<BrowseFacet>> iterList = new ArrayList<>(paths.length);
     for (String path : paths) {
       List<BrowseFacet> subList = getFacetsForPath(path, depth, strict, Integer.MIN_VALUE,
         _count.size());

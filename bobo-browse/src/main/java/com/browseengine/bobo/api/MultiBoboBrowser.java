@@ -104,9 +104,9 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
       return;
     }
 
-    Map<String, List<FacetAccessible>> mergedMap = new HashMap<String, List<FacetAccessible>>();
+    Map<String, List<FacetAccessible>> mergedMap = new HashMap<>();
     try {
-      Map<String, FacetAccessible> facetColMap = new HashMap<String, FacetAccessible>();
+      Map<String, FacetAccessible> facetColMap = new HashMap<>();
       for (int i = 0; i < _subBrowsers.length; i++) {
         try {
           _subBrowsers[i].browse(req, w, hc, facetColMap, (start + readerBase(i)));
@@ -117,7 +117,7 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
             FacetAccessible facetAccessor = entry.getValue();
             List<FacetAccessible> list = mergedMap.get(name);
             if (list == null) {
-              list = new ArrayList<FacetAccessible>(_subBrowsers.length);
+              list = new ArrayList<>(_subBrowsers.length);
               mergedMap.put(name, list);
             }
             list.add(facetAccessor);
@@ -173,7 +173,7 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
       req.isFetchStoredFields(), req.getTermVectorsToFetch(), req.getGroupBy(),
       req.getMaxPerGroup(), req.getCollectDocIdCache());
 
-    Map<String, FacetAccessible> facetCollectors = new HashMap<String, FacetAccessible>();
+    Map<String, FacetAccessible> facetCollectors = new HashMap<>();
     browse(req, collector, facetCollectors);
     if (req.getMapReduceWrapper() != null) {
       result.setMapReduceResult(req.getMapReduceWrapper().getResult());
@@ -256,7 +256,7 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
 
   @Override
   public Set<String> getFacetNames() {
-    Set<String> names = new HashSet<String>();
+    Set<String> names = new HashSet<>();
     for (Browsable subBrowser : _subBrowsers) {
       names.addAll(subBrowser.getFacetNames());
     }
@@ -276,7 +276,7 @@ public class MultiBoboBrowser extends MultiReader implements Browsable {
 
   @Override
   public Map<String, FacetHandler<?>> getFacetHandlerMap() {
-    HashMap<String, FacetHandler<?>> map = new HashMap<String, FacetHandler<?>>();
+    HashMap<String, FacetHandler<?>> map = new HashMap<>();
     for (Browsable subBrowser : _subBrowsers) {
       map.putAll(subBrowser.getFacetHandlerMap());
     }

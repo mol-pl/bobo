@@ -56,11 +56,11 @@ public abstract class FacetHandler<D> {
 	 */
 	public FacetHandler(String name, Set<String> dependsOn) {
 		_name = name;
-		_dependsOn = new HashSet<String>();
+		_dependsOn = new HashSet<>();
 		if (dependsOn != null) {
 			_dependsOn.addAll(dependsOn);
 		}
-		_dependedFacetHandlers = new HashMap<String, FacetHandler<?>>();
+		_dependedFacetHandlers = new HashMap<>();
 		_termCountSize = TermCountSize.large;
 	}
 
@@ -201,7 +201,7 @@ public abstract class FacetHandler<D> {
 
 	public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties prop)
 			throws IOException {
-		ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
+		ArrayList<RandomAccessFilter> filterList = new ArrayList<>(vals.length);
 
 		for (String val : vals) {
 			RandomAccessFilter f = buildRandomAccessFilter(val, prop);
@@ -220,7 +220,7 @@ public abstract class FacetHandler<D> {
 
 	public RandomAccessFilter buildRandomAccessOrFilter(String[] vals, Properties prop, boolean isNot)
 			throws IOException {
-		ArrayList<RandomAccessFilter> filterList = new ArrayList<RandomAccessFilter>(vals.length);
+		ArrayList<RandomAccessFilter> filterList = new ArrayList<>(vals.length);
 
 		for (String val : vals) {
 			RandomAccessFilter f = buildRandomAccessFilter(val, prop);

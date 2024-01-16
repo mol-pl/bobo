@@ -40,7 +40,7 @@ public class GeoFacetHandler extends FacetHandler<GeoFacetHandler.GeoFacetData> 
 	 * @param lonFieldName name of the index field that stores the longitude value
 	 */
 	public GeoFacetHandler(String name, String latFieldName, String lonFieldName) {
-		super(name, new HashSet<String>(Arrays.asList(new String[]{latFieldName, lonFieldName})));
+		super(name, new HashSet<>(Arrays.asList(new String[]{latFieldName, lonFieldName})));
 		_latFieldName = latFieldName;
 		_lonFieldName = lonFieldName;
 		_miles = true;

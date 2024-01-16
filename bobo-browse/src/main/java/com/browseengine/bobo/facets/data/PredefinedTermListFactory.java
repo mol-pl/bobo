@@ -20,7 +20,7 @@ import java.util.Map;
  * Autoboxing: primitive types corresponding classes above are supported.
  */
 public class PredefinedTermListFactory<T> implements TermListFactory<T> {
-  private static Map<Class<?>, Class<? extends TermValueList<?>>> supportedTypes = new HashMap<Class<?>, Class<? extends TermValueList<?>>>();
+  private static Map<Class<?>, Class<? extends TermValueList<?>>> supportedTypes = new HashMap<>();
 
   static {
     supportedTypes.put(int.class, TermIntList.class);

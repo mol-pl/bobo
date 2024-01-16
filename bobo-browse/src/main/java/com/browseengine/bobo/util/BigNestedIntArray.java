@@ -47,7 +47,7 @@ public final class BigNestedIntArray {
 		private int[][] _reuse;
 		private int[] _reuseIdx;
 		public int reuseUsage;
-		private static Comparator<int[]> COMPARE_ARRAYSIZE = new Comparator<int[]>() {
+		private static Comparator<int[]> COMPARE_ARRAYSIZE = new Comparator<>() {
 			@Override
 			public int compare(int[] o1, int[] o2) {
 				if (o1 == null || o2 == null) {

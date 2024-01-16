@@ -77,14 +77,14 @@ public class BrowseResult implements Serializable {
 	private long time;
 	private MapReduceResult mapReduceResult;
 	private List<String> errors;
-	private static BrowseHit[] NO_HITS = new BrowseHit[0];
+	private static final BrowseHit[] NO_HITS = new BrowseHit[0];
 
 	/**
 	 * Constructor.
 	 */
 	public BrowseResult() {
 		super();
-		_facetMap = new HashMap<String, FacetAccessible>();
+		_facetMap = new HashMap<>();
 		_groupAccessibles = null;
 		_sortCollector = null;
 		numHits = 0;
@@ -358,7 +358,7 @@ public class BrowseResult implements Serializable {
 
 	public void addError(String message) {
 		if (errors == null) {
-			errors = new ArrayList<String>(1);
+			errors = new ArrayList<>(1);
 		}
 
 		errors.add(message);
@@ -366,7 +366,7 @@ public class BrowseResult implements Serializable {
 
 	public List<String> getBoboErrors() {
 		if (errors == null) {
-			errors = new ArrayList<String>(1);
+			errors = new ArrayList<>(1);
 		}
 
 		return errors;

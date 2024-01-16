@@ -9,8 +9,8 @@ public class ResultMerger {
   public static <T> Iterator<T> mergeResults(final Iterator<T>[] results,
       final Comparator<T> comparator) {
 
-    return new Iterator<T>() {
-      TreeMap<T, Iterator<T>> map = new TreeMap<T, Iterator<T>>(comparator);
+    return new Iterator<>() {
+      TreeMap<T, Iterator<T>> map = new TreeMap<>(comparator);
       {
         for (Iterator<T> result : results) {
           if (result.hasNext()) {

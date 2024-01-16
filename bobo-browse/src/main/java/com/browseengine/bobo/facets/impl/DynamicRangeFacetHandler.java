@@ -31,7 +31,7 @@ public abstract class DynamicRangeFacetHandler extends RuntimeFacetHandler<Facet
   protected RangeFacetHandler _dataFacetHandler;
 
   public DynamicRangeFacetHandler(String name, String dataFacetName) {
-    super(name, new HashSet<String>(Arrays.asList(new String[] { dataFacetName })));
+    super(name, new HashSet<>(Arrays.asList(new String[] { dataFacetName })));
     _dataFacetName = dataFacetName;
   }
 
@@ -50,7 +50,7 @@ public abstract class DynamicRangeFacetHandler extends RuntimeFacetHandler<Facet
   @Override
   public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties prop)
       throws IOException {
-    List<String> valList = new ArrayList<String>(vals.length);
+    List<String> valList = new ArrayList<>(vals.length);
     for (String val : vals) {
       valList.add(buildRangeString(val));
     }
@@ -62,7 +62,7 @@ public abstract class DynamicRangeFacetHandler extends RuntimeFacetHandler<Facet
   @Override
   public RandomAccessFilter buildRandomAccessOrFilter(String[] vals, Properties prop, boolean isNot)
       throws IOException {
-    List<String> valList = new ArrayList<String>(vals.length);
+    List<String> valList = new ArrayList<>(vals.length);
     for (String val : vals) {
       valList.add(buildRangeString(val));
     }
@@ -130,7 +130,7 @@ public abstract class DynamicRangeFacetHandler extends RuntimeFacetHandler<Facet
     @Override
     public List<BrowseFacet> getFacets() {
       List<BrowseFacet> list = super.getFacets();
-      ArrayList<BrowseFacet> retList = new ArrayList<BrowseFacet>(list.size());
+      ArrayList<BrowseFacet> retList = new ArrayList<>(list.size());
       Iterator<BrowseFacet> iter = list.iterator();
       while (iter.hasNext()) {
         BrowseFacet facet = iter.next();
@@ -148,7 +148,7 @@ public abstract class DynamicRangeFacetHandler extends RuntimeFacetHandler<Facet
     public FacetIterator iterator() {
       FacetIterator iter = super.iterator();
 
-      List<BrowseFacet> facets = new ArrayList<BrowseFacet>();
+      List<BrowseFacet> facets = new ArrayList<>();
       while (iter.hasNext()) {
         Comparable<?> facet = iter.next();
         int count = iter.count;

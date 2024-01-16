@@ -47,7 +47,7 @@ public class FacetSpec implements Serializable {
 		minCount = 1;
 		expandSelection = false;
 		_comparatorFactory = null;
-		properties = new HashMap<String, String>();
+		properties = new HashMap<>();
 	}
 
 	public FacetSpec setCustomComparatorFactory(ComparatorFactory comparatorFactory) {
@@ -180,7 +180,7 @@ public class FacetSpec implements Serializable {
 	@Override
 	public FacetSpec clone() {
 		Map<String, String> internalProperties = getProperties();
-		Map<String, String> clonedProperties = new HashMap<String, String>(internalProperties.size());
+		Map<String, String> clonedProperties = new HashMap<>(internalProperties.size());
 		clonedProperties.putAll(internalProperties);
 
 		return new FacetSpec().setCustomComparatorFactory(getCustomComparatorFactory())

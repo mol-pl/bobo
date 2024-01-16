@@ -78,7 +78,7 @@ public class GeoSimpleFacetHandler extends RuntimeFacetHandler<FacetDataNone> {
   }
 
   public GeoSimpleFacetHandler(String name, String latFacetName, String longFacetName) {
-    super(name, new HashSet<String>(Arrays.asList(new String[] { latFacetName, longFacetName })));
+    super(name, new HashSet<>(Arrays.asList(new String[] { latFacetName, longFacetName })));
     _latFacetName = latFacetName;
     _longFacetName = longFacetName;
   }
@@ -98,8 +98,8 @@ public class GeoSimpleFacetHandler extends RuntimeFacetHandler<FacetDataNone> {
   @Override
   public RandomAccessFilter buildRandomAccessAndFilter(String[] vals, Properties props)
       throws IOException {
-    List<String> latValList = new ArrayList<String>(vals.length);
-    List<String> longValList = new ArrayList<String>(vals.length);
+    List<String> latValList = new ArrayList<>(vals.length);
+    List<String> longValList = new ArrayList<>(vals.length);
     for (String val : vals) {
       GeoLatLonRange range = GeoLatLonRange.parse(val);
       latValList.add(range.latRange);
@@ -116,8 +116,8 @@ public class GeoSimpleFacetHandler extends RuntimeFacetHandler<FacetDataNone> {
   @Override
   public RandomAccessFilter buildRandomAccessOrFilter(String[] vals, Properties props, boolean isNot)
       throws IOException {
-    List<String> latValList = new ArrayList<String>(vals.length);
-    List<String> longValList = new ArrayList<String>(vals.length);
+    List<String> latValList = new ArrayList<>(vals.length);
+    List<String> longValList = new ArrayList<>(vals.length);
     for (String val : vals) {
       GeoLatLonRange range = GeoLatLonRange.parse(val);
       latValList.add(range.latRange);
@@ -133,7 +133,7 @@ public class GeoSimpleFacetHandler extends RuntimeFacetHandler<FacetDataNone> {
 
   private static List<String> buildAllRangeStrings(String[] values) {
     if (values == null) return Collections.emptyList();
-    List<String> ranges = new ArrayList<String>(values.length);
+    List<String> ranges = new ArrayList<>(values.length);
     for (String value : values) {
       ranges.add(value);
     }

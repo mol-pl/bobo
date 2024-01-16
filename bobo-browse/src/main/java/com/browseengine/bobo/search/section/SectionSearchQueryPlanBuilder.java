@@ -100,9 +100,9 @@ public class SectionSearchQueryPlanBuilder {
   }
 
   private SectionSearchQueryPlan translateBooleanQuery(BooleanQuery query) throws IOException {
-    ArrayList<Query> requiredClauses = new ArrayList<Query>();
-    ArrayList<Query> prohibitedClauses = new ArrayList<Query>();
-    ArrayList<Query> optionalClauses = new ArrayList<Query>();
+    ArrayList<Query> requiredClauses = new ArrayList<>();
+    ArrayList<Query> prohibitedClauses = new ArrayList<>();
+    ArrayList<Query> optionalClauses = new ArrayList<>();
     BooleanClause[] clauses = query.getClauses();
     for (BooleanClause clause : clauses) {
       if (clause.isRequired()) {
@@ -154,7 +154,7 @@ public class SectionSearchQueryPlanBuilder {
 
   private SectionSearchQueryPlan[] translate(ArrayList<Query> queries) throws IOException {
     int size = queries.size();
-    ArrayList<SectionSearchQueryPlan> result = new ArrayList<SectionSearchQueryPlan>(size);
+    ArrayList<SectionSearchQueryPlan> result = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
       SectionSearchQueryPlan plan = translate(queries.get(i));
       if (plan != null) result.add(plan);
